@@ -300,3 +300,6 @@
 #include "functions\Config\applyConfig.au3"
 #include "functions\Config\readConfig.au3"
 #include "functions\Config\saveConfig.au3"
+
+; AltuFaltu MOD
+#include "AltuFaltu_Mod\AF_Functions.au3"

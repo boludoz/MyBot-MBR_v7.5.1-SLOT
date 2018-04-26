@@ -312,10 +312,12 @@ Func _checkObstacles($bBuilderBase = False, $bRecursive = False) ;Checks if some
 	EndIf
 
 	; check if google account list shown and select first
-	If Not CheckGoogleSelectAccount() Then
-		; check Log in with Supercell ID login screen
-		CheckLoginWithSupercellID()
-	EndIf
+	If $g_ichkSCIDSwitchAccAF = 0 Then	; AltuFaltu n
+		If Not CheckGoogleSelectAccount() Then
+			; check Log in with Supercell ID login screen
+			CheckLoginWithSupercellID()
+		EndIf
+	EndIf	; AltuFaltu n
 
 	Return False
 EndFunc   ;==>_checkObstacles

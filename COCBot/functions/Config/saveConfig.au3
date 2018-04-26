@@ -247,6 +247,7 @@ Func SaveRegularConfig()
 
 	;SetDebugLog("saveConfig: Wrote " & $g_iIniLineCount & " ini lines.")
 	_Ini_Save($g_sProfileConfigPath)
+
 EndFunc   ;==>SaveRegularConfig
 
 Func SaveConfig_Android()
@@ -1107,11 +1108,16 @@ Func SaveConfig_600_35_2()
 		IniWrite($sSwitchAccFile, "SwitchAccount", "DonateLikeCrazy", $g_bDonateLikeCrazy ? 1 : 0)
 		IniWrite($sSwitchAccFile, "SwitchAccount", "TotalCocAccount", $g_iTotalAcc)
 		IniWrite($sSwitchAccFile, "SwitchAccount", "TrainTimeToSkip", $g_iTrainTimeToSkip)
+
+		AF_SaveConfigSwitchAcc($sSwitchAccFile)	; AltuFaltu n
+
 		For $i = 1 To 8
 			IniWrite($sSwitchAccFile, "SwitchAccount", "AccountNo." & $i, $g_abAccountNo[$i - 1] ? 1 : 0)
 			IniWrite($sSwitchAccFile, "SwitchAccount", "ProfileName." & $i, $g_asProfileName[$i - 1])
 			IniWrite($sSwitchAccFile, "SwitchAccount", "DonateOnly." & $i, $g_abDonateOnly[$i - 1] ? 1 : 0)
 		Next
+	Else	; AltuFaltu n
+			AF_SaveConfigSwitchAcc()	; AltuFaltu n
 	EndIf
 
 EndFunc   ;==>SaveConfig_600_35_2
@@ -1143,6 +1149,9 @@ Func SaveConfig_600_52_2()
 	; spell capacity and forced flag
 	_Ini_Add("Spells", "SpellFactory", $g_iTotalSpellValue)
 	_Ini_Add("other", "ChkForceBrewBeforeAttack", $g_bForceBrewSpells ? 1 : 0)
+
+	AF_SaveConfig_SmartTrain()	; AltuFaltu n
+
 EndFunc   ;==>SaveConfig_600_52_2
 
 Func SaveConfig_600_54()

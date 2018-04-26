@@ -275,6 +275,12 @@ Func _cmbSwitchAcc($bReadSaveConfig = True)
 		$bEnable = False
 	EndIf
 
+	; AltuFaltu s
+	If $iCmbSwitchAcc = 0 Then
+		disableSwitchAcc()
+	EndIf
+	; AltuFaltu e
+
 	GUICtrlSetState($g_hChkSwitchAcc, (($bEnable Or ($iCmbSwitchAcc And $bAcquired)) ? $GUI_ENABLE : $GUI_DISABLE))
 	For $i = $g_hCmbTotalAccount To $g_ahChkDonate[7]
 		GUICtrlSetState($i, (($bEnable) ? $GUI_ENABLE : $GUI_DISABLE))
@@ -294,6 +300,7 @@ Func cmbTotalAcc()
 		EndIf
 		chkAccount($i)
 	Next
+	chkSCIDSwitchAccAF() 	; AltuFaltu n
 EndFunc   ;==>cmbTotalAcc
 
 Func chkSmartSwitch()

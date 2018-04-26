@@ -269,6 +269,7 @@ Func ReadRegularConfig()
 
 	; <><><><> Bot / Stats <><><><>
 	; <<< nothing here >>>
+
 EndFunc   ;==>ReadRegularConfig
 
 Func ReadConfig_Debug()
@@ -1187,6 +1188,7 @@ EndFunc   ;==>ReadConfig_600_35_1
 
 Func ReadConfig_600_35_2()
 	; <><><><> Bot / Profile / Switch Account <><><><>
+	Local $ProfNotinGroupAF = True	;AltuFaltu n
 	Local $sSwitchAccFile
 	$g_iCmbSwitchAcc = 0
 	$g_bChkSwitchAcc = False
@@ -1213,9 +1215,15 @@ Func ReadConfig_600_35_2()
 
 		If $g_iCmbSwitchAcc Then
 			ReadConfig_SwitchAccounts()
+			$ProfNotinGroupAF = False 	;AltuFaltu n
 			ExitLoop
 		EndIf
 	Next
+	; AltuFaltu s
+	If $ProfNotinGroupAF = True Then
+		AF_ReadConfigSwitchAcc()
+	EndIf
+	; AltuFaltu e
 EndFunc   ;==>ReadConfig_600_35_2
 
 Func ReadConfig_SwitchAccounts()
@@ -1229,6 +1237,9 @@ Func ReadConfig_SwitchAccounts()
 		$g_bDonateLikeCrazy = IniRead($sSwitchAccFile, "SwitchAccount", "DonateLikeCrazy", "0") = "1"
 		$g_iTotalAcc = Int(IniRead($sSwitchAccFile, "SwitchAccount", "TotalCocAccount", "-1"))
 		$g_iTrainTimeToSkip = Int(IniRead($sSwitchAccFile, "SwitchAccount", "TrainTimeToSkip", "1"))
+
+		AF_ReadConfigSwitchAcc($sSwitchAccFile)	; AltuFaltu n
+
 		For $i = 1 To 8
 			$g_abAccountNo[$i - 1] = IniRead($sSwitchAccFile, "SwitchAccount", "AccountNo." & $i, "") = "1"
 			$g_asProfileName[$i - 1] = IniRead($sSwitchAccFile, "SwitchAccount", "ProfileName." & $i, "")
@@ -1281,6 +1292,9 @@ Func ReadConfig_600_52_2()
 	$g_bForceBrewSpells = (IniRead($g_sProfileConfigPath, "other", "ChkForceBrewBeforeAttack", "0") = "1")
 	IniReadS($g_iTotalSpellValue, $g_sProfileConfigPath, "Spells", "SpellFactory", 0, "int")
 	$g_iTotalSpellValue = Int($g_iTotalSpellValue)
+
+	AF_ReadConfig_SmartTrain()	; AltuFaltu n
+
 EndFunc   ;==>ReadConfig_600_52_2
 
 Func ReadConfig_600_54()

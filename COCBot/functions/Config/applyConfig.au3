@@ -1994,6 +1994,9 @@ Func ApplyConfig_600_35_2($TypeReadSave)
 				GUICtrlSetState($g_hRadSwitchSuperCellID, $GUI_UNCHECKED)
 				GUICtrlSetState($g_hRadSwitchSharedPrefs, $GUI_CHECKED)
 			EndIf
+
+			AF_ApplyReadSwitchAcc() 	; AltuFaltu n
+
 			GUICtrlSetState($g_hChkSmartSwitch, $g_bChkSmartSwitch ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetState($g_hChkDonateLikeCrazy, $g_bDonateLikeCrazy ? $GUI_CHECKED : $GUI_UNCHECKED)
 			_GUICtrlComboBox_SetCurSel($g_hCmbTotalAccount, $g_iTotalAcc - 1)
@@ -2004,6 +2007,7 @@ Func ApplyConfig_600_35_2($TypeReadSave)
 			Next
 			_GUICtrlComboBox_SetCurSel($g_hCmbTrainTimeToSkip, $g_iTrainTimeToSkip)
 			_cmbSwitchAcc(False)
+
 		Case "Save"
 			$g_iCmbSwitchAcc = _GUICtrlComboBox_GetCurSel($g_hCmbSwitchAcc)
 			$g_bChkSwitchAcc = (GUICtrlRead($g_hChkSwitchAcc) = $GUI_CHECKED)
@@ -2019,6 +2023,9 @@ Func ApplyConfig_600_35_2($TypeReadSave)
 				$g_abDonateOnly[$i] = (GUICtrlRead($g_ahChkDonate[$i]) = $GUI_CHECKED)
 			Next
 			$g_iTrainTimeToSkip = _GUICtrlComboBox_GetCurSel($g_hCmbTrainTimeToSkip)
+
+			AF_ApplySaveSwitchAcc()	; AltuFaltu n
+
 	EndSwitch
 EndFunc   ;==>ApplyConfig_600_35_2
 
@@ -2070,6 +2077,9 @@ Func ApplyConfig_600_52_2($TypeReadSave)
 			; spell capacity and forced flag
 			GUICtrlSetData($g_hTxtTotalCountSpell, $g_iTotalSpellValue)
 			GUICtrlSetState($g_hChkForceBrewBeforeAttack, $g_bForceBrewSpells ? $GUI_CHECKED : $GUI_UNCHECKED)
+
+			AF_ApplyRead_SmartTrain()	; AltuFaltu n
+
 		Case "Save"
 			; troop/spell levels and counts
 			For $T = 0 To $eTroopCount - 1
@@ -2087,6 +2097,9 @@ Func ApplyConfig_600_52_2($TypeReadSave)
 			; spell capacity and forced flag
 			$g_iTotalSpellValue = GUICtrlRead($g_hTxtTotalCountSpell)
 			$g_bForceBrewSpells = (GUICtrlRead($g_hChkForceBrewBeforeAttack) = $GUI_CHECKED)
+
+			AF_ApplySave_SmartTrain()	; AltuFaltu n
+
 	EndSwitch
 EndFunc   ;==>ApplyConfig_600_52_2
 

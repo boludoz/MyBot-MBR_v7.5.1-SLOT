@@ -1658,3 +1658,6 @@ Global $g_iPurgeJobCount[8] = [0, 0, 0, 0, 0, 0, 0, 0]
 Global $g_iPurgeMax = 5 ; [0] is unlimited , 1-10
 
 Global $g_bChkCollectFreeMagicItems = True
+
+;AltuFaltu MOD
+#include "AltuFaltu_Mod\AF_Global Variables.au3"

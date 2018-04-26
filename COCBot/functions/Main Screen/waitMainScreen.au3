@@ -40,8 +40,21 @@ Func waitMainScreen() ;Waits for main screen to popup
 			If $g_bDebugSetlog Then SetDebugLog("Screen cleared, WaitMainScreen exit", $COLOR_DEBUG)
 			Return
 		Else
-			If Not TestCapture() And _Sleep($DELAYWAITMAINSCREEN1) Then Return
-			If checkObstacles() Then $i = 0 ;See if there is anything in the way of mainscreen
+			; AltuFaltu s
+			If $g_ichkSCIDSwitchAccAF = 1 Then
+				If WaitforVariousImages("SCIDLoginBtn",1,200) = True Then
+					Setlog("AltuFaltu - MainScreen SuperCell ID Login Screen Detected",0x6E0DD0)
+					If _Sleep(1000) Then Return
+					Click(420,630)
+					If _Sleep(1000) Then Return
+					Setlog("     5.Click on SuperCell ID Login Button",0xFF0099)
+					_MainScreen_SCIDLogin()
+				EndIf
+			Else
+			; AltuFaltu e
+				If Not TestCapture() And _Sleep($DELAYWAITMAINSCREEN1) Then Return
+				If checkObstacles() Then $i = 0 ;See if there is anything in the way of mainscreen
+			EndIf	; AltuFaltu n
 		EndIf
 		If Mod($i, 5) = 0 Then ;every 10 seconds
 			If $g_bDebugImageSave Then DebugImageSave("WaitMainScreen_", False)
@@ -99,8 +112,21 @@ Func waitMainScreenMini()
 		$iCount += 1
 		_CaptureRegion()
 		If Not _CheckPixel($aIsMain, $g_bNoCapturePixel) Then ;Checks for Main Screen
-			If Not TestCapture() And _Sleep(1000) Then Return
-			If CheckObstacles() Then $i = 0 ;See if there is anything in the way of mainscreen
+			; AltuFaltu s
+			If $g_ichkSCIDSwitchAccAF = 1 Then
+				If WaitforVariousImages("SCIDLoginBtn",1,200) = True Then
+					Setlog("AltuFaltu - MainScreen SuperCell ID Login Screen Detected",0x6E0DD0)
+					If _Sleep(1000) Then Return
+					Click(420,630)
+					If _Sleep(1000) Then Return
+					Setlog("     5.Click on SuperCell ID Login Button",0xFF0099)
+					_MainScreen_SCIDLogin()
+				EndIf
+			Else
+			; AltuFaltu e
+				If Not TestCapture() And _Sleep(1000) Then Return
+				If CheckObstacles() Then $i = 0 ;See if there is anything in the way of mainscreen
+			EndIf 	; AltuFaltu n
 		Else
 			SetLog("CoC main window took " & Round(__TimerDiff($hTimer) / 1000, 2) & " seconds", $COLOR_SUCCESS)
 			Return

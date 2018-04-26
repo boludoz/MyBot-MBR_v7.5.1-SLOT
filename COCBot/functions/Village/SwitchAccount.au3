@@ -226,6 +226,9 @@ Func SwitchCOCAcc($NextAccount)
 	If $StartOnlineTime <> 0 And Not $g_bReMatchAcc Then SetSwitchAccLog(" - Acc " & $g_iCurAccount + 1 & ", online: " & Round(TimerDiff($StartOnlineTime) / 1000 / 60, 1) & "m")
 
 	Local $bSharedPrefs = $g_bChkSharedPrefs And HaveSharedPrefs($g_asProfileName[$g_iNextAccount])
+
+	If $g_ichkSCIDSwitchAccAF = False then 		;AltuFaltu n
+
 	If $bSharedPrefs And $g_PushedSharedPrefsProfile = $g_asProfileName[$g_iNextAccount] Then
 		; shared prefs already pushed
 		$bResult = True
@@ -320,6 +323,15 @@ Func SwitchCOCAcc($NextAccount)
 		EndIf
 		If _Sleep(500) Then Return
 	EndIf
+;AltuFaltu s
+Else
+	If SwitchCOCAcc_SCID($NextAccount) = True Then
+		$bResult = True
+	Else
+		$bResult = False
+	EndIf
+EndIf
+;AltuFaltu e
 
 	If $bResult = True Then
 		$iRetry = 0
@@ -376,6 +388,7 @@ Func SwitchCOCAcc($NextAccount)
 		EndIf
 
 	Else
+	If $g_SwitchSCIDAccFatalErrorAF = False Then 	; AltuFaltu n
 		$iRetry += 1
 		$g_bReMatchAcc = True
 		SetLog("Switching account failed!", $COLOR_ERROR)
@@ -387,10 +400,16 @@ Func SwitchCOCAcc($NextAccount)
 			$iRetry = 0
 			UniversalCloseWaitOpenCoC()
 		EndIf
+	EndIf	; AltuFaltu n
 	EndIf
+	If $g_SwitchSCIDAccFatalErrorAF = False Then 	; AltuFaltu n
 	waitMainScreen()
 	If $g_bForceSinglePBLogoff Then $g_bGForcePBTUpdate = True
 	runBot()
+	Else
+	$g_SwitchSCIDAccFatalErrorAF = False
+	BtnStop()
+	EndIf
 
 EndFunc   ;==>SwitchCOCAcc
 
