@@ -72,6 +72,10 @@ Global $g_iBotLaunchTime = 0 ; Keeps track of time (in millseconds) from bot lau
 ; Since October 12th 2016 Update, Village cannot be entirely zoomed out, offset updated in func SearchZoomOut
 Global $g_iVILLAGE_OFFSET[3] = [0, 0, 1]
 
+; ExtendedAttackBar - Team AiO MOD++
+Global $g_hChkExtendedAttackBarLB, $g_hChkExtendedAttackBarDB, $g_abChkExtendedAttackBar[2]
+Global $g_iTotalAttackSlot = 10, $g_bDraggedAttackBar = False ; flag if AttackBar is dragged or not
+
 #Region debugging
 #Tidy_Off
 ; <><><><><><><><><><><><><><><><><><>

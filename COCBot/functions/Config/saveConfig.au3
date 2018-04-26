@@ -1023,6 +1023,10 @@ EndFunc   ;==>SaveConfig_600_32
 
 Func SaveConfig_600_33()
 	; <><><><> Attack Plan / Search & Attack / Drop Order Troops <><><><>
+		; ExtendedAttackBar - Team AiO MOD++
+	_Ini_Add("attack", "ExtendedAttackBarDB", $g_abChkExtendedAttackBar[$DB] ? 1 : 0)
+	_Ini_Add("attack", "ExtendedAttackBarLB", $g_abChkExtendedAttackBar[$LB] ? 1 : 0)
+
 	_Ini_Add("DropOrder", "chkDropOrder", $g_bCustomDropOrderEnable ? 1 : 0)
 	For $p = 0 To UBound($g_aiCmbCustomDropOrder) - 1
 		_Ini_Add("DropOrder", "cmbDropOrder" & $p, $g_aiCmbCustomDropOrder[$p])

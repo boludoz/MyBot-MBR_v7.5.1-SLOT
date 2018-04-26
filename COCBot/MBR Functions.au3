@@ -13,6 +13,9 @@
 ; Example .......: No
 ; ===============================================================================================================================
 ;#include-once
+; ExtendedAttackBar - Team AiO MOD++ 
+#include "functions\Mod's\ExtendedAttackBarCheck.au3" ;;;;;;;;;;;;
+
 #include "functions\Other\Base64.au3"
 #include "functions\Other\SetLog.au3"
 #include "functions\Other\StopWatch.au3"

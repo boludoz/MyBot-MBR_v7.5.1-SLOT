@@ -1861,6 +1861,10 @@ Func ApplyConfig_600_33($TypeReadSave)
 	; <><><><> Attack Plan / Search & Attack / Drop Order Troops <><><><>
 	Switch $TypeReadSave
 		Case "Read"
+			; ExtendedAttackBar - Team AiO MOD++
+			GUICtrlSetState($g_hChkExtendedAttackBarDB, $g_abChkExtendedAttackBar[$DB] ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetState($g_hChkExtendedAttackBarLB, $g_abChkExtendedAttackBar[$LB] ? $GUI_CHECKED : $GUI_UNCHECKED)
+
 			GUICtrlSetState($g_hChkCustomDropOrderEnable, $g_bCustomDropOrderEnable ? $GUI_CHECKED : $GUI_UNCHECKED)
 			chkDropOrder()
 			For $p = 0 To UBound($g_ahCmbDropOrder) - 1
@@ -1880,6 +1884,10 @@ Func ApplyConfig_600_33($TypeReadSave)
 				EndIf
 			EndIf
 		Case "Save"
+			; ExtendedAttackBar - Team AiO MOD++
+			$g_abChkExtendedAttackBar[$DB] = GUICtrlRead($g_hChkExtendedAttackBarDB) = $GUI_CHECKED ? True : False
+			$g_abChkExtendedAttackBar[$LB] = GUICtrlRead($g_hChkExtendedAttackBarLB) = $GUI_CHECKED ? True : False
+
 			$g_bCustomDropOrderEnable = (GUICtrlRead($g_hChkCustomDropOrderEnable) = $GUI_CHECKED)
 			For $p = 0 To UBound($g_ahCmbDropOrder) - 1
 				$g_aiCmbCustomDropOrder[$p] = _GUICtrlComboBox_GetCurSel($g_ahCmbDropOrder[$p])
