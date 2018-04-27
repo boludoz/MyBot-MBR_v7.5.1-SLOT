@@ -20,8 +20,6 @@ Global $g_DebugImageAF = 0
 ;Global variables to hold GUI master and global values
 Global $g_hTabMod_AF
 Global $g_chkSCIDSwitchAccAF, $g_ichkSCIDSwitchAccAF
-Global $g_hChkSmartTrain = 0, $g_hChkPreciseArmyCamp = 0, $g_hChkFillArcher = 0, $g_hTxtFillArcher = 0, $g_hChkFillEQ = 0
-Global $g_bChkSmartTrain = False, $g_bChkPreciseArmyCamp = False, $g_bChkFillArcher = False, $g_bChkFillEQ = False, $g_iTxtFillArcher = 5
 Global Enum $g_eFull, $g_eRemained, $g_eNoTrain
 Global $g_abRCheckWrongArmyCamp[2] = [False, False] ; Result of checking wrong Troops & Spells
 Global $g_bChkMultiClick, $g_iMultiClick = 1

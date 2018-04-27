@@ -13,47 +13,6 @@
 ; Example .......: No
 ; ===============================================================================================================================
 
-Func AF_ApplyRead_SmartTrain()
-
-	GUICtrlSetState($g_hChkSmartTrain, $g_bChkSmartTrain ? $GUI_CHECKED : $GUI_UNCHECKED)
-	GUICtrlSetState($g_hChkPreciseArmyCamp, $g_bChkPreciseArmyCamp ? $GUI_CHECKED : $GUI_UNCHECKED)
-	GUICtrlSetState($g_hChkFillArcher, $g_bChkFillArcher ? $GUI_CHECKED : $GUI_UNCHECKED)
-	GUICtrlSetData($g_hTxtFillArcher, $g_iTxtFillArcher)
-	GUICtrlSetState($g_hChkFillEQ, $g_bChkFillEQ ? $GUI_CHECKED : $GUI_UNCHECKED)
-	chkSmartTrain()
-
-EndFunc
-
-Func AF_ApplySave_SmartTrain()
-
-	$g_bChkSmartTrain = (GUICtrlRead($g_hChkSmartTrain) = $GUI_CHECKED)
-	$g_bChkPreciseArmyCamp = (GUICtrlRead($g_hChkPreciseArmyCamp) = $GUI_CHECKED)
-	$g_bChkFillArcher = (GUICtrlRead($g_hChkFillArcher) = $GUI_CHECKED)
-	$g_iTxtFillArcher = GUICtrlRead($g_hTxtFillArcher)
-	$g_bChkFillEQ = (GUICtrlRead($g_hChkFillEQ) = $GUI_CHECKED)
-
-EndFunc
-
-Func AF_ReadConfig_SmartTrain()
-
-	IniReadS($g_bChkSmartTrain, $g_sProfileConfigPath, "SmartTrain", "Enable", False, "Bool")
-	IniReadS($g_bChkPreciseArmyCamp, $g_sProfileConfigPath, "SmartTrain", "ChkPreciseTroops", False, "Bool")
-	IniReadS($g_bChkFillArcher, $g_sProfileConfigPath, "SmartTrain", "ChkFillArcher", False, "Bool")
-	IniReadS($g_iTxtFillArcher, $g_sProfileConfigPath, "SmartTrain", "TxtFillArcher", 5, "int")
-	IniReadS($g_bChkFillEQ, $g_sProfileConfigPath, "SmartTrain", "ChkFillEQ", False, "Bool")
-
-EndFunc
-
-Func AF_SaveConfig_SmartTrain()
-
-	_Ini_Add("SmartTrain", "Enable", $g_bChkSmartTrain ? 1 : 0)
-	_Ini_Add("SmartTrain", "ChkPreciseTroops", $g_bChkPreciseArmyCamp ? 1 : 0)
-	_Ini_Add("SmartTrain", "ChkFillArcher", $g_bChkFillArcher ? 1 : 0)
-	_Ini_Add("SmartTrain", "TxtFillArcher", $g_iTxtFillArcher)
-	_Ini_Add("SmartTrain", "ChkFillEQ", $g_bChkFillEQ ? 1 : 0)
-
-EndFunc
-
 Func AF_ApplyReadSwitchAcc()
 
 	GUICtrlSetState($g_chkSCIDSwitchAccAF, $g_ichkSCIDSwitchAccAF ? $GUI_CHECKED : $GUI_UNCHECKED)

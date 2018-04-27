@@ -18,12 +18,6 @@ Func chkUseQTrain()
 	If GUICtrlRead($g_hChkUseQuickTrain) = $GUI_CHECKED Then
 		_GUI_Value_STATE("ENABLE", $g_ahChkArmy[0] & "#" & $g_ahChkArmy[1] & "#" & $g_ahChkArmy[2])
 		chkQuickTrainCombo()
-		; AltuFaltu s
-		If GUICtrlRead($g_hChkSmartTrain) = $GUI_CHECKED Then
-			GUICtrlSetState($g_hChkPreciseArmyCamp, $GUI_UNCHECKED)
-			GUICtrlSetState($g_hChkPreciseArmyCamp, $GUI_DISABLE)
-		EndIf
-		; AltuFaltu e
 		_GUI_Value_STATE("DISABLE", $grpTrainTroops)
 		_GUI_Value_STATE("DISABLE", $grpCookSpell)
 		GUICtrlSetData($g_hLblTotalTimeCamp, " 0s")

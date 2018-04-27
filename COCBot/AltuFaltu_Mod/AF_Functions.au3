@@ -18,9 +18,3 @@
 #include "Functions\AF_SCID Switch Acc.au3"
 #include "Functions\AF_Various ImgSearch.au3"
 
-#include "ForumMod\SmartTrain\CheckPreciseArmyCamp.au3"
-#include "ForumMod\SmartTrain\CheckQueue.au3"
-#include "ForumMod\SmartTrain\CheckTrainingTab.au3"
-#include "ForumMod\SmartTrain\SmartTrain.au3"
-#include "ForumMod\_Wait4Pixel.au3"
-#include "ForumMod\ArrayFunctions.au3"
