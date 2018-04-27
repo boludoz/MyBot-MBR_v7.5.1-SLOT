@@ -28,7 +28,7 @@ Func getPBTime()
 		Return
 	EndIf
 
-	ClickP($aShieldInfoButton) ; click on PBT info icon
+	ClickP($aShieldInfoButton,1,0,"#9997") ; samm0d  ; click on PBT info icon
 	If _Sleep($DELAYPERSONALSHIELD3) Then Return
 
 	Local $iCount = 0
@@ -64,6 +64,8 @@ Func getPBTime()
 				SetError(1, "Bad OCR of PB time value ")
 				ClickP($aAway, 1, 0, "#9999") ; close window
 				If _Sleep($DELAYPERSONALSHIELD2) Then Return ; wait for close
+				; samm0d
+				$g_bRestart = True
 				Return
 			EndIf
 		EndIf

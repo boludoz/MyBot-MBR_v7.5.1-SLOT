@@ -15,6 +15,7 @@
 
 Func getArmyCCStatus($bOpenArmyWindow = False, $bCloseArmyWindow = False, $CheckWindow = True, $bSetLog = True, $bNeedCapture = True)
 
+
 	If $g_bDebugSetlogTrain Or $g_bDebugSetlog Then SetLog("Begin getArmyCCStatus:", $COLOR_DEBUG1)
 
 	$g_iCCRemainTime = 0 ; reset global time
@@ -53,6 +54,9 @@ Func getArmyCCStatus($bOpenArmyWindow = False, $bCloseArmyWindow = False, $Check
 		If $g_bDebugSetlogTrain Then SetLog("getArmyCampCap returned: " & $sResultCC, $COLOR_DEBUG)
 		$g_iCCRemainTime = ConvertOCRTime("CC request", $sResultCC, $bSetLog)
 	EndIf
+
+	; samm0d
+	RequestCC(False,"",False)
 
 	If $bCloseArmyWindow Then
 		ClickP($aAway, 1, 0, "#0000") ;Click Away

@@ -26,7 +26,8 @@ Func TestImglocTroopBar()
 	$g_bRunState = False
 EndFunc   ;==>TestImglocTroopBar
 
-Func AttackBarCheck($Remaining = False)
+; samm0d
+Func AttackBarCheck($Remaining = False, $SRIGHT = False)
 
 	Local $x = 0, $y = 659, $x1 = 853, $y1 = 698
 	Static Local $CheckSlot12 = False
@@ -168,9 +169,10 @@ Func AttackBarCheck($Remaining = False)
 						$aResult[$i][3] = -1
 						$aResult[$i][4] = -1
 					EndIf
-					If $aResult[$i][4] <= 10 Or Not $g_abChkExtendedAttackBar[$g_iMatchMode] Then ; ExtendedAttackBar - Team AiO MOD++
-						$strinToReturn &= "|" & TroopIndexLookup($aResult[$i][0]) & "#" & $aResult[$i][4] & "#" & $aResult[$i][3]
-					EndIf
+					; samm0d
+				If $aResult[$i][4] <= 10 Or Not $g_abChkExtendedAttackBar[$g_iMatchMode] Then ; ExtendedAttackBar - Team AiO MOD++
+					$strinToReturn &= "|" & TroopIndexLookup($aResult[$i][0]) & "#" & $aResult[$i][4] & "#" & $aResult[$i][3] & "#" & $aResult[$i][1]
+				EndIf
 				EndIf
 			Next
 		EndIf
@@ -223,26 +225,47 @@ Func AttackBarCheck($Remaining = False)
 
 EndFunc   ;==>AttackBarCheck
 
-Func SlotAttack($PosX, $CheckSlot12, $CheckSlotwHero)
+; samm0d
+Func SlotAttack($PosX, $CheckSlot12, $CheckSlotwHero, $SRIGHT, $Troop)
 
 	Local $Slottemp[2] = [0, 0]
+	Local $iStartOffset = 0
+	Local $iStartOffsetHero = 0
+
+	Select
+		Case $Troop = $eKing Or $Troop = $eQueen Or $Troop = $eWarden
+			$iStartOffsetHero = 8
+		Case $Troop >= $eLSpell And $Troop <= $eSkSpell
+			If $CheckSlotwHero Then $iStartOffsetHero = 16
+	EndSelect
+
+	If $SRIGHT Then
+		$iStartOffset = 56
+		If $CheckSlotwHero Then $iStartOffset = 39
+	ElseIf $CheckSlot12 Then
+		$iStartOffset = 11
+	Else
+		$iStartOffset = 33
+		If $CheckSlotwHero Then $iStartOffset = 25
+	EndIf
 
 	For $i = 0 To 12
-		If $PosX >= 25 + ($i * 73) And $PosX < 98 + ($i * 73) Then
-			$Slottemp[0] = 35 + ($i * 73)
+		If $PosX >= $iStartOffset + ($i * 73) And $PosX < (($iStartOffset + 73 + $iStartOffsetHero) + ($i * 73)) Then
+
+			$Slottemp[0] = $iStartOffset + ($i * 73) + 10 + $iStartOffsetHero
 			$Slottemp[1] = $i
-			If $CheckSlot12 = True Then
-				$Slottemp[0] -= 13
-			ElseIf $CheckSlotwHero = False Then
-				$Slottemp[0] += 8
-			EndIf
-			If $g_bDebugSetlog Then SetDebugLog("Slot: " & $i & " | $x > " & 25 + ($i * 73) & " and $x < " & 98 + ($i * 73))
-			If $g_bDebugSetlog Then SetDebugLog("Slot: " & $i & " | $PosX: " & $PosX & " |  OCR x position: " & $Slottemp[0] & " | OCR Slot: " & $Slottemp[1])
+
+			If $g_iSamM0dDebug = 1 Then Setlog("$Troop: " & $Troop)
+			If $g_iSamM0dDebug = 1 Then Setlog("$CheckSlot12: " & $CheckSlot12)
+			If $g_iSamM0dDebug = 1 Then Setlog("$CheckSlotwHero: " & $CheckSlotwHero)
+			If $g_iSamM0dDebug = 1 Then Setlog("$iStartOffset: " & $iStartOffset)
+			If $g_iSamM0dDebug = 1 Then Setlog("$iStartOffsetHero: " & $iStartOffsetHero)
+			If $g_iSamM0dDebug = 1 Then Setlog("Slot: " & $i & " | $x > " & $iStartOffset + ($i * 73) & " and $x < " & ($iStartOffset + 73 + $iStartOffsetHero) + ($i * 73))
+			If $g_iSamM0dDebug = 1 Then Setlog("Slot: " & $i & " | $PosX: " & $PosX & " |  OCR x position: " & $Slottemp[0] & " | OCR Slot: " & $Slottemp[1])
 			Return $Slottemp
 		EndIf
 		If $g_bRunState = False Then Return
 	Next
-
 	Return $Slottemp
 
 EndFunc   ;==>SlotAttack

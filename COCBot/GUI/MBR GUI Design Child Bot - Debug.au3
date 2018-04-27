@@ -33,6 +33,24 @@ Func CreateBotDebug()
 		$g_hChkDebugSetlog = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Bot - Debug", "ChkDebugSetlog", "Messages"), $x, $y - 5, -1, -1)
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Bot - Debug", "ChkDebugSetlog_Info _01", "Debug: Enables debug SetLog messages in code for Troubleshooting."))
 
+	;===== samm0d
+	$g_hChkSamM0dDebugOCR = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", 23, "GetMyOcr Debug"),$x+130, $y)
+		_GUICtrlSetTip(-1, "Enable setlog for debug getMyOcr function")
+		GUICtrlSetState(-1, $GUI_UNCHECKED)
+		GUICtrlSetOnEvent(-1, "g_hchkSamM0dDebugOCR")
+
+	$g_hchkSamM0dDebug = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", 24, "SamM0d Debug"),$x+130, $y+20)
+		_GUICtrlSetTip(-1, "Enable setlog for SamM0d Debug")
+		GUICtrlSetState(-1, $GUI_UNCHECKED)
+		GUICtrlSetOnEvent(-1, "g_hChkSamM0dDebug")
+
+	$g_hchkSamM0dImage = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", "Debug Image", "SamM0d Debug Image"),$x+130, $y+40)
+		_GUICtrlSetTip(-1, "Enable save SamM0d Debug Image under profile section.")
+		GUICtrlSetState(-1, $GUI_UNCHECKED)
+		GUICtrlSetOnEvent(-1, "g_hchkSamM0dImage")
+
+	$g_hBtnMakeImageForTrainButtons = GUICtrlCreateButton(GetTranslatedFileIni("sam m0d", "Make Train Button Images", "Make Train Button Images"), $x+130, $y+60, 140, 25)
+	;============
 	$y += 20
 		$g_hChkDebugAndroid = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Bot - Debug", "ChkDebugAndroid", "Android"), $x, $y - 5, -1, -1)
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Bot - Debug", "ChkDebugAndroid_Info _01", "Debug: Enables additional log debug messages for Android operations."))
@@ -185,17 +203,17 @@ Func CreateBotDebug()
 		$g_hBtnTestWeakBase = GUICtrlCreateButton(GetTranslatedFileIni("MBR GUI Design Child Bot - Debug", "TestWeakBase", "Test Weak Base"), $x + 20, $y, 120, 25)
 	$y -= $yNext
 
-		$g_hBtnTestClickAway = GUICtrlCreateButton(GetTranslatedFileIni("MBR GUI Design Child Bot - Debug", "TestClickAway", "Test Click Away"), $x + 20, $y, 120, 25)
-	$y -= $yNext
+;~ 		$g_hBtnTestClickAway = GUICtrlCreateButton(GetTranslatedFileIni("MBR GUI Design Child Bot - Debug", "TestClickAway", "Test Click Away"), $x + 20, $y, 120, 25)
+;~ 	$y -= $yNext
 
-		$g_hBtnTestAutoUpgrade = GUICtrlCreateButton(GetTranslatedFileIni("MBR GUI Design Child Bot - Debug", "TestAutoUpgrade", "Test Auto Upgrade"), $x + 20, $y, 120, 25)
-	$y -= $yNext
+;~ 		$g_hBtnTestAutoUpgrade = GUICtrlCreateButton(GetTranslatedFileIni("MBR GUI Design Child Bot - Debug", "TestAutoUpgrade", "Test Auto Upgrade"), $x + 20, $y, 120, 25)
+;~ 	$y -= $yNext
 
-		$g_hBtnTestUpgradeWindow = GUICtrlCreateButton(GetTranslatedFileIni("MBR GUI Design Child Bot - Debug", "TestUpgradeWindow", "Test Upgrade Window"), $x + 20, $y, 120, 25)
-	$y -= $yNext
+;~ 		$g_hBtnTestUpgradeWindow = GUICtrlCreateButton(GetTranslatedFileIni("MBR GUI Design Child Bot - Debug", "TestUpgradeWindow", "Test Upgrade Window"), $x + 20, $y, 120, 25)
+;~ 	$y -= $yNext
 
-		$g_hBtnConsoleWindow = GUICtrlCreateButton(GetTranslatedFileIni("MBR GUI Design Child Bot - Debug", "ConsoleWindow", "Show/hide Console"), $x + 20, $y, 120, 25)
-	$y -= $yNext
+;~ 		$g_hBtnConsoleWindow = GUICtrlCreateButton(GetTranslatedFileIni("MBR GUI Design Child Bot - Debug", "ConsoleWindow", "Show/hide Console"), $x + 20, $y, 120, 25)
+;~ 	$y -= $yNext
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 EndFunc   ;==>CreateBotDebug

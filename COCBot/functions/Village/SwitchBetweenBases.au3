@@ -19,7 +19,7 @@ Func SwitchBetweenBases($bCheckMainScreen = True)
 
 	If Not $g_bRunState Then Return
 
-	If IsOnBuilderBase(True) Then
+	If isOnBuilderBase(True) Then
 		$sSwitchFrom = "Builder Base"
 		$sSwitchTo = "Normal Village"
 		$bIsOnBuilderBase = True
@@ -48,7 +48,7 @@ Func SwitchBetweenBases($bCheckMainScreen = True)
 		While __TimerDiff($hTimerHandle) < 3000 And Not $bSwitched
 			_Sleep(250)
 			ForceCaptureRegion()
-			$bSwitched = IsOnBuilderBase(True) <> $bIsOnBuilderBase
+			$bSwitched = isOnBuilderBase(True) <> $bIsOnBuilderBase
 		WEnd
 
 		If $bSwitched Then

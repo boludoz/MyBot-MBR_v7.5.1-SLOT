@@ -23,6 +23,24 @@
 
 Global $g_oTxtLogInitText = ObjCreate("Scripting.Dictionary")
 Global $g_oTxtAtkLogInitText = ObjCreate("Scripting.Dictionary")
+
+Func LimitLines(ByRef $hRichText, $sDelimiter = @CR, $iMaxLength = 200) ;$iMaxLength
+    Local $asText
+    Local $iFirstLineLen
+    Local $iMax
+    Local $i
+    $asText = StringSplit(_GUICtrlRichEdit_GetText($hRichText), $sDelimiter, 2)
+    If UBound($asText) > ($iMaxLength + 1) Then ; $iMaxLength + 1 cause of 1 empty @CR on last text log
+        $iMax = UBound($asText) - ($iMaxLength + 1)
+        ;_SendMessage($hRichText, $WM_SETREDRAW, False, 0) ; disable redraw so logging has no visiual effect
+        For $i = 1 To $iMax
+            $iFirstLineLen = StringInStr(_GUICtrlRichEdit_GetText($hRichText), $sDelimiter)
+			_GUICtrlRichEdit_SetSel($hRichText, 0, $iFirstLineLen)
+			_GUICtrlRichEdit_ReplaceText($hRichText, "")
+        Next
+        ;_SendMessage($hTxtLog, $WM_SETREDRAW, True, 0) ; enabled RechEdit redraw again
+    EndIf
+EndFunc
 Global $g_oTxtSALogInitText = ObjCreate("Scripting.Dictionary")
 Global $g_bSilentSetDebugLog = False
 Global $g_aLastStatusBar
@@ -233,6 +251,13 @@ Func FlushGuiLog(ByRef $hTxtLog, ByRef $oTxtLog, $bUpdateStatus = False, $sLogMu
 	Local $iLogs = $oTxtLog.Count
 	$oTxtLog.RemoveAll
 
+	; samm0d
+	If $ichkBotLogLineLimit Then
+		If $hTxtLog = $g_hTxtLog And $iLogs Then
+			LimitLines($hTxtLog, @CR, $itxtLogLineLimit)
+		EndIf
+	EndIf
+
 	If $hTxtLog Then
 		_WinAPI_EnableWindow($hTxtLog, True) ; enabled RichEdit again
 		_GUICtrlRichEdit_SetSel($hTxtLog, -1, -1) ; select end (scroll to end)
@@ -302,6 +327,13 @@ Func SetAtkLog($String1, $String2 = "", $Color = $COLOR_BLACK, $Font = "Lucida C
 	;string1 see in video, string1&string2 put in file
 	_FileWriteLog($g_hAttackLogFile, $String1 & $String2)
 
+	If $g_iLCID = 1028 Then
+		If $Font = "Lucida Console" And $FontSize = 7.5 Then
+			$Font = "MingLiU"
+			$FontSize = 7.5
+		EndIf
+	EndIf
+
 	;Local $txtLogMutex = AcquireMutex("txtAtkLog")
 	Dim $a[6]
 	$a[0] = $String1
@@ -337,9 +369,9 @@ Func SetSwitchAccLog($String, $Color = $COLOR_BLACK, $Font = "Verdana", $FontSiz
 EndFunc   ;==>SetSwitchAccLog
 
 Func AtkLogHead()
-	SetAtkLog(_PadStringCenter(" " & GetTranslatedFileIni("MBR Func_AtkLogHead", "AtkLogHead_Text_01", "ATTACK LOG") & " ", 71, "="), "", $COLOR_BLACK, "MS Shell Dlg", 8.5)
-	SetAtkLog(GetTranslatedFileIni("MBR Func_AtkLogHead", "AtkLogHead_Text_02", '|                      --------  LOOT --------       ----- BONUS ------'), "")
-	SetAtkLog(GetTranslatedFileIni("MBR Func_AtkLogHead", "AtkLogHead_Text_03", '|AC|TIME.|TROP.|SEARCH|   GOLD| ELIXIR|DARK EL|TR.|S|  GOLD|ELIXIR|  DE|L.'), "")
+	SetAtkLog(_PadStringCenter(" " & GetTranslatedFileIni("MBR Func_AtkLogHead", "AtkLogHead_Text_01", "ATTACK LOG") & " ", 61, "="), "", $COLOR_BLACK, "MS Shell Dlg", 8.5)
+	SetAtkLog(GetTranslatedFileIni("MBR Func_AtkLogHead", "AtkLogHead_Text_02", '# |                   -------- LOOT ---------        ----- BONUS ------'), "", $COLOR_BLACK)
+	SetAtkLog(GetTranslatedFileIni("MBR Func_AtkLogHead", "AtkLogHead_Text_03", '# |TIME |TROP.|SEARCH|   GOLD| ELIXIR|DARK EL|TR.|S |  GOLD|ELIXIR|  DE|L.  |'), "", $COLOR_BLACK)
 EndFunc   ;==>AtkLogHead
 
 Func __FileWriteLog($handle, $text)
@@ -349,6 +381,7 @@ EndFunc   ;==>__FileWriteLog
 Func ClearLog($hRichEditCtrl = $g_hTxtLog)
 	Switch $hRichEditCtrl
 		Case $g_hTxtLog
+			If $ichkBotLogLineLimit Then Return
 			$g_oTxtLogInitText($g_oTxtLogInitText.Count + 1) = 0
 		Case $g_hTxtAtkLog
 			$g_oTxtAtkLogInitText($g_oTxtAtkLogInitText.Count + 1) = 0

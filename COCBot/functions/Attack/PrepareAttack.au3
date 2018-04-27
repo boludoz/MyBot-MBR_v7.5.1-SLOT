@@ -13,7 +13,8 @@
 ; Link ..........: https://github.com/MyBotRun/MyBot/wiki
 ; Example .......: No
 ; ===============================================================================================================================
-Func PrepareAttack($pMatchMode, $Remaining = False) ;Assigns troops
+; samm0d
+Func PrepareAttack($pMatchMode, $Remaining = False, $SRIGHT = False) ;Assigns troops
 
 	; Attack CSV has debug option to save attack line image, save have png of current $g_hHBitmap2
 	If ($pMatchMode = $DB And $g_aiAttackAlgorithm[$DB] = 1) Or ($pMatchMode = $LB And $g_aiAttackAlgorithm[$LB] = 1) Then
@@ -45,8 +46,9 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ;Assigns troops
 		SetLog("Initiating attack for: " & $g_asModeText[$pMatchMode], $COLOR_ERROR)
 	EndIf
 
-	_CaptureRegion2(0, 571 + $g_iBottomOffsetY, 859, 671 + $g_iBottomOffsetY)
-	If _Sleep($DELAYPREPAREATTACK1) Then Return
+	; samm0d - AttackBarCheck() already had capture.
+	;_CaptureRegion2(0, 571 + $g_iBottomOffsetY, 859, 671 + $g_iBottomOffsetY)
+	;If _Sleep($DELAYPREPAREATTACK1) Then Return
 
 	For $i = 0 To UBound($g_avAttackTroops) - 1
 		$g_avAttackTroops[$i][0] = -1
@@ -73,14 +75,17 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ;Assigns troops
 			$aTemp[Number($troopData[1])][0] = $troopData[0]
 			$aTemp[Number($troopData[1])][1] = Number($troopData[2])
 			$aTemp[Number($troopData[1])][2] = Number($troopData[1])
+			$aTemp[Number($troopData[1])][3] = Number($troopData[3])
 		Next
 	EndIf
 	For $i = 0 To UBound($aTemp) - 1
 		If $aTemp[$i][0] = "" And $aTemp[$i][1] = "" Then
 			$g_avAttackTroops[$i][0] = -1
 			$g_avAttackTroops[$i][1] = 0
+			$g_avAttackTroops[$i][2] = -1
 		Else
 			Local $troopKind = $aTemp[$i][0]
+			$g_avAttackTroops[$i][2] = -1
 			If $troopKind < $eKing Then
 				;normal troop
 				If Not IsTroopToBeUsed($pMatchMode, $troopKind) Then
@@ -90,7 +95,6 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ;Assigns troops
 					$troopKind = -1
 				Else
 					;use troop
-					;Setlog ("troopsnumber = " & $troopsnumber & "+ " &  Number( $aTemp[$i][1]))
 					$g_avAttackTroops[$i][0] = $aTemp[$i][0]
 					$g_avAttackTroops[$i][1] = $aTemp[$i][1]
 					$troopsnumber += $aTemp[$i][1]
@@ -99,13 +103,14 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ;Assigns troops
 			Else ;king, queen, warden and spells
 				$g_avAttackTroops[$i][0] = $troopKind
 				If IsSpecialTroopToBeUsed($pMatchMode, $troopKind) Then
-					$troopsnumber += 1
-					;Setlog ("troopsnumber = " & $troopsnumber & "+1")
 					$g_avAttackTroops[$i][0] = $aTemp[$i][0]
-					$g_avAttackTroops[$i][1] = $aTemp[$i][1]
-					If $g_avAttackTroops[$i][0] = $eKing Or $g_avAttackTroops[$i][0] = $eQueen Or $g_avAttackTroops[$i][0] = $eWarden Then $g_avAttackTroops[$i][1] = 1
-					$troopKind = $g_avAttackTroops[$i][1]
-					$troopsnumber += 1
+					If $g_avAttackTroops[$i][0] = $eKing Or $g_avAttackTroops[$i][0] = $eQueen Or $g_avAttackTroops[$i][0] = $eWarden Then
+						$g_avAttackTroops[$i][1] = 1
+						$troopsnumber += 1
+					Else
+						$g_avAttackTroops[$i][1] = $aTemp[$i][1]
+						If $Remaining = False Then $troopsnumber += 1
+					EndIf
 				Else
 					If $g_bDebugSetlog Then SetDebugLog($aTemp[$i][2] & " » Discard use hero/poison " & $troopKind & " " & NameOfTroop($troopKind), $COLOR_ERROR)
 					$troopKind = -1
@@ -114,8 +119,10 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ;Assigns troops
 
 			$Plural = 0
 			If $aTemp[$i][1] > 1 Then $Plural = 1
-			If $troopKind <> -1 Then SetLog($aTemp[$i][2] & " » " & $g_avAttackTroops[$i][1] & " " & NameOfTroop($g_avAttackTroops[$i][0], $Plural), $COLOR_SUCCESS)
-
+			If $troopKind <> -1 Then
+				SetLog($aTemp[$i][2] & " » " & $g_avAttackTroops[$i][1] & " " & NameOfTroop($g_avAttackTroops[$i][0], $Plural), $COLOR_SUCCESS)
+				$g_avAttackTroops[$i][2] = $aTemp[$i][3]
+			EndIf
 		EndIf
 	Next
 
@@ -160,7 +167,8 @@ Func IsSpecialTroopToBeUsed($pMatchMode, $pTroopType)
 			Case $eCastle
 				If $g_abAttackDropCC[$iTempMode] Then Return True
 			Case $eLSpell
-				If $g_abAttackUseLightSpell[$iTempMode] Or $g_bSmartZapEnable = True Then Return True
+				; samm0d
+				If $g_abAttackUseLightSpell[$iTempMode] Or $g_bSmartZapEnable = True Or $ichkUseSamM0dZap = 1 Then Return True
 			Case $eHSpell
 				If $g_abAttackUseHealSpell[$iTempMode] Then Return True
 			Case $eRSpell
@@ -179,6 +187,10 @@ Func IsSpecialTroopToBeUsed($pMatchMode, $pTroopType)
 				If $g_abAttackUseCloneSpell[$iTempMode] Then Return True
 			Case $eSkSpell
 				If $g_abAttackUseSkeletonSpell[$iTempMode] Then Return True
+			Case 51 To 52
+				If $ichkEnableUseEventTroop = 1 Then Return True
+			Case 61 To 62
+				If $ichkEnableUseEventTroop = 1 Then Return True
 			Case Else
 				Return False
 		EndSwitch

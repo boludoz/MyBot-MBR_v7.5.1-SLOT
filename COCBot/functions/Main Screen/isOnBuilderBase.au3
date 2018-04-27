@@ -1,7 +1,7 @@
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: IsOnBuilderBase.au3
+; Name ..........: isOnBuilderBase.au3
 ; Description ...: Check if Bot is currently on Normal Village or on Builder Base
-; Syntax ........: IsOnBuilderBase($bNeedCaptureRegion = False)
+; Syntax ........: isOnBuilderBase($bNeedCaptureRegion = False)
 ; Parameters ....: $bNeedCaptureRegion
 ; Return values .: True if is on Builder Base
 ; Author ........: Fliegerfaust (05-2017)
@@ -13,7 +13,7 @@
 ; Example .......: No
 ; ===============================================================================================================================
 
-Func IsOnBuilderBase($bNeedCaptureRegion = False)
+Func isOnBuilderBase($bNeedCaptureRegion = False)
 	_Sleep($DELAYISBUILDERBASE)
 
 	If _CheckPixel($aIsOnBuilderBase, $bNeedCaptureRegion) Then

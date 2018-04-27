@@ -1285,6 +1285,8 @@ Func BotClose($SaveConfig = Default, $bExit = True)
 		AndroidToFront(Default, "BotClose")
 		AndroidAdbTerminateShellInstance()
 	EndIf
+   ; samm0d
+   DirRemove(@ScriptDir & "\profiles\SamM0d", 1)
 
 	; Close Mutexes
 	If $g_hMutex_BotTitle <> 0 Then ReleaseMutex($g_hMutex_BotTitle)
@@ -2022,8 +2024,9 @@ Func Bind_ImageList($nCtrl, ByRef $hImageList)
 	Switch $nCtrl
 		Case $g_hTabMain
 			; the icons for main tab
-			; Local $aIconIndex = [$eIcnHourGlass, $eIcnTH11, $eIcnAttack, $eIcnGUI, $eIcnInfo]	; AltuFaltu r
-			Local $aIconIndex = [$eIcnHourGlass, $eIcnTH11, $eIcnAttack, $eIcnGUI, $eLegend, $eIcnInfo]	; AltuFaltu n
+			; Local $aIconIndex = [$eIcnHourGlass, $eIcnTH11, $eIcnAttack, $eIcnGUI, $eIcnInfo]
+			; samm0d
+			Local $aIconIndex = [$eIcnHourGlass, $eIcnTH11, $eIcnAttack, $eIcnGUI, $eIcnPekka, $eIcnInfo]
 
 		Case $g_hGUI_VILLAGE_TAB
 			; the icons for village tab
