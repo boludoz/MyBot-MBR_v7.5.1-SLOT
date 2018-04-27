@@ -42017,8 +42017,8 @@ If Not $bRecursive Then
 If checkObstacles_Network() Then Return True
 If checkObstacles_GfxError() Then Return True
 EndIf
-Local $bIsOnBuilderIsland = _CheckPixel($aIsOnBuilderBase, $g_bNoCapturePixel)
-If $bBuilderBase = False And $bIsOnBuilderIsland = True Then
+Local $bIsOnBuilderBase = _CheckPixel($aIsOnBuilderBase, $g_bNoCapturePixel)
+If $bBuilderBase = False And $bIsOnBuilderBase = True Then
 SetLog("Detected Builder Base, trying to switch back to Main Village")
 If SwitchBetweenBases(False) Then
 $g_bMinorObstacle = True
@@ -42941,7 +42941,7 @@ EndIf
 Next
 Return SetError(1, 0, -1)
 EndFunc
-Func isOnBuilderBase($bNeedCaptureRegion = False)
+Func IsOnBuilderBase($bNeedCaptureRegion = False)
 _Sleep($DELAYISBUILDERBASE)
 If _CheckPixel($aIsOnBuilderBase, $bNeedCaptureRegion) Then
 If $g_bDebugSetlog Then SetDebugLog("Builder Base Builder detected", $COLOR_DEBUG)
@@ -59621,7 +59621,7 @@ Local $sDirectory
 Local $stone[6] = [0, 0, 0, 0, 0, ""], $tree[6] = [0, 0, 0, 0, 0, ""]
 Local $x0, $y0, $d0, $x, $y, $x1, $y1, $right, $bottom, $a
 Local $iAdditional = 75
-If isOnBuilderBase(True) Then
+If IsOnBuilderBase(True) Then
 $sDirectory = $g_sImgZoomOutDirBB
 Else
 $sDirectory = $g_sImgZoomOutDir
@@ -60053,7 +60053,7 @@ Func SwitchBetweenBases($bCheckMainScreen = True)
 Local $sSwitchFrom, $sSwitchTo, $bIsOnBuilderBase = False, $aButtonCoords
 Local $sTile, $sTileDir, $sRegionToSearch
 If Not $g_bRunState Then Return
-If isOnBuilderBase(True) Then
+If IsOnBuilderBase(True) Then
 $sSwitchFrom = "Builder Base"
 $sSwitchTo = "Normal Village"
 $bIsOnBuilderBase = True
@@ -60079,7 +60079,7 @@ Local $bSwitched = False
 While __TimerDiff($hTimerHandle) < 3000 And Not $bSwitched
 _Sleep(250)
 ForceCaptureRegion()
-$bSwitched = isOnBuilderBase(True) <> $bIsOnBuilderBase
+$bSwitched = IsOnBuilderBase(True) <> $bIsOnBuilderBase
 WEnd
 If $bSwitched Then
 If $bCheckMainScreen Then checkMainScreen(True, Not $bIsOnBuilderBase)
@@ -61527,7 +61527,7 @@ Func MainSuggestedUpgradeCode()
 If $g_iChkBBSuggestedUpgrades = 0 Then Return
 Local $bDebug = False
 Local $bScreencap = True
-If isOnBuilderBase(True) Then
+If IsOnBuilderBase(True) Then
 If ClickOnBuilder() Then
 SetLog(" - Upg Window Opened successfully", $COLOR_INFO)
 Local $y = 102, $y1 = 132, $step = 30, $x = 400, $x1 = 540
@@ -68709,7 +68709,7 @@ _Sleep($DELAYRUNBOT3)
 AutoUpgrade()
 _Sleep($DELAYRUNBOT3)
 Case "BuilderBase"
-If isOnBuilderBase() Or(($g_bChkCollectBuilderBase Or $g_bChkStartClockTowerBoost Or $g_iChkBBSuggestedUpgrades) And SwitchBetweenBases()) Then
+If IsOnBuilderBase() Or(($g_bChkCollectBuilderBase Or $g_bChkStartClockTowerBoost Or $g_iChkBBSuggestedUpgrades) And SwitchBetweenBases()) Then
 CollectBuilderBase()
 BuilderBaseReport()
 StartClockTowerBoost()

@@ -1,7 +1,7 @@
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: isOnBuilderIsland.au3
+; Name ..........: IsOnBuilderBase.au3
 ; Description ...: Check if Bot is currently on Normal Village or on Builder Island
-; Syntax ........: isOnBuilderIsland($bNeedCaptureRegion = False)
+; Syntax ........: IsOnBuilderBase($bNeedCaptureRegion = False)
 ; Parameters ....: $bNeedCaptureRegion
 ; Return values .: True if is on Builder Island
 ; Author ........: Fliegerfaust (05-2017)
@@ -13,10 +13,10 @@
 ; Example .......: No
 ; ===============================================================================================================================
 
-Func isOnBuilderIsland($bNeedCaptureRegion = False)
-	_Sleep($DELAYISBUILDERISLAND)
+Func IsOnBuilderBase($bNeedCaptureRegion = False)
+	_Sleep($DELAYISBUILDERBASE)
 
-	If _CheckPixel($aIsOnBuilderIsland, $bNeedCaptureRegion) Then
+	If _CheckPixel($aIsOnBuilderBase, $bNeedCaptureRegion) Then
 		If $g_bDebugSetlog Then SetDebugLog("Builder Island Builder detected", $COLOR_DEBUG)
 		Return True
 	Else

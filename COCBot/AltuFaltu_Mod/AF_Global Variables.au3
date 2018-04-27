@@ -26,7 +26,7 @@ Global $g_bChkMultiClick, $g_iMultiClick = 1
 Global $g_aiQueueTroops[$eTroopCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Global $g_aiQueueSpells[$eSpellCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-Global $aIsOnBuilderIsland[4] = [359, 9, 0x75BDE4, 6] ; Check the Gold Coin from resources , is a square not round
+Global $aIsOnBuilderBase[4] = [359, 9, 0x75BDE4, 6] ; Check the Gold Coin from resources , is a square not round
 
 ;Global Variables to hold Function Data
 Global $g_SwitchSCIDAccFatalErrorAF = False

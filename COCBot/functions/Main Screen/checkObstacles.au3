@@ -51,8 +51,8 @@ Func _checkObstacles($bBuilderBase = False, $bRecursive = False) ;Checks if some
 		If checkObstacles_Network() Then Return True
 		If checkObstacles_GfxError() Then Return True
 	EndIf
-	Local $bIsOnBuilderIsland = _CheckPixel($aIsOnBuilderBase, $g_bNoCapturePixel)
-	If $bBuilderBase = False And $bIsOnBuilderIsland = True Then
+	Local $bIsOnBuilderBase = _CheckPixel($aIsOnBuilderBase, $g_bNoCapturePixel)
+	If $bBuilderBase = False And $bIsOnBuilderBase = True Then
 		SetLog("Detected Builder Base, trying to switch back to Main Village")
 		If SwitchBetweenBases(False) Then
 			$g_bMinorObstacle = True
