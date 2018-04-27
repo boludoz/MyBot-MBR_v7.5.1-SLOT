@@ -19,4 +19,3 @@
 #include "Functions\AF_Various ImgSearch.au3"
 
 #include "ForumMod\_Wait4Pixel.au3"
-#include "ForumMod\ArrayFunctions.au3"
