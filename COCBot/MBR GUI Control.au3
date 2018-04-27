@@ -716,12 +716,9 @@ Func GUIControl_WM_NOTIFY($hWind, $iMsg, $wParam, $lParam)
 			tabTHSnipe()
 		Case $g_hGUI_BOT_TAB
 			tabBot()
-
-#cs		; AltuFaltu s
+		; samm0d
 		Case $g_hGUI_STATS_TAB
 			tabStats()
-#ce		; AltuFaltu e
-
 		Case Else
 			$bCheckEmbeddedShield = False
 	EndSwitch
@@ -1648,7 +1645,8 @@ Func tabMain()
 				GUISetState(@SW_HIDE, $g_hGUI_ATTACK)
 				GUISetState(@SW_HIDE, $g_hGUI_BOT)
 
-				GUISetState(@SW_HIDE, $g_hGUI_MOD_AF)	; AltuFaltu n
+				; SamM0d
+				GUISetState(@SW_HIDE, $hGUI_MOD)
 
 				GUISetState(@SW_HIDE, $g_hGUI_ABOUT)
 				GUISetState(@SW_SHOWNOACTIVATE, $g_hGUI_LOG)
@@ -1658,7 +1656,8 @@ Func tabMain()
 				GUISetState(@SW_HIDE, $g_hGUI_ATTACK)
 				GUISetState(@SW_HIDE, $g_hGUI_BOT)
 
-				GUISetState(@SW_HIDE, $g_hGUI_MOD_AF)	; AltuFaltu n
+				; SamM0d
+				GUISetState(@SW_HIDE, $hGUI_MOD)
 
 				GUISetState(@SW_HIDE, $g_hGUI_ABOUT)
 				GUISetState(@SW_SHOWNOACTIVATE, $g_hGUI_VILLAGE)
@@ -1669,7 +1668,8 @@ Func tabMain()
 				GUISetState(@SW_HIDE, $g_hGUI_VILLAGE)
 				GUISetState(@SW_HIDE, $g_hGUI_BOT)
 
-				GUISetState(@SW_HIDE, $g_hGUI_MOD_AF)	; AltuFaltu n
+				; SamM0d
+				GUISetState(@SW_HIDE, $hGUI_MOD)
 
 				GUISetState(@SW_HIDE, $g_hGUI_ABOUT)
 				GUISetState(@SW_SHOWNOACTIVATE, $g_hGUI_ATTACK)
@@ -1680,7 +1680,8 @@ Func tabMain()
 				GUISetState(@SW_HIDE, $g_hGUI_VILLAGE)
 				GUISetState(@SW_HIDE, $g_hGUI_ATTACK)
 
-				GUISetState(@SW_HIDE, $g_hGUI_MOD_AF)	; AltuFaltu n
+				; SamM0d
+				GUISetState(@SW_HIDE, $hGUI_MOD)
 
 				GUISetState(@SW_HIDE, $g_hGUI_ABOUT)
 				GUISetState(@SW_SHOWNOACTIVATE, $g_hGUI_BOT)
@@ -1692,16 +1693,16 @@ Func tabMain()
 				GUISetState(@SW_HIDE, $g_hGUI_ATTACK)
 				GUISetState(@SW_HIDE, $g_hGUI_BOT)
 				GUISetState(@SW_SHOWNOACTIVATE, $g_hGUI_ABOUT)
-
-				GUISetState(@SW_SHOWNOACTIVATE, $g_hGUI_MOD_AF)	; AltuFaltu n
+				; SamM0d
+				GUISetState(@SW_SHOWNOACTIVATE, $hGUI_MOD)
 
 			Case $tabidx = 5 ; About
 				GUISetState(@SW_HIDE, $g_hGUI_LOG)
 				GUISetState(@SW_HIDE, $g_hGUI_VILLAGE)
 				GUISetState(@SW_HIDE, $g_hGUI_ATTACK)
 				GUISetState(@SW_HIDE, $g_hGUI_BOT)
-
-				GUISetState(@SW_HIDE, $g_hGUI_MOD_AF)	; AltuFaltu n
+				; SamM0d
+				GUISetState(@SW_HIDE, $hGUI_MOD)
 
 				GUISetState(@SW_SHOWNOACTIVATE, $g_hGUI_ABOUT)
 
@@ -1710,9 +1711,8 @@ Func tabMain()
 				GUISetState(@SW_HIDE, $g_hGUI_VILLAGE)
 				GUISetState(@SW_HIDE, $g_hGUI_ATTACK)
 				GUISetState(@SW_HIDE, $g_hGUI_BOT)
-
-				GUISetState(@SW_HIDE, $g_hGUI_MOD_AF)	; AltuFaltu n
-
+				; SamM0d
+				GUISetState(@SW_HIDE, $hGUI_MOD)
 		EndSelect
 
 EndFunc   ;==>tabMain
@@ -1938,7 +1938,7 @@ Func tabBot()
 	EndSelect
 EndFunc   ;==>tabBot
 
-#cs ; AltuFaltu s
+; samm0d
 Func tabStats()
 	Local $tabidx = GUICtrlRead($g_hGUI_STATS_TAB)
 	;SetLog("$tabidx: " & $tabidx)
@@ -1953,7 +1953,6 @@ Func tabStats()
 				GUICtrlSetState($arrowright2,$GUI_SHOW)
 		EndSelect
 EndFunc
-#ce ; AltuFaltu e
 
 Func tabDeadbase()
 	Local $tabidx = GUICtrlRead($g_hGUI_DEADBASE_TAB)
