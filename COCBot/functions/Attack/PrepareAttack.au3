@@ -56,7 +56,7 @@ Func PrepareAttack($pMatchMode, $Remaining = False, $SRIGHT = False) ;Assigns tr
 	Next
 
 	Local $Plural = 0
-	Local $result = AttackBarCheck($Remaining)
+	Local $result = AttackBarCheck($Remaining, $SRIGHT)
 	If $g_bDebugSetlog Then SetDebugLog("DLL Troopsbar list: " & $result, $COLOR_DEBUG)
 	Local $aTroopDataList = StringSplit($result, "|")
 	Local $aTemp[12][3]
