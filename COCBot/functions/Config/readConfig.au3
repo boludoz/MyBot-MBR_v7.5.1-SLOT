@@ -1293,7 +1293,6 @@ Func ReadConfig_600_52_2()
 	IniReadS($g_iTotalSpellValue, $g_sProfileConfigPath, "Spells", "SpellFactory", 0, "int")
 	$g_iTotalSpellValue = Int($g_iTotalSpellValue)
 
-	AF_ReadConfig_SmartTrain()	; AltuFaltu n
 
 EndFunc   ;==>ReadConfig_600_52_2
 

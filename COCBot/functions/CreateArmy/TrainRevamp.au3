@@ -32,7 +32,7 @@ Func TrainRevamp()
 	EndIf
 
 	
-	If Not $g_bQuickTrainEnable And Not $g_bChkSmartTrain Then	;AltuFaltu m
+	If Not $g_bQuickTrainEnable Then
 		TrainRevampOldStyle()
 		Return
 	EndIf
@@ -44,15 +44,6 @@ Func TrainRevamp()
 	CheckIfArmyIsReady()
 
 	If Not $g_bRunState Then Return
-
-	; AltuFaltu s
-	If $g_bChkSmartTrain Then
-		SmartTrain()
-		ResetVariables("donated")
-		EndGainCost("Train")
-		Return
-	EndIf
-	; AltuFaltu e
 
 	If $g_bIsFullArmywithHeroesAndSpells Or ($g_CurrentCampUtilization = 0 And $g_bFirstStart) Then
 
@@ -1720,7 +1711,7 @@ Func ResetVariables($sArmyType = "")
 
 EndFunc   ;==>ResetVariables
 
-Func TrainArmyNumber($Army, $iMultiClick = 1)	; AltuFaltu m
+Func TrainArmyNumber($Army)
 
 	Local $a_TrainArmy[3][4] = [[784, 368, 0x71BB2B, 10], [784, 485, 0x74BD2D, 10], [784, 602, 0x73BD2D, 10]]
 	SetLog("Using Quick Train Tab", $COLOR_INFO)
@@ -1729,13 +1720,9 @@ Func TrainArmyNumber($Army, $iMultiClick = 1)	; AltuFaltu m
 	If IsArmyWindow(False, $QuickTrainTAB) Then
 		For $Num = 0 To 2
 			If $Army[$Num] Then
-				Local $iClick = 2, $sLog = ""
-				If $Num = 2 Then $iClick = $iMultiClick
-				If $iClick > 2 Then $sLog = ", Multi-click x" & $iClick & " times"
-
 				If _ColorCheck(_GetPixelColor($a_TrainArmy[$Num][0], $a_TrainArmy[$Num][1], True), Hex($a_TrainArmy[$Num][2], 6), $a_TrainArmy[$Num][3]) Then
-					Click($a_TrainArmy[$Num][0], $a_TrainArmy[$Num][1], $iClick)
-					SetLog(" - Making the Army " & $Num + 1 & $sLog, $COLOR_INFO)
+					Click($a_TrainArmy[$Num][0], $a_TrainArmy[$Num][1], 1)
+					SetLog(" - Making the Army " & $Num + 1, $COLOR_INFO)
 					If _Sleep(500) Then Return
 				Else
 					SetLog(" - Error Clicking On Army: " & $Num + 1 & "| Pixel was :" & _GetPixelColor($a_TrainArmy[$Num][0], $a_TrainArmy[$Num][1], True), $COLOR_ACTION)
@@ -1822,7 +1809,7 @@ Func MakingDonatedTroops()
 			$Plural = 0
 			If $avDefaultTroopGroup[$i][4] > 0 Then
 				$RemainTrainSpace = GetOCRCurrent(48, 160)
-				If $RemainTrainSpace[0] = $RemainTrainSpace[1] And Not $g_bChkSmartTrain Then ; army camps full
+				If $RemainTrainSpace[0] = $RemainTrainSpace[1] Then ; army camps full
 					;Camps Full All Donate Counters should be zero!!!!
 					For $j = 0 To UBound($avDefaultTroopGroup, 1) - 1
 						$avDefaultTroopGroup[$j][4] = 0
@@ -1832,7 +1819,7 @@ Func MakingDonatedTroops()
 
 				Local $iTroopIndex = TroopIndexLookup($avDefaultTroopGroup[$i][0], "MakingDonatedTroops")
 
-				If $avDefaultTroopGroup[$i][2] * $avDefaultTroopGroup[$i][4] <= $RemainTrainSpace[2] Or $g_bChkSmartTrain Then ; Troopheight x donate troop qty <= avaible train space
+				If $avDefaultTroopGroup[$i][2] * $avDefaultTroopGroup[$i][4] <= $RemainTrainSpace[2] Then ; Troopheight x donate troop qty <= avaible train space
 					;Local $pos = GetTrainPos(TroopIndexLookup($avDefaultTroopGroup[$i][0]))
 					Local $howMuch = $avDefaultTroopGroup[$i][4]
 					If $avDefaultTroopGroup[$i][5] = "e" Then
@@ -2047,7 +2034,6 @@ Func IIf($Condition, $IfTrue, $IfFalse)
 		Return $IfFalse
 	EndIf
 EndFunc   ;==>IIf
-#cs
 Func _ArryRemoveBlanks(ByRef $aArray)
 	Local $iCounter = 0
 	For $i = 0 To UBound($aArray) - 1
@@ -2058,7 +2044,6 @@ Func _ArryRemoveBlanks(ByRef $aArray)
 	Next
 	ReDim $aArray[$iCounter]
 EndFunc   ;==>_ArryRemoveBlanks
-#ce
 Func ValidateSearchArmyResult($aSearchResult, $iIndex = 0)
 	If IsArray($aSearchResult) Then
 		If UBound($aSearchResult) > 0 Then

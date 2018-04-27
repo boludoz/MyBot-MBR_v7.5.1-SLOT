@@ -1149,9 +1149,6 @@ Func SaveConfig_600_52_2()
 	; spell capacity and forced flag
 	_Ini_Add("Spells", "SpellFactory", $g_iTotalSpellValue)
 	_Ini_Add("other", "ChkForceBrewBeforeAttack", $g_bForceBrewSpells ? 1 : 0)
-
-	AF_SaveConfig_SmartTrain()	; AltuFaltu n
-
 EndFunc   ;==>SaveConfig_600_52_2
 
 Func SaveConfig_600_54()

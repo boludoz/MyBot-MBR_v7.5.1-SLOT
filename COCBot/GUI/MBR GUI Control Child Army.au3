@@ -50,38 +50,6 @@ Func chkQuickTrainCombo()
 	EndIf
 EndFunc   ;==>chkQuickTrainCombo
 
-; AltuFaltu s
-Func chkSmartTrain()
-	If GUICtrlRead($g_hChkSmartTrain) = $GUI_CHECKED Then
-		If GUICtrlRead($g_hChkUseQuickTrain) = $GUI_UNCHECKED Then _GUI_Value_STATE("ENABLE", $g_hChkPreciseArmyCamp)
-		_GUI_Value_STATE("ENABLE", $g_hChkFillArcher & "#" & $g_hChkFillEQ)
-		chkPreciseTroops()
-		chkFillArcher()
-	Else
-		_GUI_Value_STATE("DISABLE", $g_hChkPreciseArmyCamp & "#" & $g_hChkFillArcher & "#" & $g_hTxtFillArcher & "#" & $g_hChkFillEQ)
-		_GUI_Value_STATE("UNCHECKED", $g_hChkPreciseArmyCamp & "#" & $g_hChkFillArcher & "#" & $g_hChkFillEQ)
-	EndIf
-EndFunc   ;==>chkSmartTrain
-
-Func chkPreciseTroops()
-	If GUICtrlRead($g_hChkPreciseArmyCamp) = $GUI_CHECKED Then
-		_GUI_Value_STATE("DISABLE", $g_hChkFillArcher & "#" & $g_hChkFillEQ)
-		_GUI_Value_STATE("UNCHECKED", $g_hChkFillArcher & "#" & $g_hChkFillEQ)
-		chkFillArcher()
-	Else
-		_GUI_Value_STATE("ENABLE", $g_hChkFillArcher & "#" & $g_hChkFillEQ)
-	EndIf
-EndFunc   ;==>chkPreciseTroops
-
-Func chkFillArcher()
-	If GUICtrlRead($g_hChkFillArcher) = $GUI_CHECKED Then
-		_GUI_Value_STATE("ENABLE", $g_hTxtFillArcher)
-	Else
-		_GUI_Value_STATE("DISABLE", $g_hTxtFillArcher)
-	EndIf
-EndFunc   ;==>chkFillArcher
-; AltuFaltu e
-
 Func SetComboTroopComp()
 	Local $bWasRedraw = SetRedrawBotWindow(False, Default, Default, Default, "SetComboTroopComp")
 	Local $ArmyCampTemp = 0
