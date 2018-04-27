@@ -129,7 +129,7 @@ Global Const $DELAYCHECKOBSTACLES10 = 1800000 ; 30 minutes
 ;isGemOpen
 Global Const $DELAYISGEMOPEN1 = 350
 
-;IsOnBuilderBase
+;isOnBuilderBase
 Global Const $DELAYISBUILDERBASE = 300
 
 ;waitMainScreen

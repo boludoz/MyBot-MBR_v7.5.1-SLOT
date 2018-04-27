@@ -906,9 +906,6 @@ $txtLogLineLimit = GUICtrlCreateInput("240", $x + 300, $y+2, 35, 18, BitOR($GUI_
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 
-GUICtrlCreateTabItem("") ; end tabitem definition
-
-
 ;================================= Tab1 ===============================================
 SplashStep("Loading M0d - Tab1...")
 GUICtrlCreateTab(0, 0, $_GUI_MAIN_WIDTH - 20, $_GUI_MAIN_HEIGHT - 255, $TCS_FLATBUTTONS)
@@ -926,6 +923,8 @@ $g_chkSCIDSwitchAccAF = GUICtrlCreateCheckbox(GetTranslatedFileIni("AF_Mod", 14,
 	_GUICtrlSetTip(-1, $sTxtTip)
 	GUICtrlSetOnEvent(-1, "chkSCIDSwitchAccAF")
 	GUICtrlSetState(-1, $GUI_UNCHECKED)
+	GUICtrlCreateGroup("", -99, -99, 1, 1)
+GUICtrlCreateTabItem("") ; end tabitem definition
 
 
 

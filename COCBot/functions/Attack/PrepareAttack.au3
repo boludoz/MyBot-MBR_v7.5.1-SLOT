@@ -59,6 +59,7 @@ Func PrepareAttack($pMatchMode, $Remaining = False, $SRIGHT = False) ;Assigns tr
 	Local $result = AttackBarCheck($Remaining, $SRIGHT)
 	If $g_bDebugSetlog Then SetDebugLog("DLL Troopsbar list: " & $result, $COLOR_DEBUG)
 	Local $aTroopDataList = StringSplit($result, "|")
+; <<<<<<< HEAD
 	Local $aTemp[12][3]
 	; ExtendedAttackBar - Team AiO MOD++
 	If $pMatchMode <= $LB Then
@@ -67,6 +68,7 @@ Func PrepareAttack($pMatchMode, $Remaining = False, $SRIGHT = False) ;Assigns tr
 			ReDim $g_avAttackTroops[22][2]
 		EndIf
 	EndIf
+; >>>>>>> SLOT+11
 	If $result <> "" Then
 		; example : 0#0#92|1#1#108|2#2#8|22#3#1|20#4#1|21#5#1|26#5#0|23#6#1|24#7#2|25#8#1|29#10#1
 		; [0] = Troop Enum Cross Reference [1] = Slot position [2] = Quantities
