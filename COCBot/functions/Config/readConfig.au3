@@ -178,6 +178,7 @@ Func ReadRegularConfig()
 		$g_iFrmBotDockedPosX = $g_WIN_POS_DEFAULT
 		$g_iFrmBotDockedPosY = $g_WIN_POS_DEFAULT
 	EndIf
+	EndIf  
 
 	; Redraw mode:  0 = disabled, 1 = Redraw always entire bot window, 2 = Redraw only required bot window area (or entire bot if control not specified)
 	IniReadS($g_iRedrawBotWindowMode, $g_sProfileConfigPath, "general", "RedrawBotWindowMode", 2, "int")

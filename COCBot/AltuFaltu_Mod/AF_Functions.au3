@@ -14,8 +14,6 @@
 ; ===============================================================================================================================
 
 #include "Configs\AF_Configs.au3"
-#include "GUI\AF_GUI Control Child.au3"
 #include "Functions\AF_SCID Switch Acc.au3"
 #include "Functions\AF_Various ImgSearch.au3"
 
-#include "ForumMod\_Wait4Pixel.au3"
