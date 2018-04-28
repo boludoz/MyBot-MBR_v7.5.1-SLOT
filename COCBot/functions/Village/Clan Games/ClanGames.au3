@@ -17,7 +17,14 @@
 Func _ClanGames()
 
 	; Check If this Feature is Enable on GUI.
+	
 	If Not $g_bChkClanGamesEnabled Then Return
+	
+	Local $hour = StringSplit(_NowTime(4), ":", $STR_NOCOUNT)
+	If $g_abClanGamesSetuphours[$hour[0]] = 0 Then
+		SetLog("Clan Games not planned, Skipped..", $COLOR_INFO)
+		Return ; exit func if no planned donate checkmarks
+	EndIf											 
 
 	Local $sINIPath = StringReplace($g_sProfileConfigPath, "config.ini" , "ClanGames_config.ini")
 	If Not FileExists($sINIPath) then ClanGamesChallenges("" , True, $sINIPath, $g_bChkClanGamesDebug)
