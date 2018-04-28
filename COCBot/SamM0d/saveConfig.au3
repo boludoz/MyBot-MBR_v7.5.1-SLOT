@@ -180,3 +180,6 @@ For $j = 0 To 2
 Next
 
 saveFriendlyChallengeSetting()
+
+saveClanGamesSetupSetting()
+

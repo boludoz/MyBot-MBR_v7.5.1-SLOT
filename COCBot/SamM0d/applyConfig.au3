@@ -190,3 +190,5 @@ EndIf
 GUICtrlSetData($g_hLblTHLevels, $g_iTownHallLevel)
 
 applyFriendlyChallengeSetting()
+
+applyClanGamesSetupSetting()

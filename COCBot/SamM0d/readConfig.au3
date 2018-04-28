@@ -180,3 +180,6 @@ For $i = 0 To UBound($MySpells) - 1
 Next
 
 readFriendlyChallengeSetting()
+
+readClanGamesSetupSetting()
+

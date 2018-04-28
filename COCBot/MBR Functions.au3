@@ -28,6 +28,7 @@
 #include "SamM0d\Functions\HLFClick.au3"
 #include "SamM0d\Functions\getMyOcr.au3"
 #include "SamM0d\Functions\FriendlyChallenge.au3"
+#include "SamM0d\Functions\ClanGamesSetup.au3"
 #include "SamM0d\Functions\MySwitch\MySwitch.au3"
 ; Mod Train
 ;---------------------------------------------------------------

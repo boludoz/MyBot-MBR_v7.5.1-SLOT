@@ -932,7 +932,7 @@ GUICtrlCreateGroup("", -99, -99, 1, 1)
 SplashStep("Loading M0d - Clan Games tab...")
 GUICtrlCreateTab(0, 0, $_GUI_MAIN_WIDTH - 20, $_GUI_MAIN_HEIGHT - 255, $TCS_FLATBUTTONS)
 
-GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d","Friendly Challenge", "Friend Challenge"))
+GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d","Clan Games", "Clan Games"))
 
 Local $x = 10, $y = 30
 
