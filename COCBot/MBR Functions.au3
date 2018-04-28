@@ -30,6 +30,7 @@
 #include "SamM0d\Functions\FriendlyChallenge.au3"
 #include "SamM0d\Functions\ClanGamesSetup.au3"
 #include "SamM0d\Functions\MySwitch\MySwitch.au3"
+#include "SamM0d\Functions\ClanHop.au3"
 ; Mod Train
 ;---------------------------------------------------------------
 #include "SamM0d\Functions\ModTrain\ModTrain.au3"

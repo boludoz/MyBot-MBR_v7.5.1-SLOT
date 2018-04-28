@@ -925,20 +925,23 @@ $g_chkSCIDSwitchAccAF = GUICtrlCreateCheckbox(GetTranslatedFileIni("AF_Mod", 14,
 	GUICtrlSetState(-1, $GUI_UNCHECKED)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 	
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-		
-		
 		
 SplashStep("Loading M0d - Clan Games tab...")
 GUICtrlCreateTab(0, 0, $_GUI_MAIN_WIDTH - 20, $_GUI_MAIN_HEIGHT - 255, $TCS_FLATBUTTONS)
-
 GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d","Clan Games", "Clan Games"))
-
 Local $x = 10, $y = 30
-
 SetupClanGamesSetupGUI($x, $y)
 
 GUICtrlCreateGroup("", -99, -99, 1, 1)
+
+SplashStep("Loading M0d - Clan Hop tab...")
+GUICtrlCreateTab(0, 0, $_GUI_MAIN_WIDTH - 20, $_GUI_MAIN_HEIGHT - 255, $TCS_FLATBUTTONS)
+GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d","Clan Hop", "Clan Hop"))
+Local $x = 10, $y = 30
+SetupClanHopGUI($x, $y)
+
+GUICtrlCreateGroup("", -99, -99, 1, 1)
+
 
 GUICtrlCreateTabItem("") ; end tabitem definition
 

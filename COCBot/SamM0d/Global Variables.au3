@@ -339,3 +339,7 @@ Global $aProfileStats[44][9] = _
 ["g_aiNbrOfDetectedMines",0,0,0,0,0,0,0,0], _
 ["g_aiNbrOfDetectedCollectors",0,0,0,0,0,0,0,0], _
 ["g_aiNbrOfDetectedDrills",0,0,0,0,0,0,0,0]]
+
+; Clan Hop 
+Global $g_hGrpDonateOptions = 0, $g_hChkClanHop = 0	; Clan HOP
+Global $g_bChkClanHop = False

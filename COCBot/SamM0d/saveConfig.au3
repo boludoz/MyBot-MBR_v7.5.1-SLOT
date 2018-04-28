@@ -183,3 +183,5 @@ saveFriendlyChallengeSetting()
 
 saveClanGamesSetupSetting()
 
+saveClanHopSetting()
+
