@@ -876,13 +876,10 @@ Func runBot() ;Bot that runs everything in order
 					EndIf
 					If CheckAndroidReboot() = True Then ContinueLoop 2 ; must be level 2 due to loop-in-loop
 				WEnd
-				ClanHop()
 				If $g_bRunState = False Then Return
 				If $g_bRestart = True Then ContinueLoop
 				If $g_iUnbrkMode >= 1 Then
 					If Unbreakable() = True Then ContinueLoop
-				If $g_bChkClanHop = True Then Return	; Clan HOP
-
 				EndIf
 			EndIf
 			If ($g_iCommandStop = 3 Or $g_iCommandStop = 0) Then ; Train Donate only - force a donate cc everytime, Ignore any SkipDonate Near Full Values
@@ -903,13 +900,14 @@ Func runBot() ;Bot that runs everything in order
 				EndIf
 				If CheckAndroidReboot() = True Then ContinueLoop 2 ; must be level 2 due to loop-in-loop
 			WEnd
+			ClanHop() ; ClanHop - Team AiO MOD++
 			; samm0d
 			FriendlyChallenge()
 			If $g_bRunState = False Then Return
 			If $g_bRestart = True Then ContinueLoop
 			If IsSearchAttackEnabled() Then ; If attack scheduled has attack disabled now, stop wall upgrades, and attack.
 				$g_iNbrOfWallsUpped = 0
-				UpgradeWall()
+				If Not $g_bChkClanHop Then UpgradeWall() ; ClanHop - Team AiO MOD++
 				If _Sleep($DELAYRUNBOT3) Then Return
 				If $g_bRestart = True Then ContinueLoop
 				If ProfileSwitchAccountEnabled() And $g_abDonateOnly[$g_iCurAccount] Then checkSwitchAcc()
@@ -976,7 +974,8 @@ Func _Idle() ;Sequence that runs until Full Army
 
 	Local $TimeIdle = 0 ;In Seconds
 	If $g_bDebugSetlog Then SetLog("Func Idle ", $COLOR_DEBUG)
-	If $g_bChkClanHop Then Return	; Clan HOP
+
+	If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 	; samm0d - check make donate type account enter idle loop
 	Local $bSkipEnterIdleLoop = False
 	Local $bDonateTypeAcc = False
@@ -1183,21 +1182,12 @@ Func _Idle() ;Sequence that runs until Full Army
 EndFunc   ;==>_Idle
 
 Func AttackMain() ;Main control for attack functions
-			If Not $g_bChkClanHop Then                                                                              ; Clan HOP
-				Setlog("No one of search condition match:", $COLOR_WARNING)                                         ; Clan HOP
-				Setlog("Waiting on troops, heroes and/or spells according to search settings", $COLOR_WARNING)      ; Clan HOP
-				$g_bIsSearchLimit = False                                                                           ; Clan HOP
-				$g_bIsClientSyncError = False                                                                       ; Clan HOP
-				$g_bQuickAttack = False                                                                             ; Clan HOP
-			Else                                                                                                    ; Clan HOP
-				SetLog("Skipping Attack because Clan Hop is enabled!", $COLOR_INFO)                                 ; Clan HOP
-			EndIf
 	If ProfileSwitchAccountEnabled() And $g_abDonateOnly[$g_iCurAccount] Then Return
 	; samm0d
 	;getArmyCapacity(True, True)
 	ClickP($aAway, 1, 0, "#0000") ;Click Away to prevent any pages on top
 	If IsSearchAttackEnabled() Then
-		If (IsSearchModeActive($DB) And checkCollectors(True, False)) Or IsSearchModeActive($LB) Or IsSearchModeActive($TS) Or Not $g_bChkClanHop Then	; Clan HOP Then
+		If (IsSearchModeActive($DB) And checkCollectors(True, False)) Or IsSearchModeActive($LB) Or IsSearchModeActive($TS) Then
 			If ProfileSwitchAccountEnabled() And ($g_aiAttackedCountSwitch[$g_iCurAccount] <= $g_aiAttackedCountAcc[$g_iCurAccount] - 2) Then checkSwitchAcc()
 			If $g_bUseCCBalanced = True Then ;launch profilereport() only if option balance D/R it's activated
 				ProfileReport()
@@ -1232,6 +1222,7 @@ Func AttackMain() ;Main control for attack functions
 			If _Sleep($DELAYATTACKMAIN2) Then Return
 			Return True
 		Else
+			If Not $g_bChkClanHop Then ; ClanHop - Team AiO MOD++
 			SetLog("No one of search condition match:", $COLOR_WARNING)
 			SetLog("Waiting on troops, heroes and/or spells according to search settings", $COLOR_WARNING)
 			$g_bIsSearchLimit = False
@@ -1239,6 +1230,9 @@ Func AttackMain() ;Main control for attack functions
 			$g_bQuickAttack = False
 			If ProfileSwitchAccountEnabled() Then checkSwitchAcc()
 			SmartWait4Train()
+			Else
+				SetLog("Skipping Attack because Clan Hop is enabled!", $COLOR_INFO)
+			EndIf
 		EndIf
 	Else
 		SetLog("Attacking Not Planned, Skipped..", $COLOR_WARNING)
@@ -1309,36 +1303,32 @@ Func _RunFunction($action)
 	SetDebugLog("_RunFunction: " & $action & " BEGIN", $COLOR_DEBUG2)
 	Switch $action
 		Case "Collect"
-					If $g_bChkClanHop Then Return	; Clan HOP
 			Collect()
 			_Sleep($DELAYRUNBOT1)
 		Case "CheckTombs"
-					If $g_bChkClanHop Then Return	; Clan HOP
 			CheckTombs()
 			_Sleep($DELAYRUNBOT3)
 		Case "CleanYard"
-					If $g_bChkClanHop Then Return	; Clan HOP
 			CleanYard()
 		Case "ReArm"
-					If $g_bChkClanHop Then Return	; Clan HOP
 			ReArm()
 			_Sleep($DELAYRUNBOT3)
 		Case "ReplayShare"
-					If $g_bChkClanHop Then Return	; Clan HOP
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			ReplayShare($g_bShareAttackEnableNow)
 			_Sleep($DELAYRUNBOT3)
 		Case "NotifyReport"
-					If $g_bChkClanHop Then Return	; Clan HOP
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			NotifyReport()
 			_Sleep($DELAYRUNBOT3)
 		Case "DonateCC"
-					If $g_bChkClanHop Then Return	; Clan HOP
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			If $g_iActiveDonate And $g_bChkDonate Then
 				If SkipDonateNearFullTroops(True) = False And BalanceDonRec(True) Then DonateCC()
 				If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)
 			EndIf
 		Case "DonateCC,Train"
-					If $g_bChkClanHop Then Return	; Clan HOP
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			; samm0d
 			If $ichkModTrain = 1 Then
 				ModTrain()
@@ -1379,40 +1369,35 @@ Func _RunFunction($action)
 				EndIf
 			EndIf
 		Case "BoostBarracks"
-					If $g_bChkClanHop Then Return	; Clan HOP
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			BoostBarracks()
-		Case "BoostSpellFactory"
-					If $g_bChkClanHop Then Return	; Clan HOP
+						  
 			BoostSpellFactory()
-		Case "BoostKing"
-					If $g_bChkClanHop Then Return	; Clan HOP
+				  
 			BoostKing()
-		Case "BoostQueen"
-					If $g_bChkClanHop Then Return	; Clan HOP
+				   
 			BoostQueen()
-		Case "BoostWarden"
-					If $g_bChkClanHop Then Return	; Clan HOP
+					
 			BoostWarden()
 		Case "RequestCC"
-					If $g_bChkClanHop Then Return	; Clan HOP
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			RequestCC()
 			If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)
 		Case "Laboratory"
-					If $g_bChkClanHop Then Return	; Clan HOP
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			Laboratory()
 			If _Sleep($DELAYRUNBOT3) = False Then checkMainScreen(False)
 		Case "UpgradeHeroes"
-					If $g_bChkClanHop Then Return	; Clan HOP
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			UpgradeHeroes()
 			_Sleep($DELAYRUNBOT3)
 		Case "UpgradeBuilding"
-					If $g_bChkClanHop Then Return	; Clan HOP
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			UpgradeBuilding()
 			_Sleep($DELAYRUNBOT3)
  			AutoUpgrade()
 			_Sleep($DELAYRUNBOT3)
 		Case "BuilderBase"
-					If $g_bChkClanHop Then Return	; Clan HOP
 			If isOnBuilderBase() Or (($g_bChkCollectBuilderBase Or $g_bChkStartClockTowerBoost Or $g_iChkBBSuggestedUpgrades) And SwitchBetweenBases()) Then
 				CollectBuilderBase()
 				BuilderBaseReport()
@@ -1423,7 +1408,6 @@ Func _RunFunction($action)
 			EndIf
 			_Sleep($DELAYRUNBOT3)
 		Case "CollectFreeMagicItems"
-					If $g_bChkClanHop Then Return	; Clan HOP
 			CollectFreeMagicItems()
 		Case ""
 			SetDebugLog("Function call doesn't support empty string, please review array size", $COLOR_ERROR)
