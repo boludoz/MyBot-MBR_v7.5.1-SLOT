@@ -117,8 +117,8 @@ Global $g_oGuiNotInMini = ObjCreate("Scripting.Dictionary")
 
 #include "GUI\MBR GUI Design Bottom.au3"
 #include "GUI\MBR GUI Design Log.au3"
-#include "GUI\MBR GUI Design Village.au3"
 #include "GUI\MBR GUI Design Attack.au3"
+#include "GUI\MBR GUI Design Village.au3"
 #include "GUI\MBR GUI Design Bot.au3"
 #include "GUI\MBR GUI Design About.au3"
 

@@ -342,9 +342,10 @@ Func DonateCC($bCheckForNewMsg = False)
 
 				For $x = 0 To UBound($eDonateCustom) - 1
 					If $g_abChkDonateTroop[$eCustom[$x]] Then
-						$canDonCustom = CheckDonateTroop(99, $g_asTxtDonateTroop[$eCustom[$x]], $g_asTxtBlacklistTroop[$eCustom[$x]], $ClanString, True)
+                        $canDonCustom = CheckDonate(99, $g_asTxtDonateTroop[$eCustom[$x]], $g_asTxtBlacklistTroop[$eCustom[$x]], $ClanString, True)
 						If $canDonCustom Then
 							If $ichkEnableDonateWhenReady = 1 Then
+								Local $CorrectDonateCustom = $eDonateCustom[$x]
 								For $i = 0 To 2
 									If $CorrectDonateCustom[$i][0] < $eBarb Then
 										$CorrectDonateCustom[$i][0] = $eArch ; Change strange small numbers to archer
@@ -410,9 +411,9 @@ Func DonateCC($bCheckForNewMsg = False)
 					If $bDonateTroop And $g_bSkipDonTroops = False Then
 						;;;  Custom Combination Troops
 						For $x = 0 To UBound($eDonateCustom) - 1
-							If $g_abChkDonateTroop[$eCustom[$x]] And CheckDonateTroop(99, $g_asTxtDonateTroop[$eCustom[$x]], $g_asTxtBlacklistTroop[$eCustom[$x]], $ClanString) Then
-								Local $CorrectDonateCustom = $eDonateCustom[$x]
+                            If $g_abChkDonateTroop[$eCustom[$x]] Then
 								If $canDonCustom Then
+									Local $CorrectDonateCustom = $eDonateCustom[$x]
 									For $i = 0 To 2
 										If $CorrectDonateCustom[$i][0] < $eBarb Then
 											$CorrectDonateCustom[$i][0] = $eArch ; Change strange small numbers to archer
@@ -427,7 +428,7 @@ Func DonateCC($bCheckForNewMsg = False)
 										If $ichkEnableDonateWhenReady = 1 Then
 											If Eval("Ready" & $g_asTroopShortNames[$CorrectDonateCustom[$i][0]]) < $CorrectDonateCustom[$i][1] Then
 												SetLog("Pre-Train not ready, skip donate " & $g_asTroopNames[$CorrectDonateCustom[$i][0]], $COLOR_RED)
-												$canDonCustomA = False
+												$canDonCustom = False
 											EndIf
 										EndIf
 										If $canDonCustom Then DonateTroopType($CorrectDonateCustom[$i][0], $CorrectDonateCustom[$i][1], $g_abChkDonateTroop[$eCustom[$x]])

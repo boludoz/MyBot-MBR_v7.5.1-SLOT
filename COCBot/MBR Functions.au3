@@ -334,6 +334,7 @@
 #include "functions\Village\SwitchAccount.au3"
 #include "functions\Village\Clan Games\ClanGames.au3"
 #include "functions\Village\FreeMagicItems.au3"
+#include "functions\Village\CheckStopForWar.au3"
 
 #include "functions\Village\BuilderBase\Collect.au3"
 #include "functions\Village\BuilderBase\StartClockTowerBoost.au3"
@@ -352,3 +353,7 @@
 
 ; AltuFaltu MOD
 #include "AltuFaltu_Mod\AF_Functions.au3"
+
+; Stop War
+#include "functions\Village\CheckStopForWar.au3"
+
