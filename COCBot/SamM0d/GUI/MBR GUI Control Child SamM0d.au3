@@ -822,16 +822,14 @@ EndFunc
 ;========= GUI Control ==========
 Func ChkStopForWar()
     If GUICtrlRead($g_hChkStopForWar) = $GUI_CHECKED Then
-        For $i = $g_hCmbStopTime To $g_hChkRequestCCForWar
+        For $i = $g_hCmbStopTime To $g_hChkTrainWarTroop
             GUICtrlSetState($i, $GUI_ENABLE)
         Next
         ChkTrainWarTroop()
+        GUICtrlSetState($g_hChkRequestCCForWar, $GUI_ENABLE)
         ChkRequestCCForWar()
     Else
-        For $i = $g_hCmbStopTime To $g_ahChkArmyWar[2]
-            GUICtrlSetState($i, $GUI_DISABLE)
-        Next
-        For $i = $g_ahTxtTrainWarTroopCount[0] To $g_hLblCountWarSpellsTotal
+        For $i = $g_hCmbStopTime To $g_hTxtRequestCCForWar
             GUICtrlSetState($i, $GUI_DISABLE)
         Next
         GUICtrlSetBkColor($g_hLblCountWarTroopsTotal, $COLOR_MONEYGREEN)
@@ -864,10 +862,7 @@ Func ChkTrainWarTroop()
         GUICtrlSetState($g_hChkUseQuickTrainWar, $GUI_ENABLE)
         chkUseQTrainWar()
     Else
-        For $i = $g_hChkUseQuickTrainWar To $g_ahChkArmyWar[2]
-            GUICtrlSetState($i, $GUI_DISABLE)
-        Next
-        For $i = $g_ahTxtTrainWarTroopCount[0] To $g_hLblCountWarSpellsTotal
+        For $i = $g_hChkUseQuickTrainWar To $g_hLblCountWarSpellsTotal
             GUICtrlSetState($i, $GUI_DISABLE)
         Next
         GUICtrlSetBkColor($g_hLblCountWarTroopsTotal, $COLOR_MONEYGREEN)
@@ -879,14 +874,14 @@ Func chkUseQTrainWar()
     If GUICtrlRead($g_hChkUseQuickTrainWar) = $GUI_CHECKED Then
         _GUI_Value_STATE("ENABLE", $g_ahChkArmyWar[0] & "#" & $g_ahChkArmyWar[1] & "#" & $g_ahChkArmyWar[2])
         chkQuickTrainComboWar()
-        For $i = $g_ahTxtTrainWarTroopCount[0] To $g_hLblCountWarSpellsTotal
+        For $i = $g_hLblRemoveArmy To $g_hLblCountWarSpellsTotal
             GUICtrlSetState($i, $GUI_DISABLE)
         Next
         GUICtrlSetBkColor($g_hLblCountWarTroopsTotal, $COLOR_MONEYGREEN)
         GUICtrlSetBkColor($g_hLblCountWarSpellsTotal, $COLOR_MONEYGREEN)
     Else
         _GUI_Value_STATE("DISABLE", $g_ahChkArmyWar[0] & "#" & $g_ahChkArmyWar[1] & "#" & $g_ahChkArmyWar[2])
-        For $i = $g_ahTxtTrainWarTroopCount[0] To $g_hLblCountWarSpellsTotal
+        For $i = $g_hLblRemoveArmy To $g_hLblCountWarSpellsTotal
             GUICtrlSetState($i, $GUI_ENABLE)
         Next
         lblTotalWarTroopCount()

@@ -67,7 +67,7 @@ Func CheckStopForWar()
 			Local $iBattleTime = $iBattleStartTime >= 0 ? $iBattleStartTime : 24 * 60 - $iBattleEndTime ; check battle start time
 			If $g_bDebugSetlog Then SetDebugLog("$iBattleTime: " & $iBattleTime & " minutes")
 
-			$g_iTimerToRecheck = $iBattleTime + $g_bStopBeforeBattle ? (-$g_iStopTime * 60) ? $g_iStopTime * 60
+			$g_iTimerToRecheck = $iBattleTime + $g_bStopBeforeBattle ? (-$g_iStopTime * 60) : $g_iStopTime * 60
 			If $g_bDebugSetlog Then SetDebugLog("$g_iTimerToRecheck: " & $g_iTimerToRecheck & " minutes")
 			If $g_iTimerToRecheck > 0 Then
 				$g_iStartTimerToRecheck = TimerInit()
@@ -232,25 +232,46 @@ Func StopAndPrepareForWar($iSleepTime)
 
 	SetLog("It's war time, let's take a break", $COLOR_ACTION)
 
-	If Not ProfileSwitchAccountEnabled() Then
-		UniversalCloseWaitOpenCoC($iSleepTime * 60 * 1000, "StopAndPrepareForWar", False, True) ; wake up & full restart
-	Else
+	If ProfileSwitchAccountEnabled() Then
 		If GUICtrlRead($g_ahChkAccount[$g_iCurAccount]) = $GUI_CHECKED Then
-			GUICtrlSetState($g_ahChkAccount[$g_iCurAccount], $GUI_UNCHECKED)
-			chkAccount($g_iCurAccount)
-			SaveConfig_600_35_2() ; Save config profile after changing botting type
-			ReadConfig_600_35_2() ; Update variables
-			UpdateMultiStats(False)
-			SetLog("Acc [" & $g_iCurAccount + 1 & "] turned OFF")
-			SetSwitchAccLog("   Acc. " & $g_iCurAccount + 1 & " now Idle for war", $COLOR_ACTION)
-
 			Local $aActiveAccount = _ArrayFindAll($g_abAccountNo, True)
-			If UBound($aActiveAccount) >= 1 Then
-				$g_iNextAccount = $aActiveAccount[0]
-				SwitchCOCAcc($g_iNextAccount)
+			If UBound($aActiveAccount) > 1 Then
+				GUICtrlSetState($g_ahChkAccount[$g_iCurAccount], $GUI_UNCHECKED)
+				chkAccount($g_iCurAccount)
+				SaveConfig_600_35_2() ; Save config profile after changing botting type
+				ReadConfig_600_35_2() ; Update variables
+				UpdateMultiStats(False)
+				SetLog("Acc [" & $g_iCurAccount + 1 & "] turned OFF and start over with another account")
+				SetSwitchAccLog("   Acc. " & $g_iCurAccount + 1 & " now Idle for war", $COLOR_ACTION)
+
+				For $i = 0 To UBound($aActiveAccount) - 1
+					If $aActiveAccount[$i] <> $g_iCurAccount Then
+						$g_iNextAccount = $aActiveAccount[$i]
+						If $g_iGuiMode = 1 Then
+							; normal GUI Mode
+							_GUICtrlComboBox_SetCurSel($g_hCmbProfile, _GUICtrlComboBox_FindStringExact($g_hCmbProfile, $g_asProfileName[$g_iNextAccount]))
+							cmbProfile()
+							DisableGUI_AfterLoadNewProfile()
+						Else
+							; mini or headless GUI Mode
+							saveConfig()
+							$g_sProfileCurrentName = $g_asProfileName[$g_iNextAccount]
+							LoadProfile(False)
+						EndIf
+						$g_bInitiateSwitchAcc = True
+						ExitLoop
+					EndIf
+				Next
+
+				runBot()
+			ElseIf UBound($aActiveAccount) = 1 Then
+				SetLog("This is the last active account for switching, close CoC anyway")
 			EndIf
 		EndIf
 	EndIf
+
+	UniversalCloseWaitOpenCoC($iSleepTime * 60 * 1000, "StopAndPrepareForWar", False, True) ; wake up & full restart
+
 EndFunc   ;==>StopAndPrepareForWar
 
 Func RemoveCC()

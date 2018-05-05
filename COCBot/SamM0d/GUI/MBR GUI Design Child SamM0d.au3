@@ -989,7 +989,7 @@ GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d","Clan War Troops", "War troo
                 If $i = 0 Then GUICtrlSetState(-1, $GUI_CHECKED)
                 GUICtrlSetOnEvent(-1, "chkQuickTrainComboWar")
         Next
-        GUICtrlCreateLabel("Remove Army", $x + 305, $y + 1, -1, 15, $SS_LEFT)
+        $g_hLblRemoveArmy = GUICtrlCreateLabel("Remove Army", $x + 305, $y + 1, -1, 15, $SS_LEFT)
         _GUICtrlCreateIcon($g_sLibIconPath, $eIcnResetButton, $x + 375, $y - 4, 24, 24)
             GUICtrlSetOnEvent(-1, "RemovecampWar")
 
