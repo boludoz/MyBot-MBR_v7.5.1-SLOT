@@ -23,7 +23,7 @@ Global $iTimeForLastShareClanGamesSetup = 0
 Func SetupClanGamesSetupGUI($x, $y)
 	Local $xStart = $x
 	Local $yStart = $y
-
+		Local $grpClanHopAF = GUICtrlCreateGroup(GetTranslatedFileIni("AF_Mod", 16, "Clan Games"), $x, $y, 430, 250)
 		$y += 30
 		GUICtrlCreateLabel(GetTranslatedFileIni("MBR Global GUI Design", "Only_during_hours", "Only during these hours of each day"), $x, $y, 300, 20, $BS_MULTILINE)
 		$y += 20
