@@ -1229,7 +1229,7 @@ Func AttackMain() ;Main control for attack functions
 			$g_bIsClientSyncError = False
 			$g_bQuickAttack = False
 			If ProfileSwitchAccountEnabled() Then checkSwitchAcc()
-			SmartWait4Train()
+			;SmartWait4Train()
 			Else
 				SetLog("Skipping Attack because Clan Hop is enabled!", $COLOR_INFO)
 			EndIf
@@ -1371,13 +1371,17 @@ Func _RunFunction($action)
 		Case "BoostBarracks"
 			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			BoostBarracks()
-						  
+		Case "BoostSpellFactory"
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			BoostSpellFactory()
-				  
+		Case "BoostKing"
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			BoostKing()
-				   
+		Case "BoostQueen"
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			BoostQueen()
-					
+		Case "BoostWarden"
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			BoostWarden()
 		Case "RequestCC"
 			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
