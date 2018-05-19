@@ -33,6 +33,7 @@ Global $CustomTrain_MSG_12
 Global $CustomTrain_MSG_13
 Global $CustomTrain_MSG_14
 Global $CustomTrain_MSG_15
+Global $CustomTrain_MSG_16
 Global $CustomTrain_MSG_DarkElixir
 Global $CustomTrain_MSG_Elixir
 ;============================================================

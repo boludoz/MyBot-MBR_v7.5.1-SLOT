@@ -18,10 +18,7 @@ Func ModTrain($ForcePreTrain = False)
 
 	If $g_iSamM0dDebug = 1 Then SetLog("Func Train ", $COLOR_DEBUG)
 	If $g_bTrainEnabled = False Then Return
-	If $g_iMyTroopsSize = 0 Then
-		SetLog($CustomTrain_MSG_15, $COLOR_ERROR)
-		Return
-	EndIf
+	SetupTroops()
 
 	Local $bNotStuckJustOnBoost = False
 	Local $iCount = 0
@@ -532,4 +529,4 @@ Func SetLogAndReturn($iMsg)
 	EndSwitch
 	If $g_iSamM0dDebug = 1 Then SetLog("[" & $sMsg & "] - block for detection troops or spells.",$COLOR_RED)
 	Return True
-EndFunc
+ EndFunc

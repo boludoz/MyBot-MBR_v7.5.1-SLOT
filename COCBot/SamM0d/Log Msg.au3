@@ -13,6 +13,7 @@ $CustomTrain_MSG_12 = GetTranslatedFileIni("sam m0d log msg", "Troop cost", "Tro
 $CustomTrain_MSG_13 = GetTranslatedFileIni("sam m0d log msg", "Spell cost", "Spell cost")
 $CustomTrain_MSG_14 = GetTranslatedFileIni("sam m0d log msg", "Ready to brew", "Ready to brew")
 $CustomTrain_MSG_15 = GetTranslatedFileIni("sam m0d log msg", "Please setup your troops at the M0d section.", "Please setup your troops at the M0d section.")
+$CustomTrain_MSG_16 = GetTranslatedFileIni("sam m0d log msg", "Deactivated MOD TRAIN until you set the troops, using train default. .", "Deactivated MOD TRAIN until you set the troops, using train default..")
 $CustomTrain_MSG_DarkElixir = GetTranslatedFileIni("sam m0d log msg", "Dark Elixir", "Dark Elixir")
 $CustomTrain_MSG_Elixir = GetTranslatedFileIni("sam m0d log msg", "Elixir", "Elixir")
 
