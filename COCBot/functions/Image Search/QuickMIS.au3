@@ -148,7 +148,10 @@ Func QuickMIS($ValueReturned, $directory, $Left = 0, $Top = 0, $Right = $g_iGAME
 					_ArraySort($aResults)
 
 					For $i = 0 To UBound($aResults) - 1
-						$sOCRString &= $aResults[$i][1]
+                        If $i >= 1 Then                                                  ; Fix by Demen
+                            If $aResults[$i][0] = $aResults[$i - 1][0] Then ContinueLoop ; Fix by Demen
+                        EndIf                                                            ; Fix by Demen
+						$sOCRString &= $aResults[$i][1]                                  ; Fix by Demen
 					Next
 					If $g_bDebugSetlog Then SetDebugLog("QuickMIS " & $ValueReturned & ", $sOCRString: " & $sOCRString)
 

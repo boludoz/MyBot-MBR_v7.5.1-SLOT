@@ -185,3 +185,4 @@ saveClanGamesSetupSetting()
 
 saveClanHopSetting()
 
+saveDemenWarSetting()

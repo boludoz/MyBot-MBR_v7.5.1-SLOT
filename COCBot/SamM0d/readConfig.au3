@@ -185,3 +185,4 @@ readClanGamesSetupSetting()
 
 readClanHopSetting()
 
+readDemenWarSetting()

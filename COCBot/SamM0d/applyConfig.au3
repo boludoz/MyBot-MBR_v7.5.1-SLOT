@@ -194,3 +194,5 @@ applyFriendlyChallengeSetting()
 applyClanGamesSetupSetting()
 
 applyClanHopSetting()
+
+applyDemenWarSetting($TypeReadSave)

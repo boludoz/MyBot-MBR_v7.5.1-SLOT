@@ -342,7 +342,7 @@ Func DonateCC($bCheckForNewMsg = False)
 
 				For $x = 0 To UBound($eDonateCustom) - 1
 					If $g_abChkDonateTroop[$eCustom[$x]] Then
-                        $canDonCustom = CheckDonate(99, $g_asTxtDonateTroop[$eCustom[$x]], $g_asTxtBlacklistTroop[$eCustom[$x]], $ClanString, True)
+						$canDonCustom = CheckDonate(99, $g_asTxtDonateTroop[$eCustom[$x]], $g_asTxtBlacklistTroop[$eCustom[$x]], $ClanString, True)
 						If $canDonCustom Then
 							If $ichkEnableDonateWhenReady = 1 Then
 								Local $CorrectDonateCustom = $eDonateCustom[$x]
@@ -411,7 +411,7 @@ Func DonateCC($bCheckForNewMsg = False)
 					If $bDonateTroop And $g_bSkipDonTroops = False Then
 						;;;  Custom Combination Troops
 						For $x = 0 To UBound($eDonateCustom) - 1
-                            If $g_abChkDonateTroop[$eCustom[$x]] Then
+							If $g_abChkDonateTroop[$eCustom[$x]] Then
 								If $canDonCustom Then
 									Local $CorrectDonateCustom = $eDonateCustom[$x]
 									For $i = 0 To 2

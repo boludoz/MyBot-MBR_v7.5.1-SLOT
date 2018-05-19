@@ -119,7 +119,7 @@ Func ModTrain($ForcePreTrain = False)
 		EndIf
 
 		;_ArraySort($iKTime,1)
-		Local $iMaxV =  _ArrayMax($iKTime, 1)
+		Local $iMaxV =  _ArraySort($iKTime, 1)
 
 		If $g_iSamM0dDebug = 1 Then SetLog("$iMaxV: " & $iMaxV)
 

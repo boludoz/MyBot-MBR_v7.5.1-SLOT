@@ -970,12 +970,150 @@ Func Idle() ;Sequence that runs until Full Army
 EndFunc   ;==>Idle
 
 Func _Idle() ;Sequence that runs until Full Army
+
+	If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
+
+If $g_iMyTroopsSize = 0 or $ichkModTrain = 0 or $g_bChkClanHop Then 
+		Static $iCollectCounter = 0 ; Collect counter, when reaches $g_iCollectAtCount, it will collect
+
+			Local $TimeIdle = 0 ;In Seconds
+			If $g_bDebugSetlog Then SetDebugLog("Func Idle ", $COLOR_DEBUG)
+		
+			While $g_bIsFullArmywithHeroesAndSpells = False
+		
+				CheckAndroidReboot()
+		
+				;Execute Notify Pending Actions
+				NotifyPendingActions()
+				If _Sleep($DELAYIDLE1) Then Return
+				If $g_iCommandStop = -1 Then SetLog("====== Waiting for full army ======", $COLOR_SUCCESS)
+				Local $hTimer = __TimerInit()
+				Local $iReHere = 0
+		
+				If $g_iActiveDonate And $g_bChkDonate Then
+					Local $aHeroResult = CheckArmyCamp(True, True, True, False)
+					While $iReHere < 7
+						$iReHere += 1
+						If $iReHere = 1 And SkipDonateNearFullTroops(True, $aHeroResult) = False And BalanceDonRec(True) Then
+							DonateCC(True)
+						ElseIf SkipDonateNearFullTroops(False, $aHeroResult) = False And BalanceDonRec(False) Then
+							DonateCC(True)
+						EndIf
+						If _Sleep($DELAYIDLE2) Then ExitLoop
+						If $g_bRestart = True Then ExitLoop
+						If CheckAndroidReboot() Then ContinueLoop 2
+					WEnd
+				EndIf
+				If _Sleep($DELAYIDLE1) Then ExitLoop
+				checkObstacles() ; trap common error messages also check for reconnecting animation
+				checkMainScreen(False) ; required here due to many possible exits
+				If ($g_iCommandStop = 3 Or $g_iCommandStop = 0) And $g_bTrainEnabled = True Then
+					CheckArmyCamp(True, True)
+					If _Sleep($DELAYIDLE1) Then Return
+					If ($g_bFullArmy = False Or $g_bFullArmySpells = False) Then
+						SetLog("Army Camp and Barracks are not full, Training Continues...", $COLOR_ACTION)
+						$g_iCommandStop = 0
+					EndIf
+				EndIf
+				ReplayShare($g_bShareAttackEnableNow)
+				If _Sleep($DELAYIDLE1) Then Return
+				If $g_bRestart = True Then ExitLoop
+				If $iCollectCounter > $g_iCollectAtCount Then ; This is prevent from collecting all the time which isn't needed anyway
+					Local $aRndFuncList = ['Collect', 'CheckTombs', 'DonateCC', 'CleanYard']
+					While 1
+						If $g_bRunState = False Then Return
+						If $g_bRestart = True Then ExitLoop
+						If CheckAndroidReboot() Then ContinueLoop 2
+						If UBound($aRndFuncList) > 1 Then
+							Local $Index = Random(0, UBound($aRndFuncList), 1)
+							If $Index > UBound($aRndFuncList) - 1 Then $Index = UBound($aRndFuncList) - 1
+							_RunFunction($aRndFuncList[$Index])
+							_ArrayDelete($aRndFuncList, $Index)
+						Else
+							_RunFunction($aRndFuncList[0])
+							ExitLoop
+						EndIf
+					WEnd
+					If $g_bRunState = False Then Return
+					If $g_bRestart = True Then ExitLoop
+					If _Sleep($DELAYIDLE1) Or $g_bRunState = False Then ExitLoop
+					$iCollectCounter = 0
+				EndIf
+				$iCollectCounter = $iCollectCounter + 1
+				AddIdleTime()
+				checkMainScreen(False) ; required here due to many possible exits
+				If $g_iCommandStop = -1 Then
+					If $g_iActualTrainSkip < $g_iMaxTrainSkip Then
+						If CheckNeedOpenTrain($g_sTimeBeforeTrain) Then TrainRevamp()
+						If $g_bRestart = True Then ExitLoop
+						If _Sleep($DELAYIDLE1) Then ExitLoop
+						checkMainScreen(False)
+					Else
+						SetLog("Humanize bot, prevent to delete and recreate troops " & $g_iActualTrainSkip + 1 & "/" & $g_iMaxTrainSkip, $color_blue)
+						$g_iActualTrainSkip = $g_iActualTrainSkip + 1
+						If $g_iActualTrainSkip >= $g_iMaxTrainSkip Then
+							$g_iActualTrainSkip = 0
+						EndIf
+						CheckArmyCamp(True, True)
+					EndIf
+				EndIf
+				If _Sleep($DELAYIDLE1) Then Return
+				If $g_iCommandStop = 0 And $g_bTrainEnabled = True Then
+					If Not ($g_bFullArmy) Then
+						If $g_iActualTrainSkip < $g_iMaxTrainSkip Then
+							If CheckNeedOpenTrain($g_sTimeBeforeTrain) Then TrainRevamp()
+							If $g_bRestart = True Then ExitLoop
+							If _Sleep($DELAYIDLE1) Then ExitLoop
+							checkMainScreen(False)
+						Else
+							$g_iActualTrainSkip = $g_iActualTrainSkip + 1
+							If $g_iActualTrainSkip >= $g_iMaxTrainSkip Then
+								$g_iActualTrainSkip = 0
+							EndIf
+							CheckArmyCamp(True, True)
+						EndIf
+					EndIf
+					If $g_bFullArmy And $g_bTrainEnabled = True Then
+						SetLog("Army Camp and Barracks are full, stop Training...", $COLOR_ACTION)
+						$g_iCommandStop = 3
+					EndIf
+				EndIf
+				If _Sleep($DELAYIDLE1) Then Return
+				If $g_iCommandStop = -1 Then
+					DropTrophy()
+					If $g_bRestart = True Then ExitLoop
+					;If $g_bFullArmy Then ExitLoop		; Never will reach to SmartWait4Train() to close coc while Heroes/Spells not ready 'if' Army is full, so better to be commented
+					If _Sleep($DELAYIDLE1) Then ExitLoop
+					checkMainScreen(False)
+				EndIf
+				If _Sleep($DELAYIDLE1) Then Return
+				If $g_bRestart = True Then ExitLoop
+				$TimeIdle += Round(__TimerDiff($hTimer) / 1000, 2) ;In Seconds
+		
+				If $g_bCanRequestCC = True Then RequestCC()
+		
+				SetLog("Time Idle: " & StringFormat("%02i", Floor(Floor($TimeIdle / 60) / 60)) & ":" & StringFormat("%02i", Floor(Mod(Floor($TimeIdle / 60), 60))) & ":" & StringFormat("%02i", Floor(Mod($TimeIdle, 60))))
+		
+				If $g_bOutOfGold = True Or $g_bOutOfElixir = True Then Return ; Halt mode due low resources, only 1 idle loop
+		
+				If ProfileSwitchAccountEnabled() Then checkSwitchAcc() ; Forced to switch when in halt attack mode
+		
+				If ($g_iCommandStop = 3 Or $g_iCommandStop = 0) And $g_bTrainEnabled = False Then ExitLoop ; If training is not enabled, run only 1 idle loop
+		
+				If $g_iCommandStop = -1 Then ; Check if closing bot/emulator while training and not in halt mode
+					SmartWait4Train()
+					If $g_bRestart = True Then ExitLoop ; if smart wait activated, exit to runbot in case user adjusted GUI or left emulator/bot in bad state
+				EndIf
+		
+			WEnd
+
+			Else
+			
 	Static $iCollectCounter = 0 ; Collect counter, when reaches $g_iCollectAtCount, it will collect
 
 	Local $TimeIdle = 0 ;In Seconds
 	If $g_bDebugSetlog Then SetLog("Func Idle ", $COLOR_DEBUG)
 
-	If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 	; samm0d - check make donate type account enter idle loop
 	Local $bSkipEnterIdleLoop = False
 	Local $bDonateTypeAcc = False
@@ -995,14 +1133,16 @@ Func _Idle() ;Sequence that runs until Full Army
 				If $g_bIsFullArmywithHeroesAndSpells = False Then
 					$g_bRestart = True
 				EndIf
-				$g_bIsFullArmywithHeroesAndSpells = True
+				$bSkipEnterIdleLoop = True
 			Else
 				SetLog("Enter Idle Loop, troops getting ready or soon.", $COLOR_INFO)
 			EndIf
 		EndIf
+	Else
+		$bSkipEnterIdleLoop = $g_bIsFullArmywithHeroesAndSpells
 	EndIf
 
-	While $g_bIsFullArmywithHeroesAndSpells = False
+	While $bSkipEnterIdleLoop = False
 
 		CheckAndroidReboot()
 
@@ -1040,16 +1180,6 @@ Func _Idle() ;Sequence that runs until Full Army
 		checkMainScreen(False) ; required here due to many possible exits
 
 		; samm0d
-		If $ichkModTrain = 0 Then
-			If ($g_iCommandStop = 3 Or $g_iCommandStop = 0) And $g_bTrainEnabled = True Then
-				CheckArmyCamp(True, True)
-				If _Sleep($DELAYIDLE1) Then Return
-				If ($g_bFullArmy = False Or $g_bFullArmySpells = False) Then
-					SetLog("Army Camp and Barracks are not full, Training Continues...", $COLOR_ACTION)
-					$g_iCommandStop = 0
-				EndIf
-			EndIf
-		EndIf
 
 		ReplayShare($g_bShareAttackEnableNow)
 		If _Sleep($DELAYIDLE1) Then Return
@@ -1080,49 +1210,10 @@ Func _Idle() ;Sequence that runs until Full Army
 		checkMainScreen(False) ; required here due to many possible exits
 
 		; samm0d
-		If $ichkModTrain = 0 Then
-			If $g_iCommandStop = -1 Then
-				If $g_iActualTrainSkip < $g_iMaxTrainSkip Then
-					If CheckNeedOpenTrain($g_sTimeBeforeTrain) Then TrainRevamp()
-					If $g_bRestart = True Then ExitLoop
-					If _Sleep($DELAYIDLE1) Then ExitLoop
-					checkMainScreen(False)
-				Else
-					Setlog("Humanize bot, prevent to delete and recreate troops " & $g_iActualTrainSkip + 1 & "/" & $g_iMaxTrainSkip, $color_blue)
-					$g_iActualTrainSkip = $g_iActualTrainSkip + 1
-					If $g_iActualTrainSkip >= $g_iMaxTrainSkip Then
-						$g_iActualTrainSkip = 0
-					EndIf
-					CheckArmyCamp(True, True)
-				EndIf
-			EndIf
-			If _Sleep($DELAYIDLE1) Then Return
-			If $g_iCommandStop = 0 And $g_bTrainEnabled = True Then
-				If Not ($g_bFullArmy) Then
-					If $g_iActualTrainSkip < $g_iMaxTrainSkip Then
-						If CheckNeedOpenTrain($g_sTimeBeforeTrain) Then TrainRevamp()
-						If $g_bRestart = True Then ExitLoop
-						If _Sleep($DELAYIDLE1) Then ExitLoop
-						checkMainScreen(False)
-					Else
-						$g_iActualTrainSkip = $g_iActualTrainSkip + 1
-						If $g_iActualTrainSkip >= $g_iMaxTrainSkip Then
-							$g_iActualTrainSkip = 0
-						EndIf
-						CheckArmyCamp(True, True)
-					EndIf
-				EndIf
-				If $g_bFullArmy And $g_bTrainEnabled = True Then
-					SetLog("Army Camp and Barracks are full, stop Training...", $COLOR_ACTION)
-					$g_iCommandStop = 3
-				EndIf
-			EndIf
-		Else
 			ModTrain()
 			If $g_bRestart = True Then ExitLoop
 			If _Sleep(200) Then ExitLoop
 			checkMainScreen(False)
-		EndIf
 
 		If _Sleep($DELAYIDLE1) Then Return
 		If $g_iCommandStop = -1 Then
@@ -1179,13 +1270,13 @@ Func _Idle() ;Sequence that runs until Full Army
 		EndIf
 
 	WEnd
+EndIf
 EndFunc   ;==>_Idle
 
 Func AttackMain() ;Main control for attack functions
 	If ProfileSwitchAccountEnabled() And $g_abDonateOnly[$g_iCurAccount] Then Return
 	; samm0d
 	;getArmyCapacity(True, True)
-	ClickP($aAway, 1, 0, "#0000") ;Click Away to prevent any pages on top
 	If IsSearchAttackEnabled() Then
 		If (IsSearchModeActive($DB) And checkCollectors(True, False)) Or IsSearchModeActive($LB) Or IsSearchModeActive($TS) Then
 			If ProfileSwitchAccountEnabled() And ($g_aiAttackedCountSwitch[$g_iCurAccount] <= $g_aiAttackedCountAcc[$g_iCurAccount] - 2) Then checkSwitchAcc()
@@ -1207,7 +1298,6 @@ Func AttackMain() ;Main control for attack functions
 				;SetLog("BullyMode: " & $g_abAttackTypeEnable[$TB] & ", Bully Hero: " & BitAND($g_aiAttackUseHeroes[$g_iAtkTBMode], $g_aiSearchHeroWaitEnable[$g_iAtkTBMode], $g_iHeroAvailable) & "|" & $g_aiSearchHeroWaitEnable[$g_iAtkTBMode] & "|" & $g_iHeroAvailable, $COLOR_DEBUG)
 			EndIf
 			_ClanGames()
-			ClickP($aAway, 1, 0, "#0000") ;Click Away to prevent any pages on top
 			PrepareSearch()
 			If $g_bOutOfGold = True Then Return ; Check flag for enough gold to search
 			If $g_bRestart = True Then Return
@@ -1229,8 +1319,9 @@ Func AttackMain() ;Main control for attack functions
 			$g_bIsClientSyncError = False
 			$g_bQuickAttack = False
 			If ProfileSwitchAccountEnabled() Then checkSwitchAcc()
-			;SmartWait4Train()
+			SmartWait4Train()
 			Else
+		
 				SetLog("Skipping Attack because Clan Hop is enabled!", $COLOR_INFO)
 			EndIf
 		EndIf

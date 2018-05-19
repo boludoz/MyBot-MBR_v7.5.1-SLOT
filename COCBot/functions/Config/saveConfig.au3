@@ -165,8 +165,6 @@ Func SaveRegularConfig()
 	SaveConfig_600_1()
 	; <><><><> Village / Misc <><><><>
 	SaveConfig_600_6()
-	; <><><><> Village / Misc - War Preparation <><><><> (Demen)
-	SaveConfig_600_7()
 	; <><><><> Village / Achievements <><><><>
 	SaveConfig_600_9()
 	; <><><><> Village / Donate - Request <><><><>
@@ -375,30 +373,6 @@ Func SaveConfig_600_6()
 
 
 EndFunc   ;==>SaveConfig_600_6
-
-Func SaveConfig_600_7()
-	; <><><><> Village / Misc - War Preparation <><><><> (Demen)
-	ApplyConfig_600_7(GetApplyConfigSaveAction())
-	_Ini_Add("war preparation", "Enable", $g_bStopForWar ? 1 : 0)
-	_Ini_Add("war preparation", "Stop Time", $g_iStopTime)
-	_Ini_Add("war preparation", "Stop Before", $g_bStopBeforeBattle ? 1 : 0)
-	_Ini_Add("war preparation", "Return Time", $g_iReturnTime)
-	_Ini_Add("war preparation", "Train War Troop", $g_bTrainWarTroop ? 1 : 0)
-	_Ini_Add("war preparation", "QuickTrain War Troop", $g_bUseQuickTrainWar ? 1 : 0)
-	_Ini_Add("war preparation", "QuickTrain War Army1", $g_aChkArmyWar[0] ? 1 : 0)
-	_Ini_Add("war preparation", "QuickTrain War Army2", $g_aChkArmyWar[1] ? 1 : 0)
-	_Ini_Add("war preparation", "QuickTrain War Army3", $g_aChkArmyWar[2] ? 1 : 0)
-
-	For $i = 0 To $eTroopCount - 1
-		_Ini_Add("war preparation", $g_asTroopShortNames[$i], $g_aiWarCompTroops[$i])
-	Next
-	For $j = 0 To $eSpellCount - 1
-		_Ini_Add("war preparation", $g_asSpellShortNames[$j], $g_aiWarCompSpells[$j])
-	Next
-
-	_Ini_Add("war preparation", "RequestCC War", $g_bRequestCCForWar ? 1 : 0)
-	_Ini_Add("war preparation", "RequestCC War Text", $g_sTxtRequestCCForWar)
-EndFunc   ;==>SaveConfig_600_7
 
 Func SaveConfig_600_9()
 	; <><><><> Village / Achievements <><><><>
@@ -1053,10 +1027,6 @@ EndFunc   ;==>SaveConfig_600_32
 
 Func SaveConfig_600_33()
 	; <><><><> Attack Plan / Search & Attack / Drop Order Troops <><><><>
-		; ExtendedAttackBar - Team AiO MOD++
-	_Ini_Add("attack", "ExtendedAttackBarDB", $g_abChkExtendedAttackBar[$DB] ? 1 : 0)
-	_Ini_Add("attack", "ExtendedAttackBarLB", $g_abChkExtendedAttackBar[$LB] ? 1 : 0)
-
 	_Ini_Add("DropOrder", "chkDropOrder", $g_bCustomDropOrderEnable ? 1 : 0)
 	For $p = 0 To UBound($g_aiCmbCustomDropOrder) - 1
 		_Ini_Add("DropOrder", "cmbDropOrder" & $p, $g_aiCmbCustomDropOrder[$p])

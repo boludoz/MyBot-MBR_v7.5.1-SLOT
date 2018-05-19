@@ -189,8 +189,6 @@ Func ReadRegularConfig()
 	ReadConfig_600_1()
 	; <><><><> Village / Misc <><><><>
 	ReadConfig_600_6()
-	; <><><><> Village / Misc - War Preparation <><><><> (Demen)
-	ReadConfig_600_7()
 	; <><><><> Village / Achievements <><><><>
 	ReadConfig_600_9()
 	; <><><><> Village / Donate - Request <><><><>
@@ -433,30 +431,6 @@ Func ReadConfig_600_6()
 	IniReadS($g_bChkClanGamesMiscellaneous, $g_sProfileConfigPath, "other", "ChkClanGamesMiscellaneous", False, "Bool")
 	IniReadS($g_iPurgeMax, $g_sProfileConfigPath, "other", "PurgeMax", 5, "int")
 EndFunc   ;==>ReadConfig_600_6
-
-Func ReadConfig_600_7()
-	; <><><><> Village / Misc - War Preparation <><><><> (Demen)
-	IniReadS($g_bStopForWar, $g_sProfileConfigPath, "war preparation", "Enable", False, "Bool")
-	IniReadS($g_iStopTime, $g_sProfileConfigPath, "war preparation", "Stop Time", 0, "Int")
-	IniReadS($g_bStopBeforeBattle, $g_sProfileConfigPath, "war preparation", "Stop Before", True, "Bool")
-	IniReadS($g_iReturnTime, $g_sProfileConfigPath, "war preparation", "Return Time", 0, "Int")
-	IniReadS($g_bTrainWarTroop, $g_sProfileConfigPath, "war preparation", "Train War Troop", False, "Bool")
-	IniReadS($g_bUseQuickTrainWar, $g_sProfileConfigPath, "war preparation", "QuickTrain War Troop", False, "Bool")
-	IniReadS($g_aChkArmyWar[0], $g_sProfileConfigPath, "war preparation", "QuickTrain War Army1", False, "Bool")
-	IniReadS($g_aChkArmyWar[1], $g_sProfileConfigPath, "war preparation", "QuickTrain War Army2", False, "Bool")
-	IniReadS($g_aChkArmyWar[2], $g_sProfileConfigPath, "war preparation", "QuickTrain War Army3", False, "Bool")
-
-	For $i = 0 To $eTroopCount - 1
-		IniReadS($g_aiWarCompTroops[$i], $g_sProfileConfigPath, "war preparation", $g_asTroopShortNames[$i], 0, "Int")
-	Next
-	For $j = 0 To $eSpellCount - 1
-		IniReadS($g_aiWarCompSpells[$j], $g_sProfileConfigPath, "war preparation", $g_asSpellShortNames[$j], 0, "Int")
-	Next
-
-	IniReadS($g_bRequestCCForWar, $g_sProfileConfigPath, "war preparation", "RequestCC War", False, "Bool")
-	$g_sTxtRequestCCForWar = IniRead($g_sProfileConfigPath, "war preparation", "RequestCC War Text", "War troop please")
-
-EndFunc   ;==>ReadConfig_600_7
 
 Func ReadConfig_600_9()
 	; <><><><> Village / Achievements <><><><>
@@ -1190,10 +1164,6 @@ EndFunc   ;==>ReadConfig_600_32
 
 Func ReadConfig_600_33()
 	; <><><><> Attack Plan / Search & Attack / Drop Order Troops <><><><>
-	; ExtendedAttackBar - Team AiO MOD++
-	IniReadS($g_abChkExtendedAttackBar[$DB], $g_sProfileConfigPath, "attack", "ExtendedAttackBarDB", False, "Bool")
-	IniReadS($g_abChkExtendedAttackBar[$LB], $g_sProfileConfigPath, "attack", "ExtendedAttackBarLB", False, "Bool")
-
 	IniReadS($g_bCustomDropOrderEnable, $g_sProfileConfigPath, "DropOrder", "chkDropOrder", False, "Bool")
 	For $p = 0 To UBound($g_aiCmbCustomDropOrder) - 1
 		IniReadS($g_aiCmbCustomDropOrder[$p], $g_sProfileConfigPath, "DropOrder", "cmbDropOrder" & $p, -1)

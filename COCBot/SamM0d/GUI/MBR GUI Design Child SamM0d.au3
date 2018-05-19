@@ -1025,25 +1025,29 @@ GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d","Clan War Troops", "War troo
                 GUICtrlSetOnEvent(-1, "TrainWarSpellCountEdit")
         Next
 
-    $x = 30
-    $y += 60
-        $g_hCalTotalWarSpells = GUICtrlCreateProgress($x, $y + 3, 285, 10)
-        $g_hLblTotalWarSpellsProgress = GUICtrlCreateLabel("", $x, $y + 3, 285, 10)
-            GUICtrlSetBkColor(-1, $COLOR_RED)
-            GUICtrlSetState(-1, BitOR($GUI_DISABLE, $GUI_HIDE))
+	$x = 30
+	$y += 60
+		$g_hCalTotalWarSpells = GUICtrlCreateProgress($x, $y + 3, 285, 10)
+		$g_hLblTotalWarSpellsProgress = GUICtrlCreateLabel("", $x, $y + 3, 285, 10)
+			GUICtrlSetBkColor(-1, $COLOR_RED)
+			GUICtrlSetState(-1, BitOR($GUI_DISABLE, $GUI_HIDE))
 
-        GUICtrlCreateLabel("Total spells", $x + 290, $y, -1, -1)
-        $g_hLblCountWarSpellsTotal = GUICtrlCreateLabel("" & 0, $x + 350, $y, 30, 15, $SS_CENTER)
-            GUICtrlSetBkColor(-1, $COLOR_MONEYGREEN) ;lime, moneygreen
+		GUICtrlCreateLabel("Total spells", $x + 290, $y, -1, -1)
+		$g_hLblCountWarSpellsTotal = GUICtrlCreateLabel("" & 0, $x + 350, $y, 30, 15, $SS_CENTER)
+			GUICtrlSetBkColor(-1, $COLOR_MONEYGREEN) ;lime, moneygreen
+		
+	$x = 15
+	$y += 13
+	$g_hChkX2ForWar = GUICtrlCreateCheckbox("Train X2", $x, $y, -1, -1)  ; War
 
-    $x = 15
-    $y += 25
-        $g_hChkRequestCCForWar = GUICtrlCreateCheckbox("Request CC before pausing", $x, $y, -1, -1)
-            GUICtrlSetOnEvent(-1, "ChkRequestCCForWar")
-        $g_hTxtRequestCCForWar = GUICtrlCreateInput("War troop please", $x + 180, $y, 120, -1, $SS_CENTER)
+	$x = 15
+	$y += 17
+		$g_hChkRequestCCForWar = GUICtrlCreateCheckbox("Request CC before pausing", $x, $y, -1, -1)
+			GUICtrlSetOnEvent(-1, "ChkRequestCCForWar")
+		$g_hTxtRequestCCForWar = GUICtrlCreateInput("War troop please", $x + 180, $y, 120, -1, $SS_CENTER)
 
 
-GUICtrlCreateGroup("", -99, -99, 1, 1)
+    GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 GUICtrlCreateTabItem("") ; end tabitem definition
 

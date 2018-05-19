@@ -69,8 +69,6 @@ Func applyConfig($bRedrawAtExit = True, $TypeReadSave = "Read") ;Applies the dat
 	ApplyConfig_600_1($TypeReadSave)
 	; <><><><> Village / Misc <><><><>
 	ApplyConfig_600_6($TypeReadSave)
-	; <><><><> Village / Misc - War Preparation <><><><> (Demen)
-	ApplyConfig_600_7($TypeReadSave)
 	; <><><><> Village / Achievements <><><><>
 	ApplyConfig_600_9($TypeReadSave)
 	; <><><><> Village / Donate - Request <><><><>
@@ -390,57 +388,6 @@ Func ApplyConfig_600_6($TypeReadSave)
 			$g_iPurgeMax = _GUICtrlComboBox_GetCurSel($g_hcmbPurgeLimit)
 	EndSwitch
 EndFunc   ;==>ApplyConfig_600_6
-
-Func ApplyConfig_600_7($TypeReadSave)
-	; <><><><> Village / Misc - War Preparation <><><><> (Demen)
-	Switch $TypeReadSave
-		Case "Read"
-			GUICtrlSetState($g_hChkStopForWar, $g_bStopForWar ? $GUI_CHECKED : $GUI_UNCHECKED)
-			ChkStopForWar()
-			_GUICtrlComboBox_SetCurSel($g_hCmbStopTime, $g_iStopTime)
-			_GUICtrlComboBox_SetCurSel($g_CmbStopBeforeBattle, $g_bStopBeforeBattle ? 0 : 1)
-			_GUICtrlComboBox_SetCurSel($g_hCmbReturnTime, $g_iReturnTime)
-
-			GUICtrlSetState($g_hChkTrainWarTroop, $g_bTrainWarTroop ? $GUI_CHECKED : $GUI_UNCHECKED)
-			GUICtrlSetState($g_hChkUseQuickTrainWar, $g_bUseQuickTrainWar ? $GUI_CHECKED : $GUI_UNCHECKED)
-			GUICtrlSetState($g_ahChkArmyWar[0], $g_aChkArmyWar[0] ? $GUI_CHECKED : $GUI_UNCHECKED)
-			GUICtrlSetState($g_ahChkArmyWar[1], $g_aChkArmyWar[1] ? $GUI_CHECKED : $GUI_UNCHECKED)
-			GUICtrlSetState($g_ahChkArmyWar[2], $g_aChkArmyWar[2] ? $GUI_CHECKED : $GUI_UNCHECKED)
-
-			For $i = 0 To $eTroopCount - 1
-				GUICtrlSetData($g_ahTxtTrainWarTroopCount[$i], $g_aiWarCompTroops[$i])
-			Next
-			For $j = 0 To $eSpellCount - 1
-				GUICtrlSetData($g_ahTxtTrainWarSpellCount[$j], $g_aiWarCompSpells[$j])
-			Next
-			ChkTrainWarTroop()
-			GUICtrlSetState($g_hChkRequestCCForWar, $g_bRequestCCForWar ? $GUI_CHECKED : $GUI_UNCHECKED)
-			GUICtrlSetData($g_hTxtRequestCCForWar, $g_sTxtRequestCCForWar)
-			ChkRequestCCForWar()
-
-		Case "Save"
-			$g_bStopForWar = GUICtrlRead($g_hChkStopForWar)  = $GUI_CHECKED
-
-			$g_iStopTime = _GUICtrlComboBox_GetCurSel($g_hCmbStopTime)
-			$g_bStopBeforeBattle = _GUICtrlComboBox_GetCurSel($g_CmbStopBeforeBattle) = 0
-			$g_iReturnTime = _GUICtrlComboBox_GetCurSel($g_hCmbReturnTime)
-
-			$g_bTrainWarTroop = GUICtrlRead($g_hChkTrainWarTroop) = $GUI_CHECKED
-			$g_bUseQuickTrainWar = GUICtrlRead($g_hChkUseQuickTrainWar) = $GUI_CHECKED
-			$g_aChkArmyWar[0] = GUICtrlRead($g_ahChkArmyWar[0]) = $GUI_CHECKED
-			$g_aChkArmyWar[1] = GUICtrlRead($g_ahChkArmyWar[1]) = $GUI_CHECKED
-			$g_aChkArmyWar[2] = GUICtrlRead($g_ahChkArmyWar[2]) = $GUI_CHECKED
-			For $i = 0 To $eTroopCount - 1
-				$g_aiWarCompTroops[$i] = GUICtrlRead($g_ahTxtTrainWarTroopCount[$i])
-			Next
-			For $j = 0 To $eSpellCount - 1
-				$g_aiWarCompSpells[$j] = GUICtrlRead($g_ahTxtTrainWarSpellCount[$j])
-			Next
-
-			$g_bRequestCCForWar = GUICtrlRead($g_hChkRequestCCForWar) = $GUI_CHECKED
-			$g_sTxtRequestCCForWar = GUICtrlRead($g_hTxtRequestCCForWar)
-	EndSwitch
-EndFunc   ;==>ApplyConfig_600_7
 
 Func ApplyConfig_600_9($TypeReadSave)
 	; <><><><> Village / Achievements <><><><>
@@ -1926,10 +1873,6 @@ Func ApplyConfig_600_33($TypeReadSave)
 	; <><><><> Attack Plan / Search & Attack / Drop Order Troops <><><><>
 	Switch $TypeReadSave
 		Case "Read"
-			; ExtendedAttackBar - Team AiO MOD++
-			GUICtrlSetState($g_hChkExtendedAttackBarDB, $g_abChkExtendedAttackBar[$DB] ? $GUI_CHECKED : $GUI_UNCHECKED)
-			GUICtrlSetState($g_hChkExtendedAttackBarLB, $g_abChkExtendedAttackBar[$LB] ? $GUI_CHECKED : $GUI_UNCHECKED)
-
 			GUICtrlSetState($g_hChkCustomDropOrderEnable, $g_bCustomDropOrderEnable ? $GUI_CHECKED : $GUI_UNCHECKED)
 			chkDropOrder()
 			For $p = 0 To UBound($g_ahCmbDropOrder) - 1
@@ -1949,10 +1892,6 @@ Func ApplyConfig_600_33($TypeReadSave)
 				EndIf
 			EndIf
 		Case "Save"
-			; ExtendedAttackBar - Team AiO MOD++
-			$g_abChkExtendedAttackBar[$DB] = GUICtrlRead($g_hChkExtendedAttackBarDB) = $GUI_CHECKED ? True : False
-			$g_abChkExtendedAttackBar[$LB] = GUICtrlRead($g_hChkExtendedAttackBarLB) = $GUI_CHECKED ? True : False
-
 			$g_bCustomDropOrderEnable = (GUICtrlRead($g_hChkCustomDropOrderEnable) = $GUI_CHECKED)
 			For $p = 0 To UBound($g_ahCmbDropOrder) - 1
 				$g_aiCmbCustomDropOrder[$p] = _GUICtrlComboBox_GetCurSel($g_ahCmbDropOrder[$p])

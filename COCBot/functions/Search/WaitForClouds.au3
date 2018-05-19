@@ -24,20 +24,20 @@ Func WaitForClouds()
 
 	; samm0d
 	;===============
-	Local $maxSearchCount = 40 ; 10 seconds for initialize long search, check chat button, after will random 1-2 minutes for checking 1 time
-	Local $maxLongSearchCount = 7 ; $maxLongSearchCount * $maxSearchCount = seconds total wait time in higher leagues: ; 21 minutes, set a value here but is never used unless error
+	Local $maxSearchCount = 400 ; 10 seconds for initialize long search, check chat button, after will random 1-2 minutes for checking 1 time
+	Local $maxLongSearchCount = 70 ; $maxLongSearchCount * $maxSearchCount = seconds total wait time in higher leagues: ; 21 minutes, set a value here but is never used unless error
 
 	Switch Int($g_aiCurrentLoot[$eLootTrophy]) ; add randomization to SearchCounters (long cloud keep alive time) for higher leagues
 		Case 3700 To 4099 ; champion 1 league
-			$maxLongSearchCount = Random(10, 12, 1) ; random range 20-40 minutes
+			$maxLongSearchCount = Random(100, 120, 10) ; random range 20-40 minutes
 		Case 4100 To 4399 ; Titan 3 league
-			$maxLongSearchCount = Random(15, 25, 1) ; random range 30-87 minutes
+			$maxLongSearchCount = Random(150, 250, 10) ; random range 30-87 minutes
 		Case 4400 To 4699 ; Titan 2 league
-			$maxLongSearchCount = Random(24, 42, 1) ; random range 60-147 minutes
+			$maxLongSearchCount = Random(240, 420, 10) ; random range 60-147 minutes
 		Case 4700 To 4999 ; Titan 1 league
-			$maxLongSearchCount = Random(36, 50, 1) ; random range 90-175 minutes
+			$maxLongSearchCount = Random(360, 500, 10) ; random range 90-175 minutes
 		Case 5000 To 6500 ; Legend league
-			$maxLongSearchCount = Random(80, 85, 1) ; random range 200-300 minutes
+			$maxLongSearchCount = Random(800, 850, 10) ; random range 200-300 minutes
 	EndSwitch
 	;===============
 
@@ -58,7 +58,7 @@ Func WaitForClouds()
 			Return
 		EndIf
 		If $iCount >= $maxSearchCount Then ; If clouds do not clear in alloted time do something
-			$maxSearchCount = Random(240,480,1) ; $maxSearchCount * 250ms ($DELAYGETRESOURCES1) = seconds wait time before reset in lower leagues: 240*250ms = 1 minutes, 480*250ms = 2 minutes
+			$maxSearchCount = Random(2400,4800,10) ; $maxSearchCount * 250ms ($DELAYGETRESOURCES1) = seconds wait time before reset in lower leagues: 240*250ms = 1 minutes, 480*250ms = 2 minutes
 			If EnableLongSearch() = False Then ; Check if attacking in Champion 1 or higher league with long search that needs to be continued
 				resetAttackSearch()
 				ExitLoop
