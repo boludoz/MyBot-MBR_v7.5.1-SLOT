@@ -27,7 +27,7 @@ Func _CheckColorPixel($x, $y, $sColor, $iColorVariation, $bFCapture = True, $sMs
 	Local $hPixelColor = _GetPixelColor2($x, $y, $bFCapture)
 	Local $bFound = _ColorCheck($hPixelColor, Hex($sColor,6), Int($iColorVariation))
 	Local $COLORMSG = ($bFound = True ? $COLOR_BLUE : $COLOR_RED)
-	If $sMsglog <> Default And IsString($sMsglog) And $g_DebugLogAF = 1 Then
+	If $sMsglog <> Default And IsString($sMsglog) And $g_iSamM0dDebug = 1 Then
 		Local $String = $sMsglog & " - Ori Color: " & Hex($sColor,6) & " at X,Y: " & $x & "," & $y & " Found: " & $hPixelColor
 		SetLog($String, $COLORMSG)
 	EndIf
