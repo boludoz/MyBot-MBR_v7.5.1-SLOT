@@ -978,6 +978,8 @@ Func Idle() ;Sequence that runs until Full Army
 EndFunc   ;==>Idle
 
 Func _Idle() ;Sequence that runs until Full Army
+
+	If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 	Static $iCollectCounter = 0 ; Collect counter, when reaches $g_iCollectAtCount, it will collect
 
 	Local $TimeIdle = 0 ;In Seconds
