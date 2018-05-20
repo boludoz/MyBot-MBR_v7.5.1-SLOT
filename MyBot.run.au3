@@ -95,10 +95,12 @@ Func UpdateBotTitle()
 EndFunc   ;==>UpdateBotTitle
 
  Func SetupTroops()
-	If $g_iMyTroopsSize = 0 Then
+	If $g_iMyTroopsSize = 0 and $chkModTrain = 1 Then
 	$ichkModTrain = 0
 		SetLog($CustomTrain_MSG_15, $COLOR_ERROR)
 		SetLog($CustomTrain_MSG_16, $COLOR_ERROR)
+	else
+	$ichkModTrain = (GUICtrlRead($chkModTrain) = $GUI_CHECKED ? 1 : 0)
 	EndIf
  EndFunc
 
