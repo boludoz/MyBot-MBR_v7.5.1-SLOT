@@ -372,7 +372,8 @@ Func IsClanGamesWindow($getCapture = True)
 EndFunc   ;==>IsClanGamesWindow
 
 Func IsClanGamesEvent($getCapture = True)
-	If QuickMIS("BC1", $g_sImageBuilerGames, 20, 75, 110, 115, $getCapture, $g_bChkClanGamesDebug) Then
+If QuickMIS("N1", $g_sImageBuilerGames, 20, 75, 110, 115) then
+	;If QuickMIS("BC1", $g_sImageBuilerGames, 20, 75, 110, 115, $getCapture, $g_bChkClanGamesDebug) Then
 		SetLog("Builder Games Event detected!", $COLOR_INFO)
 		If GUICtrlRead($g_hLblRemainTime) <> "BG Event" Then GUICtrlSetData($g_hLblRemainTime, "BG Event")
 		ClickP($aAway, 1, 0, "#0000") ;Click Away
