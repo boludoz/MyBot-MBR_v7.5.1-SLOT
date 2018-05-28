@@ -116,7 +116,7 @@ Func ModTrain($ForcePreTrain = False)
 		EndIf
 
 		;_ArraySort($iKTime,1)
-		Local $iMaxV =  _ArraySort($iKTime, 1)
+		Local $iMaxV =  _ArrayMax($iKTime, 1)
 
 		If $g_iSamM0dDebug = 1 Then SetLog("$iMaxV: " & $iMaxV)
 
@@ -126,9 +126,6 @@ Func ModTrain($ForcePreTrain = False)
 				If $aSwitchList[$i][4] = $iCurActiveAcc Then
 					;$aSwitchList[$i][0] = _DateAdd('n', $iKTime[0], _NowCalc())
 					$aSwitchList[$i][0] = _DateAdd('n', $iMaxV, _NowCalc())
-					If $iMaxV Then
-						SetLog("Army Ready Time: " & $aSwitchList[$i][0], $COLOR_INFO)
-					EndIf
 					If $aSwitchList[$i][2] <> 1 Then
 						$bIsAttackType = True
 					EndIf
@@ -529,4 +526,4 @@ Func SetLogAndReturn($iMsg)
 	EndSwitch
 	If $g_iSamM0dDebug = 1 Then SetLog("[" & $sMsg & "] - block for detection troops or spells.",$COLOR_RED)
 	Return True
- EndFunc
+EndFunc

@@ -812,7 +812,7 @@ Func runBot() ;Bot that runs everything in order
 			If $g_bRestart = True Then ContinueLoop
 		EndIf
 
-;~ 		PrepareDonateCC()
+		PrepareDonateCC()
 
 		chkShieldStatus()
 		If $g_bRestart = True Then ContinueLoop
@@ -1222,6 +1222,7 @@ Func AttackMain() ;Main control for attack functions
 				;SetLog("BullyMode: " & $g_abAttackTypeEnable[$TB] & ", Bully Hero: " & BitAND($g_aiAttackUseHeroes[$g_iAtkTBMode], $g_aiSearchHeroWaitEnable[$g_iAtkTBMode], $g_iHeroAvailable) & "|" & $g_aiSearchHeroWaitEnable[$g_iAtkTBMode] & "|" & $g_iHeroAvailable, $COLOR_DEBUG)
 			EndIf
 			_ClanGames()
+			ClickP($aAway, 1, 0, "#0000") ;Click Away to prevent any pages on top
 			PrepareSearch()
 			If $g_bOutOfGold = True Then Return ; Check flag for enough gold to search
 			If $g_bRestart = True Then Return

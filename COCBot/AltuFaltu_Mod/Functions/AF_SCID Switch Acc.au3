@@ -55,7 +55,7 @@ Func SwitchCOCAcc_SCID($NextAccount)
 							SetLog("AltuFaltu - You have only one Acc. of SCID in Emulator and", 0x6E0DD0)
 							SetLog("           	You Active Swithch Acc. Soo Funny.", 0x6E0DD0)
 							SetLog("Solution - Disable Switch Acc.", 0x6E0DD0)
-							;BtnStop()
+							BtnStop()
 							$g_SwitchSCIDAccFatalErrorAF = True
 						Else
 							SetLog("Cannot Load SuperCell ID Select Account Page, restart game...", $COLOR_RED)

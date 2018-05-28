@@ -18,7 +18,8 @@ Global $aIsReloadError[4] = [457, 301 + $g_iMidOffsetY, 0x33B5E5, 10] ; Pixel Se
 Global $aIsMain[4] = [431, 10, 0x75BDE4, 6] ; Main Screen, Shield Info ! icon
 Global $aIsMainGrayed[4] = [431, 10, 0x3B5F72, 6] ; Main Screen, Shield Info ! icon
 
-Global $aIsOnBuilderBase[4] = [838, 18, 0xffff46, 10] ; Check the Gold Coin from resources , is a square not round
+Global $aIsOnBuilderBase[4] = [359, 9, 0x75BDE4, 6] ; Check the Gold Coin from resources , is a square not round
+Global $aIsOnBuilderBaseGrayed[4] = [359, 9, 0x3B5F72, 6] ; Check the Gold Coin from resources , is a square not round
 
 Global $aTopLeftClient[4] = [1, 1, 0x000000, 0] ; TopLeftClient: Tolerance not needed
 Global $aTopMiddleClient[4] = [475, 1, 0x000000, 0] ; TopMiddleClient: Tolerance not needed

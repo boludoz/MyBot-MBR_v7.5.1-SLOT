@@ -458,26 +458,19 @@ Func DoSwitchAcc()
 			For $i = 0 To UBound($aSwitchList) - 1
 				If $aSwitchList[$i][4] = $iCurActiveAcc Then
 					If $aSwitchList[$i][2] <> 1 Then
-						If $g_iSamM0dDebug = 1 Then SetLog("$g_bIsFullArmywithHeroesAndSpells: " & $g_bIsFullArmywithHeroesAndSpells)
-						If $g_iSamM0dDebug = 1 Then SetLog("$ichkForcePreTrainB4Switch: " & $ichkForcePreTrainB4Switch)
-						If $g_bIsFullArmywithHeroesAndSpells = True Or $ichkForcePreTrainB4Switch = 1 Then ;If $g_bIsFullArmywithHeroesAndSpells = True mean just back from attack, then we check train before switch acc.
-							Local $bShare_replay = $g_bIsFullArmywithHeroesAndSpells
+						If $g_bIsFullArmywithHeroesAndSpells Or $ichkForcePreTrainB4Switch Then ;If $g_bIsFullArmywithHeroesAndSpells = True mean just back from attack, then we check train before switch acc.
 							SetLog("Check train before switch account...",$COLOR_ACTION)
 							If $ichkModTrain = 1 Then
 								ModTrain($ichkForcePreTrainB4Switch = 1)
 							Else
 								TrainRevamp()
 							EndIf
-							If $bShare_replay = True Then
-								ReplayShare($g_bShareAttackEnableNow, True)
+							If $bAvoidSwitch Then
+								SetLog("Avoid switch, troops getting ready or soon.", $COLOR_INFO)
+								Return
 							EndIf
 						EndIf
-						If $bAvoidSwitch Then
-							SetLog("Avoid switch, troops getting ready or soon.", $COLOR_INFO)
-							Return
-						EndIf
 					EndIf
-					ExitLoop
 				EndIf
 			Next
 		EndIf
@@ -614,7 +607,6 @@ Func DoVillageLoadSucess($iAcc)
 	$g_asShieldStatus[1] = ""
 	$g_asShieldStatus[2] = ""
 	$g_sPBStartTime = ""
-	$g_bShareAttackEnableNow = False
 
 	; Mod Train
 	;-----------------------------------------------------
@@ -1443,7 +1435,7 @@ Func Wait4Main($bBuilderBase = False)
 		If _CheckColorPixel($aIsMain[0], $aIsMain[1], $aIsMain[2], $aIsMain[3], $g_bNoCapturePixel, "aIsMain") Then
 			If $g_iSamM0dDebug = 1 Then Setlog("Main Village - Screen cleared, Wait4Main exit", $COLOR_DEBUG)
 			Return True
-		ElseIf _CheckColorPixel($aIsOnBuilderBase[0], $aIsOnBuilderBase[1], $aIsOnBuilderBase[2], $aIsOnBuilderBase[3], $g_bNoCapturePixel, "aIsOnBuilderIsland") Then
+		ElseIf _CheckColorPixel($aIsOnBuilderBase[0], $aIsOnBuilderBase[1], $aIsOnBuilderBase[2], $aIsOnBuilderBase[3], $g_bNoCapturePixel, "aIsOnBuilderBase") Then
 			If Not $bBuilderBase Then
 				ZoomOut()
 				SwitchBetweenBases()
