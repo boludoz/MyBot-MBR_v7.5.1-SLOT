@@ -15,7 +15,7 @@
 ; ===============================================================================================================================
 
 Global $g_aiPrepDon[4] = [0, 0, 0, 0]
-Global $g_iTotalDonateCapacity, $g_iTotalDonateSpellCapacity
+Global $g_iTotalDonateCapacity, $g_iTotalDonateSpellCapacity, $g_iTotalDonateWorkShopCapacity
 Global $g_iDonTroopsLimit = 8, $iDonSpellsLimit = 1, $g_iDonTroopsAv = 0, $g_iDonSpellsAv = 0
 Global $g_iDonTroopsQuantityAv = 0, $g_iDonTroopsQuantity = 0, $g_iDonSpellsQuantityAv = 0, $g_iDonSpellsQuantity = 0
 Global $g_bSkipDonTroops = False, $g_bSkipDonSpells = False
@@ -1225,105 +1225,125 @@ Func DonateWindowCap(ByRef $g_bSkipDonTroops, ByRef $g_bSkipDonSpells)
 
 EndFunc   ;==>DonateWindowCap
 
-Func RemainingCCcapacity()
-	; Remaining CC capacity of requested troops from your ClanMates
-	; Will return the $g_iTotalDonateCapacity with that capacity for use in donation logic.
+ Func RemainingCCcapacity()
+ ; Remaining CC capacity of requested troops from your ClanMates
+ ; Will return the $g_iTotalDonateCapacity with that capacity for use in donation logic.
+ Local $aCapTroops = "", $aTempCapTroops = "", $aCapSpells = "", $aTempCapSpells, $aCapWorkShop = "", $aTempCapWorkShop
+ Local $iDonatedTroops = 0, $iDonatedSpells = 0, $iDonatedWorkShop = 0
+ Local $iCapTroopsTotal = 0, $iCapSpellsTotal = 0, $iCapWorkShopTotal = 0
+ $g_iTotalDonateCapacity = -1
+ $g_iTotalDonateSpellCapacity = -1
+ $g_iTotalDonateWorkShopCapacity = -1
+ ; Verify with OCR the Donation Clan Castle capacity
+ If $g_bDebugSetlog Then SetDebugLog("Started dual getOcrSpaceCastleDonate", $COLOR_DEBUG)
+ $aCapTroops = getOcrSpaceCastleDonate(31, $g_aiDonatePixel[1]) ; when the request is troops+spell+WorkShop
+ $aCapSpells = getOcrSpaceCastleDonate(108, $g_aiDonatePixel[1]) ; when the request is troops+spell+WorkShop
+ $aCapWorkShop = getOcrSpaceCastleDonate(170, $g_aiDonatePixel[1]) ; when the request is troops+spell+WorkShop
+ If $g_bDebugSetlog Then SetDebugLog("$aCapTroops :" & $aCapTroops, $COLOR_DEBUG)
+ If $g_bDebugSetlog Then SetDebugLog("$aCapSpells :" & $aCapSpells, $COLOR_DEBUG)
+ If $g_bDebugSetlog Then SetDebugLog("$aCapWorkShop :" & $aCapWorkShop, $COLOR_DEBUG)
+ If Not (StringInStr($aCapWorkShop, "#")) Then ; verify if the string is valid or it is just a number from request without WorkShop
+  If $g_bDebugSetlog Then SetDebugLog("Started single getOcrSpaceCastleDonate", $COLOR_DEBUG)
+  $aCapTroops = getOcrSpaceCastleDonate(60, $g_aiDonatePixel[1]) ; when the Request don't have workshop
+  $aCapSpells = getOcrSpaceCastleDonate(157, $g_aiDonatePixel[1]) ; when the Request don't have workshop
+  If $g_bDebugSetlog Then SetDebugLog("$aCapTroops :" & $aCapTroops, $COLOR_DEBUG)
+  If $g_bDebugSetlog Then SetDebugLog("$aCapSpells :" & $aCapSpells, $COLOR_DEBUG)
+  $aCapWorkShop = -1
+ ElseIf Not (StringInStr($aCapTroops, "#") Or StringInStr($aCapSpells, "#")) Then ; verify if the string is valid or it is just a number from request without spell
+  If $g_bDebugSetlog Then SetDebugLog("Started single getOcrSpaceCastleDonate", $COLOR_DEBUG)
+  $aCapTroops = getOcrSpaceCastleDonate(78, $g_aiDonatePixel[1]) ; when the Request don't have Spell
+  If $g_bDebugSetlog Then SetDebugLog("$aCapTroops :" & $aCapTroops, $COLOR_DEBUG)
+  $aCapSpells = -1
+  $aCapWorkShop = -1
+ EndIf
+ If $aCapTroops <> "" Then
+  ; Splitting the XX/XX
+  $aTempCapTroops = StringSplit($aCapTroops, "#")
+  ; Local Variables to use
+  If $aTempCapTroops[0] >= 2 Then
+   ;  Note - stringsplit always returns an array even if no values split!
+   If $g_bDebugSetlog Then SetDebugLog("$aTempCapTroops splitted :" & $aTempCapTroops[1] & "/" & $aTempCapTroops[2], $COLOR_DEBUG)
+   If $aTempCapTroops[2] > 0 Then
+    $iDonatedTroops = $aTempCapTroops[1]
+    $iCapTroopsTotal = $aTempCapTroops[2]
+    If $iCapTroopsTotal = 0 Then
+     $iCapTroopsTotal = 30
+    EndIf
+    If $iCapTroopsTotal = 5 Then
+     $iCapTroopsTotal = 35
+    EndIf
+   EndIf
+  Else
+   SetLog("Error reading the Castle Troop Capacity[1]...", $COLOR_ERROR) ; log if there is read error
+   $iDonatedTroops = 0
+   $iCapTroopsTotal = 0
+  EndIf
+ Else
+  SetLog("Error reading the Castle Troop Capacity[2]...", $COLOR_ERROR) ; log if there is read error
+  $iDonatedTroops = 0
+  $iCapTroopsTotal = 0
+ EndIf
+ If $aCapSpells <> -1 Then
+  If $aCapSpells <> "" Then
+   ; Splitting the XX/XX
+   $aTempCapSpells = StringSplit($aCapSpells, "#")
+   ; Local Variables to use
+   If $aTempCapSpells[0] >= 2 Then
+    ; Note - stringsplit always returns an array even if no values split!
+    If $g_bDebugSetlog Then SetDebugLog("$aTempCapSpells splitted :" & $aTempCapSpells[1] & "/" & $aTempCapSpells[2], $COLOR_DEBUG)
+    If $aTempCapSpells[2] > 0 Then
+     $iDonatedSpells = $aTempCapSpells[1]
+     $iCapSpellsTotal = $aTempCapSpells[2]
+    EndIf
+   Else
+    SetLog("Error reading the Castle Spell Capacity[1]...", $COLOR_ERROR) ; log if there is read error
+    $iDonatedSpells = 0
+    $iCapSpellsTotal = 0
+   EndIf
+  Else
+   SetLog("Error reading the Castle Spell Capacity[2]...", $COLOR_ERROR) ; log if there is read error
+   $iDonatedSpells = 0
+   $iCapSpellsTotal = 0
+  EndIf
+ EndIf
+ If $aCapWorkShop <> -1 Then
+  If $aCapWorkShop <> "" Then
+   ; Splitting the XX/XX
+   $aTempCapWorkShop = StringSplit($aCapWorkShop, "#")
+   ; Local Variables to use
+   If $aTempCapWorkShop[0] >= 2 Then
+    ; Note - stringsplit always returns an array even if no values split!
+    If $g_bDebugSetlog Then SetDebugLog("$aTempCapWorkShop splitted :" & $aTempCapWorkShop[1] & "/" & $aTempCapWorkShop[2], $COLOR_DEBUG)
+    If $aTempCapWorkShop[2] > 0 Then
+     $iDonatedWorkShop = $aTempCapWorkShop[1]
+     $iCapWorkShopTotal = $aTempCapWorkShop[2]
+    EndIf
+   Else
+    SetLog("Error reading the Castle Spell Capacity[1]...", $COLOR_ERROR) ; log if there is read error
+    $iDonatedWorkShop = 0
+    $iCapWorkShopTotal = 0
+   EndIf
+  Else
+   SetLog("Error reading the Castle Spell Capacity[2]...", $COLOR_ERROR) ; log if there is read error
+   $iDonatedWorkShop = 0
+   $iCapWorkShopTotal = 0
+  EndIf
+ EndIf
 
-	Local $aCapTroops = "", $aTempCapTroops = "", $aCapSpells = "", $aTempCapSpells
-	Local $iDonatedTroops = 0, $iDonatedSpells = 0
-	Local $iCapTroopsTotal = 0, $iCapSpellsTotal = 0
-
-	$g_iTotalDonateCapacity = -1
-	$g_iTotalDonateSpellCapacity = -1
-
-	; Verify with OCR the Donation Clan Castle capacity
-	If $g_bDebugSetlog Then SetDebugLog("Started dual getOcrSpaceCastleDonate", $COLOR_DEBUG)
-	$aCapTroops = getOcrSpaceCastleDonate(49, $g_aiDonatePixel[1]) ; when the request is troops+spell
-	$aCapSpells = getOcrSpaceCastleDonate(154, $g_aiDonatePixel[1]) ; when the request is troops+spell
-
-	If $g_bDebugSetlog Then SetDebugLog("$aCapTroops :" & $aCapTroops, $COLOR_DEBUG)
-	If $g_bDebugSetlog Then SetDebugLog("$aCapSpells :" & $aCapSpells, $COLOR_DEBUG)
-
-	If Not (StringInStr($aCapTroops, "#") Or StringInStr($aCapSpells, "#")) Then ; verify if the string is valid or it is just a number from request without spell
-		If $g_bDebugSetlog Then SetDebugLog("Started single getOcrSpaceCastleDonate", $COLOR_DEBUG)
-		$aCapTroops = getOcrSpaceCastleDonate(78, $g_aiDonatePixel[1]) ; when the Request don't have Spell
-
-		If $g_bDebugSetlog Then SetDebugLog("$aCapTroops :" & $aCapTroops, $COLOR_DEBUG)
-		$aCapSpells = -1
-	EndIf
-
-	If $aCapTroops <> "" Then
-		; Splitting the XX/XX
-		$aTempCapTroops = StringSplit($aCapTroops, "#")
-
-		; Local Variables to use
-		If $aTempCapTroops[0] >= 2 Then
-			;  Note - stringsplit always returns an array even if no values split!
-			If $g_bDebugSetlog Then SetDebugLog("$aTempCapTroops splitted :" & $aTempCapTroops[1] & "/" & $aTempCapTroops[2], $COLOR_DEBUG)
-			If $aTempCapTroops[2] > 0 Then
-				$iDonatedTroops = $aTempCapTroops[1]
-				$iCapTroopsTotal = $aTempCapTroops[2]
-				If $iCapTroopsTotal = 0 Then
-					$iCapTroopsTotal = 30
-				EndIf
-				If $iCapTroopsTotal = 5 Then
-					$iCapTroopsTotal = 35
-				EndIf
-			EndIf
-		Else
-			SetLog("Error reading the Castle Troop Capacity[1]...", $COLOR_ERROR) ; log if there is read error
-			$iDonatedTroops = 0
-			$iCapTroopsTotal = 0
-		EndIf
-	Else
-		SetLog("Error reading the Castle Troop Capacity[2]...", $COLOR_ERROR) ; log if there is read error
-		$iDonatedTroops = 0
-		$iCapTroopsTotal = 0
-	EndIf
-
-	If $aCapSpells <> -1 Then
-		If $aCapSpells <> "" Then
-			; Splitting the XX/XX
-			$aTempCapSpells = StringSplit($aCapSpells, "#")
-
-			; Local Variables to use
-			If $aTempCapSpells[0] >= 2 Then
-				; Note - stringsplit always returns an array even if no values split!
-				If $g_bDebugSetlog Then SetDebugLog("$aTempCapSpells splitted :" & $aTempCapSpells[1] & "/" & $aTempCapSpells[2], $COLOR_DEBUG)
-				If $aTempCapSpells[2] > 0 Then
-					$iDonatedSpells = $aTempCapSpells[1]
-					$iCapSpellsTotal = $aTempCapSpells[2]
-				EndIf
-			Else
-				SetLog("Error reading the Castle Spell Capacity[1]...", $COLOR_ERROR) ; log if there is read error
-				$iDonatedSpells = 0
-				$iCapSpellsTotal = 0
-			EndIf
-		Else
-			SetLog("Error reading the Castle Spell Capacity[2]...", $COLOR_ERROR) ; log if there is read error
-			$iDonatedSpells = 0
-			$iCapSpellsTotal = 0
-		EndIf
-	EndIf
-
-
-	; $g_iTotalDonateCapacity it will be use to determinate the quantity of kind troop to donate
-	$g_iTotalDonateCapacity = ($iCapTroopsTotal - $iDonatedTroops)
-	If $aCapSpells <> -1 Then $g_iTotalDonateSpellCapacity = ($iCapSpellsTotal - $iDonatedSpells)
-
-	If $g_iTotalDonateCapacity < 0 Then
-		SetLog("Unable to read Castle Capacity!", $COLOR_ERROR)
-	Else
-		If $aCapSpells <> -1 Then
-			SetLog("Chat Troops: " & $iDonatedTroops & "/" & $iCapTroopsTotal & ", Spells: " & $iDonatedSpells & "/" & $iCapSpellsTotal)
-		Else
-			SetLog("Chat Troops: " & $iDonatedTroops & "/" & $iCapTroopsTotal)
-		EndIf
-	EndIf
-
-	;;Return $g_iTotalDonateCapacity
-
-EndFunc   ;==>RemainingCCcapacity
+ ; $g_iTotalDonateCapacity it will be use to determinate the quantity of kind troop to donate
+ $g_iTotalDonateCapacity = ($iCapTroopsTotal - $iDonatedTroops)
+ If $aCapSpells <> -1 Then $g_iTotalDonateSpellCapacity = ($iCapSpellsTotal - $iDonatedSpells)
+ If $g_iTotalDonateCapacity < 0 Then
+  SetLog("Unable to read Castle Capacity!", $COLOR_ERROR)
+ Else
+  If $aCapSpells <> -1 Then
+   SetLog("Chat Troops: " & $iDonatedTroops & "/" & $iCapTroopsTotal & ", Spells: " & $iDonatedSpells & "/" & $iCapSpellsTotal)
+  Else
+   SetLog("Chat Troops: " & $iDonatedTroops & "/" & $iCapTroopsTotal)
+  EndIf
+ EndIf
+ ;;Return $g_iTotalDonateCapacity
+EndFunc   ;==>RemainingCCcapacity 
 
 Func DetectSlotTroop(Const $iTroopIndex)
 	Local $FullTemp
