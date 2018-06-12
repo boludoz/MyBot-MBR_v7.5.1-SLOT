@@ -329,8 +329,16 @@ EndFunc
 Func lblMyTotalCountSpell()
 	_GUI_Value_STATE("HIDE", $groupListMySpells)
 	; calculate $iTotalTrainSpaceSpell value
-	$g_iMySpellsSize = Int((GUICtrlRead($txtNumLightningSpell) * 2) + (GUICtrlRead($txtNumHealSpell) * 2) + (GUICtrlRead($txtNumRageSpell) * 2) + (GUICtrlRead($txtNumJumpSpell) * 2) + _
-			(GUICtrlRead($txtNumFreezeSpell) * 2) + (GUICtrlRead($txtNumCloneSpell) * 4) + GUICtrlRead($txtNumPoisonSpell) + GUICtrlRead($txtNumHasteSpell) + GUICtrlRead($txtNumEarthSpell) + GUICtrlRead($txtNumSkeletonSpell))
+	$g_iMySpellsSize = Int((GUICtrlRead($txtNumLightningSpell) * $g_aiSpellSpace[$eSpellLightning]) + _
+	(GUICtrlRead($txtNumHealSpell) * $g_aiSpellSpace[$eSpellHeal]) + _ 
+	(GUICtrlRead($txtNumRageSpell) * $g_aiSpellSpace[$eSpellRage]) + _ 
+	(GUICtrlRead($txtNumJumpSpell) * $g_aiSpellSpace[$eSpellJump]) + _
+	GUICtrlRead($txtNumFreezeSpell) + _ 
+	(GUICtrlRead($txtNumCloneSpell) * $g_aiSpellSpace[$eSpellClone]) + _
+	GUICtrlRead($txtNumPoisonSpell) + _ 
+	GUICtrlRead($txtNumHasteSpell) + _ 
+	GUICtrlRead($txtNumEarthSpell) + _ 
+	GUICtrlRead($txtNumSkeletonSpell))
 
 	_GUICtrlComboBox_SetCurSel($g_hTxtTotalCountSpell, _GUICtrlComboBox_GetCurSel($txtTotalCountSpell2))
 
