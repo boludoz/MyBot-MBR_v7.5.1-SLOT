@@ -94,17 +94,6 @@ Func UpdateBotTitle()
 	SetDebugLog("Bot title updated to: " & $g_sBotTitle)
 EndFunc   ;==>UpdateBotTitle
 
- Func SetupTroops()
-	If $g_iMyTroopsSize = 0 and $chkModTrain = 1 Then
-	$ichkModTrain = 0
-		SetLog($CustomTrain_MSG_15, $COLOR_ERROR)
-		SetLog($CustomTrain_MSG_16, $COLOR_ERROR)
-	else
-	$ichkModTrain = (GUICtrlRead($chkModTrain) = $GUI_CHECKED ? 1 : 0)
-	EndIf
- EndFunc
-
-
 Func InitializeBot()
 
 	ProcessCommandLine()
@@ -196,8 +185,11 @@ Func InitializeBot()
 	Else
 		DirCreate(@ScriptDir & "\profiles\" & $g_sProfileCurrentName & "\SamM0d Debug")
 		DirCreate(@ScriptDir & "\profiles\" & $g_sProfileCurrentName & "\SamM0d Debug\Images")
-	 EndIf
-	SetupTroops()
+	EndIf
+
+	If $g_iMyTroopsSize = 0 Then
+		SetLog($CustomTrain_MSG_15, $COLOR_ERROR)
+	EndIf
 
 	DirRemove(@ScriptDir & "\profiles\SamM0d", 1)
 	;DirCreate(@ScriptDir & "\profiles\SamM0d")
@@ -727,6 +719,7 @@ Func runBot() ;Bot that runs everything in order
 		SetLog("Rematching Account [" & $g_iNextAccount + 1 & "] with Profile [" & GUICtrlRead($g_ahCmbProfile[$g_iNextAccount]) & "]")
 		SwitchCoCAcc($g_iNextAccount)
 	EndIf
+	BotHumanization() ; Bot Humanization - Team AiO MOD++
 	While 1
 		; samm0d
 		If $g_iSamM0dDebug = 1 And $g_bRestart Then SetLog("Continue loop with restart", $COLOR_DEBUG)
@@ -817,6 +810,9 @@ Func runBot() ;Bot that runs everything in order
 		chkShieldStatus()
 		If $g_bRestart = True Then ContinueLoop
 
+		MainGTFO()
+		MainKickout()
+
 		checkObstacles() ; trap common error messages also check for reconnecting animation
 		If $g_bRestart = True Then ContinueLoop
 
@@ -834,7 +830,6 @@ Func runBot() ;Bot that runs everything in order
 			If $g_bRestart = True Then ContinueLoop
 			If _Sleep($DELAYRUNBOT3) Then Return
 			VillageReport()
-			CheckStopForWar()
 			If $g_bOutOfGold = True And (Number($g_aiCurrentLoot[$eLootGold]) >= Number($g_iTxtRestartGold)) Then ; check if enough gold to begin searching again
 				$g_bOutOfGold = False ; reset out of gold flag
 				SetLog("Switching back to normal after no gold to search ...", $COLOR_SUCCESS)
@@ -868,7 +863,7 @@ Func runBot() ;Bot that runs everything in order
 			If $g_bRestart = True Then ContinueLoop
 			If IsSearchAttackEnabled() Then ; if attack is disabled skip reporting, requesting, donating, training, and boosting
 				; samm0d - ignore request cc, since later when train army will be apply request cc.
-				Local $aRndFuncList = ['ReplayShare', 'NotifyReport', 'DonateCC,Train', 'BoostBarracks', 'BoostSpellFactory', 'BoostKing', 'BoostQueen', 'BoostWarden', 'CollectFreeMagicItems']
+				Local $aRndFuncList = ['ReplayShare', 'NotifyReport', 'DonateCC,Train', 'Boost']
 				;Local $aRndFuncList = ['ReplayShare', 'NotifyReport', 'DonateCC,Train', 'BoostBarracks', 'BoostSpellFactory', 'BoostKing', 'BoostQueen', 'BoostWarden', 'RequestCC', 'CollectFreeMagicItems']
 				While 1
 					If $g_bRunState = False Then Return
@@ -893,6 +888,7 @@ Func runBot() ;Bot that runs everything in order
 			If ($g_iCommandStop = 3 Or $g_iCommandStop = 0) Then ; Train Donate only - force a donate cc everytime, Ignore any SkipDonate Near Full Values
 				If BalanceDonRec(True) Then DonateCC()
 			EndIf
+			MainSuperXPHandler() ; Goblin XP - Team AiO MOD++
 			Local $aRndFuncList = ['Laboratory', 'UpgradeHeroes', 'UpgradeBuilding', 'BuilderBase']
 			While 1
 				If $g_bRunState = False Then Return
@@ -908,9 +904,9 @@ Func runBot() ;Bot that runs everything in order
 				EndIf
 				If CheckAndroidReboot() = True Then ContinueLoop 2 ; must be level 2 due to loop-in-loop
 			WEnd
-			ClanHop() ; ClanHop - Team AiO MOD++
 			; samm0d
 			FriendlyChallenge()
+			ClanHop() ; ClanHop - Team AiO MOD++
 			If $g_bRunState = False Then Return
 			If $g_bRestart = True Then ContinueLoop
 			If IsSearchAttackEnabled() Then ; If attack scheduled has attack disabled now, stop wall upgrades, and attack.
@@ -946,6 +942,8 @@ Func runBot() ;Bot that runs everything in order
 			Else
 				If $g_bIsSearchLimit = True Then
 					SetLog("Restarted due search limit", $COLOR_INFO)
+				ElseIf $g_bIsSearchTimeout = True Then
+					SetLog("[Legend League] Restarted due search timeout", $COLOR_INFO)
 				Else
 					SetLog("Restarted after Out of Sync Error: Attack Now", $COLOR_INFO)
 				EndIf
@@ -978,8 +976,6 @@ Func Idle() ;Sequence that runs until Full Army
 EndFunc   ;==>Idle
 
 Func _Idle() ;Sequence that runs until Full Army
-
-	If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 	Static $iCollectCounter = 0 ; Collect counter, when reaches $g_iCollectAtCount, it will collect
 
 	Local $TimeIdle = 0 ;In Seconds
@@ -997,6 +993,7 @@ Func _Idle() ;Sequence that runs until Full Army
 			Next
 		EndIf
 	EndIf
+	If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 
 	While $g_bIsFullArmywithHeroesAndSpells = False
 
@@ -1008,7 +1005,7 @@ Func _Idle() ;Sequence that runs until Full Army
 		If $g_iCommandStop = -1 Then SetLog("====== Waiting for full army ======", $COLOR_SUCCESS)
 		Local $hTimer = __TimerInit()
 
-		;PrepareDonateCC()
+		BotHumanization() ; Bot Humanization - Team AiO MOD++
 
 		;If $g_bDonateSkipNearFullEnable = True Then getArmyCapacity(true,true)
 		If $g_iActiveDonate And $g_bChkDonate Then
@@ -1086,10 +1083,28 @@ Func _Idle() ;Sequence that runs until Full Army
 		$iCollectCounter = $iCollectCounter + 1
 		AddIdleTime()
 		checkMainScreen(False) ; required here due to many possible exits
-
-		; samm0d
-		If $ichkModTrain = 0 Then
-			If $g_iCommandStop = -1 Then
+        ; samm0d
+        If $ichkModTrain = 0 Then
+		If $g_iCommandStop = -1 Then
+			If $g_iActualTrainSkip < $g_iMaxTrainSkip Then
+				MainSuperXPHandler() ; Goblin XP - Team AiO MOD++
+				If CheckNeedOpenTrain($g_sTimeBeforeTrain) Then TrainRevamp()
+				If $g_bRestart = True Then ExitLoop
+				If _Sleep($DELAYIDLE1) Then ExitLoop
+				checkMainScreen(False)
+			Else
+				Setlog("Humanize bot, prevent to delete and recreate troops " & $g_iActualTrainSkip + 1 & "/" & $g_iMaxTrainSkip, $color_blue)
+				$g_iActualTrainSkip = $g_iActualTrainSkip + 1
+				If $g_iActualTrainSkip >= $g_iMaxTrainSkip Then
+					$g_iActualTrainSkip = 0
+				EndIf
+				CheckArmyCamp(True, True)
+			EndIf
+			MainSuperXPHandler() ; Goblin XP - Team AiO MOD++
+		EndIf
+		If _Sleep($DELAYIDLE1) Then Return
+		If $g_iCommandStop = 0 And $g_bTrainEnabled = True Then
+			If Not ($g_bFullArmy) Then
 				If $g_iActualTrainSkip < $g_iMaxTrainSkip Then
 					If CheckNeedOpenTrain($g_sTimeBeforeTrain) Then TrainRevamp()
 					If $g_bRestart = True Then ExitLoop
@@ -1193,7 +1208,7 @@ Func _Idle() ;Sequence that runs until Full Army
 				EndIf
 			EndIf
 		EndIf
-
+	EndIf
 	WEnd
 EndFunc   ;==>_Idle
 
@@ -1201,6 +1216,14 @@ Func AttackMain() ;Main control for attack functions
 	If ProfileSwitchAccountEnabled() And $g_abDonateOnly[$g_iCurAccount] Then Return
 	; samm0d
 	;getArmyCapacity(True, True)
+
+	; Goblin XP - Team AiO MOD++
+	If $ichkEnableSuperXP = 1 And $irbSXTraining = 2 Then
+		MainSuperXPHandler()
+		Return
+	EndIf
+
+	getArmyTroopCapacity(True, True)
 	If IsSearchAttackEnabled() Then
 		If (IsSearchModeActive($DB) And checkCollectors(True, False)) Or IsSearchModeActive($LB) Or IsSearchModeActive($TS) Then
 			If ProfileSwitchAccountEnabled() And ($g_aiAttackedCountSwitch[$g_iCurAccount] <= $g_aiAttackedCountAcc[$g_iCurAccount] - 2) Then checkSwitchAcc()
@@ -1246,7 +1269,6 @@ Func AttackMain() ;Main control for attack functions
 			If ProfileSwitchAccountEnabled() Then checkSwitchAcc()
 			SmartWait4Train()
 			Else
-
 				SetLog("Skipping Attack because Clan Hop is enabled!", $COLOR_INFO)
 			EndIf
 		EndIf
@@ -1312,7 +1334,7 @@ Func QuickAttack()
 			Return False ;ts snipe no restart... no enough army
 		EndIf
 	EndIf
-	EndIf
+EndIf
 EndFunc   ;==>QuickAttack
 
 Func _RunFunction($action)
@@ -1344,12 +1366,12 @@ Func _RunFunction($action)
 				If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)
 			EndIf
 		Case "DonateCC,Train"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			; samm0d
 			If $ichkModTrain = 1 Then
 				ModTrain()
 			EndIf
 
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			If $g_iActiveDonate And $g_bChkDonate Then
 				If $g_bFirstStart Then
 					getArmyTroopCapacity(True, False)
@@ -1384,23 +1406,14 @@ Func _RunFunction($action)
 					If $g_bDebugSetlogTrain Then SetLog("Halt mode - training disabled", $COLOR_DEBUG)
 				EndIf
 			EndIf
-		Case "BoostBarracks"
+		Case "Boost"
 			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			BoostBarracks()
-		Case "BoostSpellFactory"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			BoostSpellFactory()
-		Case "BoostKing"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			BoostKing()
-		Case "BoostQueen"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			BoostQueen()
-		Case "BoostWarden"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			BoostWarden()
 		Case "RequestCC"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			RequestCC()
 			If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)
 		Case "Laboratory"
@@ -1426,6 +1439,12 @@ Func _RunFunction($action)
 				; switch back to normal village
 				SwitchBetweenBases()
 			EndIf
+			_Sleep($DELAYRUNBOT3)
+		Case "SuperXP" ; Goblin XP - Team AiO MOD++
+			MainSuperXPHandler()
+			_Sleep($DELAYRUNBOT3)
+		Case "Humanization" ; Bot Humanization - Team AiO MOD++
+			BotHumanization()
 			_Sleep($DELAYRUNBOT3)
 		Case "CollectFreeMagicItems"
 			CollectFreeMagicItems()

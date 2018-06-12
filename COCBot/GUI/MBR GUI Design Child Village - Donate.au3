@@ -53,6 +53,12 @@ Global $g_hLblDonateTroopTBD1 = 0, $g_hLblDonateTroopTBD2 = 0, $g_hLblDonateTroo
 Global $g_hGrpDonateGeneralBlacklist = 0, $g_hTxtGeneralBlacklist = 0
 Global $lblBtnCustomE = 0
 
+; ClanHop - Team AiO MOD++
+Global $g_hGrpDonateOptions = 0, $g_hChkClanHop = 0
+
+; Request CC Troops at first - Team AiO MOD++
+Global $g_hChkReqCCFirst = 0
+
 ; Schedule
 Global $g_hChkDonateHoursEnable = 0, $g_ahChkDonateHours[24] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Global $g_hCmbFilterDonationsCC = 0, $g_hChkSkipDonateNearFullTroopsEnable = 0
@@ -610,15 +616,14 @@ Func CreateDonateSubTab()
 ;~			GUICtrlSetOnEvent(-1, "btnDonateCustomC")
 
 	$x += $Offx
-		; Button Not Active - future expansion?
+		; ClanHop - Team AiO MOD++
 		$g_hLblDonateTroopCustomD = GUICtrlCreateLabel("", $x, $y - 2, $Offx + 2, $Offx + 2)
 			GUICtrlSetBkColor(-1, $GUI_BKCOLOR_TRANSPARENT)
 			GUICtrlSetState(-1, $GUI_DISABLE)
-
 		GUICtrlCreateButton("", $x + 2, $y, $Offx - 2, $Offx - 2, $BS_ICON)
-			GUICtrlSetState(-1, $GUI_DISABLE)
-;~			_GUICtrlSetImage(-1, $g_sLibIconPath, $eIcnTroops, 0)
-;~			GUICtrlSetOnEvent(-1, "btnDonateCustomD")
+			_GUICtrlSetImage (-1, $g_sLibIconPath, $eIcnClanHop, 1)
+			GUICtrlSetOnEvent(-1, "btnDonateOptions")
+
 	$x += $Offx
 		GUICtrlCreateButton("", $x + 2, $y, $Offx - 2, $Offx - 2, $BS_ICON)
 			_GUICtrlSetImage(-1, $g_sLibIconPath, $eIcnDonBlacklist, 1)
@@ -1820,6 +1825,17 @@ Func CreateDonateSubTab()
 			GUICtrlSetColor(-1, $COLOR_WHITE)
 			GUICtrlSetData(-1, StringFormat(GetTranslatedFileIni("MBR GUI Design Child Village - Donate", "TxtGeneralBlacklist_Item_01", "clan war\r\nwar\r\ncw")))
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Village - Donate", "TxtGeneralBlacklist_Info_01", "General Blacklist for donation requests"))
+	GUICtrlCreateGroup("", -99, -99, 1, 1)
+
+	; ClanHop - Team AiO MOD++
+	$x = $xStart
+	$y = $Offy
+	$g_hGrpDonateOptions = GUICtrlCreateGroup(GetTranslatedFileIni("MBR GUI Design Child Village - Donate", "GrpDonateOptions", "Donate Options"), $x - 20, $y - 20, $g_iSizeWGrpTab3, 169)
+	$x -= 10
+	$y -= 4
+		GUICtrlSetState(-1, $GUI_HIDE)
+		$g_hChkClanHop = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Donate", "ChkClanHop", "Clan Hop"), $x, $y)
+		GUICtrlSetState(-1,$GUI_HIDE)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 EndFunc   ;==>CreateDonateSubTab

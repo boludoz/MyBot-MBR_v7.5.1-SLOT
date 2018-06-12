@@ -4,8 +4,8 @@
 ; Syntax ........:getNextSwitchList()
 ; Parameters ....:
 ; Return values .: None
-; Author ........: Samkie (8 August, 2017) AltuFatu (feb 2018)
-; Modified ......: BOLUDOZ (4/5/2018)
+; Author ........: Samkie (8 August, 2017)
+; Modified ......:
 ; Remarks .......:
 ; Related .......:
 ; Link ..........: https://github.com/MyBotRun/MyBot/wiki
@@ -1271,21 +1271,9 @@ Func btnPushshared_prefs()
 			Else
 				CloseCoC()
 			EndIf
+
 			OpenCoC()
 			Wait4Main()
-
-			Local $i
-			Local $sProfile = GUICtrlRead($g_hCmbProfile2)
-			Local $iSlot4Switch = -1
-			For $i = 0 To 7
-				If $icmbWithProfile[$i] = $sProfile Then
-						$iSlot4Switch = $i
-					ExitLoop
-				EndIf
-			Next
-			If $iSlot4Switch <> -1 Then
-				SwitchCOCAcc_SCID($iSlot4Switch)
-			EndIf
 		Case 1
 			SetLog("Start shared_prefs switch")
 			If _CheckColorPixel($aIsMain[0], $aIsMain[1], $aIsMain[2], $aIsMain[3], $g_bCapturePixel, "aIsMain") Or _CheckColorPixel($aIsMainGrayed[0], $aIsMainGrayed[1], $aIsMainGrayed[2], $aIsMainGrayed[3], $g_bCapturePixel, "aIsMainGrayed") Then

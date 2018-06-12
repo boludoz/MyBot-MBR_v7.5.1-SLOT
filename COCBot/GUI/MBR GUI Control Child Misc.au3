@@ -46,7 +46,9 @@ Func LoadProfile($bSaveCurrentProfile = True)
 		EndIf
 
 		SetLog("Profile " & $g_sProfileCurrentName & " loaded from " & $g_sProfileConfigPath, $COLOR_SUCCESS)
-		SetupTroops()
+		If $g_iMyTroopsSize = 0 Then
+			SetLog($CustomTrain_MSG_15, $COLOR_ERROR)
+		EndIf
 		;======================================================================================================
 
 		Return True

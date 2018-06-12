@@ -191,8 +191,116 @@ GUICtrlSetData($g_hLblTHLevels, $g_iTownHallLevel)
 
 applyFriendlyChallengeSetting()
 
-applyClanGamesSetupSetting()
+;Func ApplyConfig_MOD($TypeReadSave)
+;	; <><><> Team AiO MOD++ (2018) <><><>
+;	Switch $TypeReadSave
+;		Case "Read"
+			; ClanHop - Team AiO MOD++
+			GUICtrlSetState($g_hChkClanHop, $g_bChkClanHop = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 
-applyClanHopSetting()
+			; Bot Humanization - Team AiO MOD++
+			GUICtrlSetState($g_chkUseBotHumanization, $g_ichkUseBotHumanization = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetState($g_chkUseAltRClick, $g_ichkUseAltRClick = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetState($g_chkCollectAchievements, $g_ichkCollectAchievements = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetState($g_chkLookAtRedNotifications, $g_ichkLookAtRedNotifications = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
+			chkUseBotHumanization()
+			For $i = 0 To 12
+				_GUICtrlComboBox_SetCurSel($g_acmbPriority[$i], $g_iacmbPriority[$i])
+			Next
+			For $i = 0 To 1
+				_GUICtrlComboBox_SetCurSel($g_acmbMaxSpeed[$i], $g_iacmbMaxSpeed[$i])
+			Next
+			For $i = 0 To 1
+				_GUICtrlComboBox_SetCurSel($g_acmbPause[$i], $g_iacmbPause[$i])
+			Next
+			For $i = 0 To 1
+				GUICtrlSetData($g_ahumanMessage[$i], $g_iahumanMessage[$i])
+			Next
+			_GUICtrlComboBox_SetCurSel($g_cmbMaxActionsNumber, $g_icmbMaxActionsNumber)
+			GUICtrlSetData($g_challengeMessage, $g_ichallengeMessage)
+			cmbStandardReplay()
+			cmbWarReplay()
 
-applyDemenWarSetting($TypeReadSave)
+			; Goblin XP - Team AiO MOD++
+			GUICtrlSetState($chkEnableSuperXP, $ichkEnableSuperXP = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
+			chkEnableSuperXP()
+			GUICtrlSetState($chkSkipZoomOutXP, $ichkSkipZoomOutXP = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetState($chkFastGoblinXP, $ichkFastGoblinXP = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetState($rbSXTraining, ($irbSXTraining = 1) ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetState($rbSXIAttacking, ($irbSXTraining = 2) ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetData($txtMaxXPtoGain, $itxtMaxXPtoGain)
+			GUICtrlSetState($chkSXBK, $ichkSXBK = $eHeroKing ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetState($chkSXAQ, $ichkSXAQ = $eHeroQueen ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetState($chkSXGW, $ichkSXGW = $eHeroWarden ? $GUI_CHECKED : $GUI_UNCHECKED)
+
+			; GTFO - Team AiO MOD++
+			GUICtrlSetState($g_hChkUseGTFO, $g_bChkUseGTFO = True ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetData($g_hTxtMinSaveGTFO_Elixir, $g_iTxtMinSaveGTFO_Elixir)
+			GUICtrlSetData($g_hTxtMinSaveGTFO_DE, $g_iTxtMinSaveGTFO_DE)
+			ApplyGTFO()
+
+			GUICtrlSetState($g_hChkUseKickOut, $g_bChkUseKickOut = True ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetData($g_hTxtDonatedCap, $g_iTxtDonatedCap)
+			GUICtrlSetData($g_hTxtReceivedCap, $g_iTxtReceivedCap)
+			GUICtrlSetState($g_hChkKickOutSpammers, $g_bChkKickOutSpammers = True ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetData($g_hTxtKickLimit, $g_iTxtKickLimit)
+			ApplyKickOut()
+
+			; Check Grand Warden Mode - Team AiO MOD++
+			GUICtrlSetState($g_hChkCheckWardenMode, $g_bCheckWardenMode ? $GUI_CHECKED : $GUI_UNCHECKED)
+			chkCheckWardenMode()
+			_GUICtrlComboBox_SetCurSel($g_hCmbCheckWardenMode, $g_iCheckWardenMode)
+
+;		Case "Save"
+
+			; ClanHop - Team AiO MOD++
+			$g_bChkClanHop = (GUICtrlRead($g_hChkClanHop) = $GUI_CHECKED)
+
+			; Bot Humanization - Team AiO MOD++
+			$g_ichkUseBotHumanization = GUICtrlRead($g_chkUseBotHumanization) = $GUI_CHECKED ? 1 : 0
+			$g_ichkUseAltRClick = GUICtrlRead($g_chkUseAltRClick) = $GUI_CHECKED ? 1 : 0
+			$g_ichkCollectAchievements = GUICtrlRead($g_chkCollectAchievements) = $GUI_CHECKED ? 1 : 0
+			$g_ichkLookAtRedNotifications = GUICtrlRead($g_chkLookAtRedNotifications) = $GUI_CHECKED ? 1 : 0
+			For $i = 0 To 12
+				$g_iacmbPriority[$i] = _GUICtrlComboBox_GetCurSel($g_acmbPriority[$i])
+			Next
+			For $i = 0 To 1
+				$g_iacmbMaxSpeed[$i] = _GUICtrlComboBox_GetCurSel($g_acmbMaxSpeed[$i])
+			Next
+			For $i = 0 To 1
+				$g_iacmbPause[$i] = _GUICtrlComboBox_GetCurSel($g_acmbPause[$i])
+			Next
+			For $i = 0 To 1
+				$g_iahumanMessage[$i] = GUICtrlRead($g_ahumanMessage[$i])
+			Next
+			$g_icmbMaxActionsNumber = _GUICtrlComboBox_GetCurSel($g_icmbMaxActionsNumber)
+			$g_ichallengeMessage = GUICtrlRead($g_challengeMessage)
+
+			; Goblin XP - Team AiO MOD++
+			$ichkEnableSuperXP = GUICtrlRead($chkEnableSuperXP) = $GUI_CHECKED ? 1 : 0
+			$ichkSkipZoomOutXP = GUICtrlRead($chkSkipZoomOutXP) = $GUI_CHECKED ? 1 : 0
+			$ichkFastGoblinXP = GUICtrlRead($chkFastGoblinXP) = $GUI_CHECKED ? 1 : 0
+			$irbSXTraining = GUICtrlRead($rbSXTraining) = $GUI_CHECKED ? 1 : 2
+			$ichkSXBK = (GUICtrlRead($chkSXBK) = $GUI_CHECKED) ? $eHeroKing : $eHeroNone
+			$ichkSXAQ = (GUICtrlRead($chkSXAQ) = $GUI_CHECKED) ? $eHeroQueen : $eHeroNone
+			$ichkSXGW = (GUICtrlRead($chkSXGW) = $GUI_CHECKED) ? $eHeroWarden : $eHeroNone
+			$itxtMaxXPtoGain = Int(GUICtrlRead($txtMaxXPtoGain))
+
+			; GTFO - Team AiO MOD++
+			$g_bChkUseGTFO = (GUICtrlRead($g_hChkUseGTFO) = $GUI_CHECKED)
+			$g_iTxtMinSaveGTFO_Elixir = Number(GUICtrlRead($g_hTxtMinSaveGTFO_Elixir))
+			$g_iTxtMinSaveGTFO_DE = Number( GUICtrlRead($g_hTxtMinSaveGTFO_DE))
+
+			$g_bChkUseKickOut = (GUICtrlRead($g_hChkUseKickOut) = $GUI_CHECKED)
+			$g_iTxtDonatedCap = Number(GUICtrlRead($g_hTxtDonatedCap))
+			$g_iTxtReceivedCap = Number(GUICtrlRead($g_hTxtReceivedCap))
+			$g_bChkKickOutSpammers = (GUICtrlRead($g_hChkKickOutSpammers) = $GUI_CHECKED)
+			$g_iTxtKickLimit = Number(GUICtrlRead($g_hTxtKickLimit))
+
+			; Check Grand Warden Mode - Team AiO MOD++
+			$g_bCheckWardenMode = (GUICtrlRead($g_hChkCheckWardenMode) = $GUI_CHECKED)
+			$g_iCheckWardenMode = _GUICtrlComboBox_GetCurSel($g_hCmbCheckWardenMode)
+
+;	EndSwitch
+; EndFunc   ;==>ApplyConfig_MOD
+; ApplyConfig_MOD($TypeReadSave)

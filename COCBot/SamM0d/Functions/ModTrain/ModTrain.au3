@@ -18,7 +18,10 @@ Func ModTrain($ForcePreTrain = False)
 
 	If $g_iSamM0dDebug = 1 Then SetLog("Func Train ", $COLOR_DEBUG)
 	If $g_bTrainEnabled = False Then Return
-	SetupTroops()
+	If $g_iMyTroopsSize = 0 Then
+		SetLog($CustomTrain_MSG_15, $COLOR_ERROR)
+		Return
+	EndIf
 
 	Local $bNotStuckJustOnBoost = False
 	Local $iCount = 0

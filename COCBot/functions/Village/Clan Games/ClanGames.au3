@@ -17,14 +17,7 @@
 Func _ClanGames()
 
 	; Check If this Feature is Enable on GUI.
-	
 	If Not $g_bChkClanGamesEnabled Then Return
-	
-	Local $hour = StringSplit(_NowTime(4), ":", $STR_NOCOUNT)
-	If $g_abClanGamesSetuphours[$hour[0]] = 0 Then
-		SetLog("Clan Games not planned, Skipped..", $COLOR_INFO)
-		Return ; exit func if no planned donate checkmarks
-	EndIf											 
 
 	Local $sINIPath = StringReplace($g_sProfileConfigPath, "config.ini" , "ClanGames_config.ini")
 	If Not FileExists($sINIPath) then ClanGamesChallenges("" , True, $sINIPath, $g_bChkClanGamesDebug)
@@ -372,8 +365,7 @@ Func IsClanGamesWindow($getCapture = True)
 EndFunc   ;==>IsClanGamesWindow
 
 Func IsClanGamesEvent($getCapture = True)
-If QuickMIS("N1", $g_sImageBuilerGames, 20, 75, 110, 115) then
-	;If QuickMIS("BC1", $g_sImageBuilerGames, 20, 75, 110, 115, $getCapture, $g_bChkClanGamesDebug) Then
+	If QuickMIS("BC1", $g_sImageBuilerGames, 20, 75, 110, 115, $getCapture, $g_bChkClanGamesDebug) Then
 		SetLog("Builder Games Event detected!", $COLOR_INFO)
 		If GUICtrlRead($g_hLblRemainTime) <> "BG Event" Then GUICtrlSetData($g_hLblRemainTime, "BG Event")
 		ClickP($aAway, 1, 0, "#0000") ;Click Away

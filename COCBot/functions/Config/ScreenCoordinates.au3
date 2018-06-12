@@ -108,10 +108,10 @@ Global $aVillageHasDarkElixir[4] = [837, 134, 0x3D2D3D, 10] ; Main Page, Base ha
 Global $aCheckTopProfile[4] = [200, 166, 0x868CAC, 5]
 Global $aCheckTopProfile2[4] = [220, 355, 0x4E4D79, 5]
 
-Global $aArmyTab[4] = [170, 120, 0xFAFAF8, 20] ; Army Tab, right from text, white
-Global $aTroopsTab[4] = [380, 120, 0xFAFAF8, 20] ; Troops Tab, right from text, white
-Global $aSpellsTab[4] = [565, 120, 0xFAFAF8, 20] ; Spells Tab, right from text, white
-Global $aQuickTrainTab[4] = [770, 120, 0xFAFAF8, 20] ; Quick Train Tab, right from text, white
+Global $aArmyTab[4] = [115, 110, 0xF9F9F7, 20] ; Army Tab, right from text, white
+Global $aTroopsTab[4] = [265, 110, 0xF9F9F7, 20] ; Troops Tab, right from text, white
+Global $aSpellsTab[4] = [450, 110, 0xF9F9F7, 20] ; Spells Tab, right from text, white
+Global $aQuickTrainTab[4] = [600, 110, 0xFAFAF7, 20] ; Quick Train Tab, right from text, white
 Global $aRecievedTroops[4] = [200 ,215 ,0xFFFFFF, 20] ; Y of You have recieved blabla from xx!
 
 ; Check healthy color RGB ( 220,255,19~27) ; the king and queen haves the same Y , but warden is a little lower ...
@@ -132,7 +132,7 @@ Global $NextBtn[4] = [780, 546 + $g_iBottomOffsetY, 0xD34300, 20] ;  Next Button
 ; Someone asking troops : Color 0xD0E978 in x = 121
 
 ; 1 - Dark Gray : Castle filled/No Castle | 2 - Dark Green : Available or Already made | 3 - White : Available or Castle filled/No Castle
-Global $aRequestTroopsAO[6] = [754, 580, 0x919191, 0x6DB630, 0xFFFFFE, 15] ; Button Request Troops in Army Overview  (x,y, Gray - Full/No Castle, Green - Available or Already, White - Available or Full)
+Global $aRequestTroopsAO[6] = [765, 580, 0x919191, 0x6DB630, 0xFFFFFE, 15] ; Button Request Troops in Army Overview  (x,y, Gray - Full/No Castle, Green - Available or Already, White - Available or Full)
 
 Global Const $aOpenChatTab[4] = [19, 335 + $g_iMidOffsetY, 0xE88D27, 20]
 Global Const $aCloseChat[4] = [331, 330 + $g_iMidOffsetY, 0xF0951D, 20] ; duplicate with $aChatTab above, need to rename and fix all code to use one?
@@ -174,7 +174,7 @@ Global $aFindMatchButtonRND[4] = [200, 510 + $g_iMidOffsetY, 300, 530 + $g_iMidO
 Global $NextBtnRND[4] = [710, 530 + $g_iMidOffsetY, 830, 570 + $g_iMidOffsetY] ;  Next Button
 
 ;Switch Account
-Global $aLoginWithSupercellID[4] = [305, 600 + $g_iMidOffsetY, 0xB1E25A, 20] ; Upper green button section "Log in with Supercell ID" 0xB1E25A
+Global $aLoginWithSupercellID[4] = [285, 677, 0xCDEF75, 20] ; Upper green button section "Log in with Supercell ID" 0xCDEF75
 Global $aButtonSetting[4] = [820, 550 + $g_iMidOffsetY, 0xFFFFFF, 10] ; Setting button, Main Screen
 ;Google Play
 Global $aButtonConnected[4] = [430, 380 + $g_iMidOffsetY, 0xD8F480, 20] ; Setting screen, Connected button

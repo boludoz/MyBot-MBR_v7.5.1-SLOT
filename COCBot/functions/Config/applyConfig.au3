@@ -2023,9 +2023,6 @@ Func ApplyConfig_600_35_2($TypeReadSave)
 				$g_abDonateOnly[$i] = (GUICtrlRead($g_ahChkDonate[$i]) = $GUI_CHECKED)
 			Next
 			$g_iTrainTimeToSkip = _GUICtrlComboBox_GetCurSel($g_hCmbTrainTimeToSkip)
-
-			AF_ApplySaveSwitchAcc()	; AltuFaltu n
-
 	EndSwitch
 EndFunc   ;==>ApplyConfig_600_35_2
 

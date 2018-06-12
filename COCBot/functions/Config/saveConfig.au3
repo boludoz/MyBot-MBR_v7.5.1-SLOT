@@ -1107,16 +1107,11 @@ Func SaveConfig_600_35_2()
 		IniWrite($sSwitchAccFile, "SwitchAccount", "DonateLikeCrazy", $g_bDonateLikeCrazy ? 1 : 0)
 		IniWrite($sSwitchAccFile, "SwitchAccount", "TotalCocAccount", $g_iTotalAcc)
 		IniWrite($sSwitchAccFile, "SwitchAccount", "TrainTimeToSkip", $g_iTrainTimeToSkip)
-
-		AF_SaveConfigSwitchAcc($sSwitchAccFile)	; AltuFaltu n
-
 		For $i = 1 To 8
 			IniWrite($sSwitchAccFile, "SwitchAccount", "AccountNo." & $i, $g_abAccountNo[$i - 1] ? 1 : 0)
 			IniWrite($sSwitchAccFile, "SwitchAccount", "ProfileName." & $i, $g_asProfileName[$i - 1])
 			IniWrite($sSwitchAccFile, "SwitchAccount", "DonateOnly." & $i, $g_abDonateOnly[$i - 1] ? 1 : 0)
 		Next
-	Else	; AltuFaltu n
-			AF_SaveConfigSwitchAcc()	; AltuFaltu n
 	EndIf
 
 EndFunc   ;==>SaveConfig_600_35_2

@@ -33,7 +33,6 @@ Global $CustomTrain_MSG_12
 Global $CustomTrain_MSG_13
 Global $CustomTrain_MSG_14
 Global $CustomTrain_MSG_15
-Global $CustomTrain_MSG_16
 Global $CustomTrain_MSG_DarkElixir
 Global $CustomTrain_MSG_Elixir
 ;============================================================
@@ -341,23 +340,47 @@ Global $aProfileStats[44][9] = _
 ["g_aiNbrOfDetectedCollectors",0,0,0,0,0,0,0,0], _
 ["g_aiNbrOfDetectedDrills",0,0,0,0,0,0,0,0]]
 
-; Clan Hop 
-Global $g_hGrpDonateOptions = 0, $g_hChkClanHop = 0	; Clan HOP
+; ClanHop - Team AiO MOD++
 Global $g_bChkClanHop = False
 
-; Stop for war - War Preparation Demen
-Global $g_bStopForWar
-Global $g_iStopTime, $g_bStopBeforeBattle, $g_iReturnTime
-Global $g_iStartTimerToRecheck, $g_iTimerToRecheck, $g_sCheckOrStop
-Global $g_bTrainWarTroop, $g_bUseQuickTrainWar, $g_aChkArmyWar[3], $g_aiWarCompTroops[$eTroopCount], $g_aiWarCompSpells[$eSpellCount], $g_bChkX2ForWar, $g_hChkX2ForWar ; War
-Global $g_bRequestCCForWar,    $g_sTxtRequestCCForWar
+; Bot Humanization - Team AiO MOD++
+Global $g_iacmbPriority[13] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Global $g_iacmbMaxSpeed[2] = [1, 1]
+Global $g_iacmbPause[2] = [0, 0]
+Global $g_iahumanMessage[2] = ["Hello !", "Hello !"]
+Global $g_ichallengeMessage = "Can you beat my village?"
 
-Global $g_abStopForWar[8]
-Global $g_aiStartTimerToRecheck[8], $g_aiTimerToRecheck[8], $g_asCheckOrStop[8]
+Global $g_iMinimumPriority, $g_iMaxActionsNumber, $g_iActionToDo
+Global $g_aSetActionPriority[13] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-Global $g_hChkStopForWar = 0, $g_hCmbStopTime = 0, $g_CmbStopBeforeBattle = 0, $g_hCmbReturnTime = 0
-Global $g_hChkTrainWarTroop = 0, $g_hChkUseQuickTrainWar, $g_ahChkArmyWar[3], $g_hLblRemoveArmy, $g_ahTxtTrainWarTroopCount[19], $g_ahTxtTrainWarSpellCount[10]
-Global $g_hCalTotalWarTroops, $g_hLblTotalWarTroopsProgress, $g_hLblCountWarTroopsTotal
-Global $g_hCalTotalWarSpells, $g_hLblTotalWarSpellsProgress, $g_hLblCountWarSpellsTotal
-Global $g_hChkRequestCCForWar = 0, $g_hTxtRequestCCForWar = 0 
+Global $g_sFrequenceChain = "Never|Sometimes|Frequently|Often|Very Often"
+Global $g_sReplayChain = "1|2|4"
+Global $g_ichkUseBotHumanization = 0, $g_ichkUseAltRClick = 0, $g_icmbMaxActionsNumber = 1, $g_ichkCollectAchievements = 0, $g_ichkLookAtRedNotifications = 0
+
+Global $g_aReplayDuration[2] = [0, 0] ; An array, [0] = Minute | [1] = Seconds
+Global $g_bOnReplayWindow, $g_iReplayToPause
+
+Global $g_iLastLayout = 0
+
+; Goblin XP - Team AiO MOD++
+Global $ichkEnableSuperXP = 0, $ichkSkipZoomOutXP = 0, $ichkFastGoblinXP = 0, $irbSXTraining = 1, $ichkSXBK = 0, $ichkSXAQ = 0, $ichkSXGW = 0, $iStartXP = 0, $iCurrentXP = 0, $iGainedXP = 0, $iGainedXPHour = 0, $itxtMaxXPtoGain = 500
+Global $g_bDebugSX = False
+
+Global $g_DpGoblinPicnic[3][4] = [[300, 205, 5, 5], [340, 140, 5, 5], [290, 220, 5, 5]]
+Global $g_BdGoblinPicnic[3] = [0, "5000-7000", "6000-8000"] ; [0] = Queen, [1] = Warden, [2] = Barbarian King
+Global $g_ActivatedHeroes[3] = [False, False, False] ; [0] = Queen, [1] = Warden, [2] = Barbarian King , Prevent to click on them to Activate Again And Again
+Global Const $g_minStarsToEnd = 1
+Global $g_canGainXP = False
+
+; GTFO - Team AiO MOD++
+Global $g_bChkUseGTFO = False, $g_bChkUseKickOut = False, $g_bChkKickOutSpammers = False
+Global $g_iTxtMinSaveGTFO_Elixir = 200000, $g_iTxtMinSaveGTFO_DE = 2000, _
+	$g_iTxtDonatedCap = 8, $g_iTxtReceivedCap = 35, _
+	$g_iTxtKickLimit = 6
+
+; Check Grand Warden Mode - Team AiO MOD++
+Global $g_bCheckWardenMode = False, $g_iCheckWardenMode = 0
+
+
+
 

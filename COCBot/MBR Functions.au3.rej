@@ -1,6 +1,0 @@
-diff a/COCBot/MBR Functions.au3 b/COCBot/MBR Functions.au3	(rejected hunks)
-@@ -297,3 +298,4 @@
- #include "functions\Config\applyConfig.au3"
- #include "functions\Config\readConfig.au3"
- #include "functions\Config\saveConfig.au3"
-+

@@ -64,7 +64,11 @@ Func MatchSlotsPerEdge($Num)
 		Case 1 ;$eArch
 			Return 0
 		Case 2 ;$eGiants
-			Return $g_iSlotsGiants
+			If $nbSides = 5 Then
+				Return $g_aiSlotsGiants
+			Else
+				Return $g_iSlotsGiants
+			EndIf
 		Case 3 ;$eGobl
 			Return 0
 		Case 4 ;$eWall

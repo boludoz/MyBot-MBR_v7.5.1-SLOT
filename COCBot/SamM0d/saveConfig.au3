@@ -181,8 +181,55 @@ Next
 
 saveFriendlyChallengeSetting()
 
-saveClanGamesSetupSetting()
+;Func SaveConfig_MOD()
+	; <><><> Team AiO MOD++ (2018) <><><>
+;	ApplyConfig_MOD(GetApplyConfigSaveAction())
+	; ClanHop - Team AiO MOD++
+	_Ini_Add("donate", "chkClanHop", $g_bChkClanHop)
 
-saveClanHopSetting()
+	; Bot Humanization - Team AiO MOD++
+	_Ini_Add("Bot Humanization", "chkUseBotHumanization", $g_ichkUseBotHumanization)
+	_Ini_Add("Bot Humanization", "chkUseAltRClick", $g_ichkUseAltRClick)
+	_Ini_Add("Bot Humanization", "chkCollectAchievements", $g_ichkCollectAchievements)
+	_Ini_Add("Bot Humanization", "chkLookAtRedNotifications", $g_ichkLookAtRedNotifications)
+	For $i = 0 To 12
+		_Ini_Add("Bot Humanization", "cmbPriority[" & $i & "]", _GUICtrlComboBox_GetCurSel($g_acmbPriority[$i]))
+	Next
+	For $i = 0 To 1
+		_Ini_Add("Bot Humanization", "cmbMaxSpeed[" & $i & "]", _GUICtrlComboBox_GetCurSel($g_acmbMaxSpeed[$i]))
+	Next
+	For $i = 0 To 1
+		_Ini_Add("Bot Humanization", "cmbPause[" & $i & "]", _GUICtrlComboBox_GetCurSel($g_acmbPause[$i]))
+	Next
+	For $i = 0 To 1
+		_Ini_Add("Bot Humanization", "humanMessage[" & $i & "]", GUICtrlRead($g_ahumanMessage[$i]))
+	Next
+	_Ini_Add("Bot Humanization", "cmbMaxActionsNumber", _GUICtrlComboBox_GetCurSel($g_cmbMaxActionsNumber))
+	_Ini_Add("Bot Humanization", "challengeMessage", GUICtrlRead($g_challengeMessage))
 
-saveDemenWarSetting()
+	; Goblin XP - Team AiO MOD++
+	_Ini_Add("GoblinXP", "EnableSuperXP", $ichkEnableSuperXP)
+	_Ini_Add("GoblinXP", "SkipZoomOutXP", $ichkSkipZoomOutXP)
+	_Ini_Add("GoblinXP", "FastGoblinXP", $ichkFastGoblinXP)
+	_Ini_Add("GoblinXP", "SXTraining",  $irbSXTraining)
+	_Ini_Add("GoblinXP", "SXBK", $ichkSXBK)
+	_Ini_Add("GoblinXP", "SXAQ", $ichkSXAQ)
+	_Ini_Add("GoblinXP", "SXGW", $ichkSXGW)
+	_Ini_Add("GoblinXP", "MaxXptoGain", GUICtrlRead($txtMaxXPtoGain))
+
+	; GTFO - Team AiO MOD++
+	_Ini_Add("GTFO", "chkUseGTFO", $g_bChkUseGTFO)
+	_Ini_Add("GTFO", "txtMinSaveGTFO_Elixir",$g_iTxtMinSaveGTFO_Elixir)
+	_Ini_Add("GTFO", "txtMinSaveGTFO_DE", $g_iTxtMinSaveGTFO_DE)
+	_Ini_Add("GTFO", "chkUseKickOut", $g_bChkUseKickOut)
+	_Ini_Add("GTFO", "txtDonatedCap", $g_iTxtDonatedCap)
+	_Ini_Add("GTFO", "txtReceivedCap", $g_iTxtReceivedCap)
+	_Ini_Add("GTFO", "chkKickOutSpammers", $g_bChkKickOutSpammers)
+	_Ini_Add("GTFO", "txtKickLimit", $g_iTxtKickLimit)
+
+	; Check Grand Warden Mode - Team AiO MOD++
+	_Ini_Add("other", "chkCheckWardenMode", $g_bCheckWardenMode ? 1 : 0)
+	_Ini_Add("other", "cmbCheckWardenMode", $g_iCheckWardenMode)
+
+;EndFunc   ;==>SaveConfig_MOD
+;SaveConfig_MOD()
