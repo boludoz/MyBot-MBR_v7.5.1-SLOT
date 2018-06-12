@@ -39,7 +39,7 @@ Func _ClanGames()
 	If Not IsClanGamesWindow() Then Return
 
 	; Check if is a Clan or Builder Games Event
-	If Not IsClanGamesEvent() Then Return
+	;If Not IsClanGamesEvent() Then Return
 
 	; Let's get some information , like Remain Timer, Score and limit
 	Local $ScoreLimits = GetTimesAndScores()
