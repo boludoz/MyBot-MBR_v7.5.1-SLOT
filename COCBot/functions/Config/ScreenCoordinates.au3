@@ -174,7 +174,7 @@ Global $aFindMatchButtonRND[4] = [200, 510 + $g_iMidOffsetY, 300, 530 + $g_iMidO
 Global $NextBtnRND[4] = [710, 530 + $g_iMidOffsetY, 830, 570 + $g_iMidOffsetY] ;  Next Button
 
 ;Switch Account
-Global $aLoginWithSupercellID[4] = [285, 677, 0xCDEF75, 20] ; Upper green button section "Log in with Supercell ID" 0xCDEF75
+Global $aLoginWithSupercellID[4] = [285, 647 + $g_iMidOffsetY, 0xCDEF75, 20] ; Upper green button section "Log in with Supercell ID" 0xCDEF75
 Global $aButtonSetting[4] = [820, 550 + $g_iMidOffsetY, 0xFFFFFF, 10] ; Setting button, Main Screen
 ;Google Play
 Global $aButtonConnected[4] = [430, 380 + $g_iMidOffsetY, 0xD8F480, 20] ; Setting screen, Connected button
