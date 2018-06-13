@@ -981,3 +981,12 @@ Func ChkRequestCCForWar()
         GUICtrlSetState($g_hTxtRequestCCForWar, $GUI_DISABLE)
     EndIf
 EndFunc
+
+; Restart Search Legend league - Team AiO MOD++
+Func chkSearchTimeout()
+	If GUICtrlRead($g_hChkSearchTimeout) = $GUI_CHECKED Then
+		_GUI_Value_STATE("ENABLE", $g_hLblSearchTimeout & "#" & $g_hTxtSearchTimeout & "#" & $g_hLblSearchTimeoutminutes)
+	Else
+		_GUI_Value_STATE("DISABLE", $g_hLblSearchTimeout & "#" & $g_hTxtSearchTimeout & "#" & $g_hLblSearchTimeoutminutes)
+	EndIf
+EndFunc   ;==>chkSearchTimeout

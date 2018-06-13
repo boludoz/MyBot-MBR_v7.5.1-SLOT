@@ -198,7 +198,7 @@ GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 Local $x = 10, $y = 30
 
-GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", 107, "Deploy speed for all standard attack mode."), $x, $y, 430, 100)
+GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", 107, "Deploy speed for all standard attack mode."), $x, $y, 430, 82)
 
 $chkUnitFactor = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", 108, "Modify Unit Factor"), $x+10, $y + 20, 130, 25)
 	$sTxtTip = GetTranslatedFileIni("sam m0d", 109, "Unit deploy delay = Unit setting x Unit Factor (millisecond)")
@@ -212,7 +212,7 @@ $txtUnitFactor = GUICtrlCreateInput("10", $x + 180, $y + 20, 31, 20, BitOR($GUI_
 	GUICtrlSetState(-1, $GUI_DISABLE)
 	GUICtrlSetData(-1, 10)
 	GUICtrlSetOnEvent(-1, "chkUnitFactor")
-$y += 30
+$y += 25
 $chkWaveFactor = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", 110, "Modify Wave Factor"), $x+10, $y + 20, 130, 25)
 	$sTxtTip = GetTranslatedFileIni("sam m0d", 111, "Switch troop delay = Wave setting x Wave Factor (millisecond)")
 	_GUICtrlSetTip(-1, $sTxtTip)
@@ -226,10 +226,30 @@ $txtWaveFactor = GUICtrlCreateInput("100", $x + 180, $y + 20, 31, 20, BitOR($GUI
 	GUICtrlSetData(-1, 100)
 	GUICtrlSetOnEvent(-1, "chkWaveFactor")
 
-
 GUICtrlCreateGroup("", -99, -99, 1, 1)
+	; Restart Search Legend league - Team AiO MOD++
+	$x = 55 + 151 + 15
+	$y += 80
+        GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", "Group_04", "Restart search IF Cloud Time"), $x, $y - 15, 173, 50)
+		$g_hChkSearchTimeout = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", "ChkSearchTimeout", "Restart search") ,$x + 10 , $y)
+			_GUICtrlSetTip(-1,GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Search", "ChkSearchTimeout_Info_01", "Will Return to home and restart search if clouding time is > xx minutes"))
+			GUICtrlSetOnEvent(-1, "chkSearchTimeout")
+		$g_hLblSearchTimeout = GUICtrlCreateLabel(ChrW(62), $x + 5, $y + 17, -1, -1)
+		$g_hTxtSearchTimeout = GUICtrlCreateInput("10", $x + 15, $y + 15, 25, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+		$g_hLblSearchTimeoutminutes = GUICtrlCreateLabel("minutes", $x + 50, $y + 17, -1, -1)
 
-$y = 140
+    ; Check Grand Warden Mode - Team AiO MOD++
+$x = 10 ;	horizontal
+        GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", "Group_04", "Check Grand Warden Mode"), $x, $y - 15, 173, 50)
+        $g_hChkCheckWardenMode = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Attack - Troops_Options", "CheckWardenMode", "Check Mode") & ": ",$x + 10 , $y)
+            GUICtrlSetOnEvent(-1, "chkCheckWardenMode")
+            _GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Attack - Troops_Options", "CheckWardenMode_Info_01", "Enable this Option if you want to check in which Mode the Grand Warden is and change if needed"))
+        $g_hCmbCheckWardenMode = GUICtrlCreateCombo("", $x + 90, $y, 60, 18, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+            GUICtrlSetState(-1, $GUI_DISABLE)
+            GUICtrlSetData(-1, "Ground|Air", "Ground")
+            _GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Attack - Troops_Options", "CheckWardenMode_Info_02", "Select the Mode your Warden needs to have for attacks"))
+
+$y += 40
 $chkDropCCFirst = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", 105, "Enable deploy cc troops first"), $x+10, $y, -1, -1)
 	$sTxtTip = GetTranslatedFileIni("sam m0d", 106, "Deploy cc troops first, only support for standard attack mode")
 	GUICtrlSetOnEvent(-1, "chkDropCCFirst")
@@ -306,21 +326,9 @@ $y += 25
 	GUICtrlSetState(-1, $GUI_CHECKED)
 	$txtIFTHLevel = GUICtrlCreateCombo("", $x+30, $y+25, 100, 20, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			GUICtrlSetData(-1, "7|8|9|10","7")
-    ; Check Grand Warden Mode - Team AiO MOD++
-    $x = 55 + 151 + 15
-    $y = 130
-        GUICtrlCreateGroup(GetTranslatedFileIni("MBR GUI Design Child Attack - Troops_Options", "Group_04", "Check Grand Warden Mode"), $x - 20, $y - 20, 173, 50)
-        $g_hChkCheckWardenMode = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Attack - Troops_Options", "CheckWardenMode", "Check Mode") & ": ", $x - 10, $y)
-            GUICtrlSetOnEvent(-1, "chkCheckWardenMode")
-            _GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Attack - Troops_Options", "CheckWardenMode_Info_01", "Enable this Option if you want to check in which Mode the Grand Warden is and change if needed"))
-        $g_hCmbCheckWardenMode = GUICtrlCreateCombo("", $x + 80, $y, 60, 18, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-            GUICtrlSetState(-1, $GUI_DISABLE)
-            GUICtrlSetData(-1, "Ground|Air", "Ground")
-            _GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Attack - Troops_Options", "CheckWardenMode_Info_02", "Select the Mode your Warden needs to have for attacks"))
-
 
 Local $x = 10, $y = 30
-SplashStep("Loading M0d - Advanced Random Click tab...")
+SplashStep("Loading M0d - Advanced Random tab...")
 GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d", 10, "Random Click"))
 $grpHLFClick = GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", 11, "Advanced Random Click On Button"), $x, $y, 430, 180)
 	; More Human Like When Train Click By Sam
@@ -355,6 +363,8 @@ $grpHLFClick = GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", 11, "Advanced 
 		_GUICtrlSetTip(-1, $sTxtTip)
 		GUICtrlSetState(-1, $GUI_UNCHECKED)
 		GUICtrlSetOnEvent(-1, "chkEnableHLFClickSetlog")
+
+$grpHLFClick = GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", "_Sleep", "Advanced Random _Sleep"), $x, $y, 430, 180)
 
 SplashStep("Loading M0d - My Switch tab...")
 GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d", "My Switch", "My Switch"))

@@ -195,6 +195,10 @@ applyDemenWarSetting($TypeReadSave);Func ApplyConfig_MOD($TypeReadSave)
 ;	; <><><> Team AiO MOD++ (2018) <><><>
 ;	Switch $TypeReadSave
 ;		Case "Read"
+			; Restart Search Legend league - Team AiO MOD++
+			GUICtrlSetState($g_hChkSearchTimeout, $g_bIsSearchTimeout = True ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetData($g_hTxtSearchTimeout, $g_iSearchTimeout)
+			chkSearchTimeout()
 			; ClanHop - Team AiO MOD++
 			GUICtrlSetState($g_hChkClanHop, $g_bChkClanHop = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 
