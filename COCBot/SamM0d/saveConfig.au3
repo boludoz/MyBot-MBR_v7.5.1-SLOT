@@ -232,5 +232,9 @@ saveDemenWarSetting()
 	_Ini_Add("other", "chkCheckWardenMode", $g_bCheckWardenMode ? 1 : 0)
 	_Ini_Add("other", "cmbCheckWardenMode", $g_iCheckWardenMode)
 
+	; Restart Search Legend league - Team AiO MOD++
+	_Ini_Add("other", "ChkSearchTimeout", $g_bIsSearchTimeout)
+	_Ini_Add("other", "SearchTimeout", $g_iSearchTimeout)
+
 ;EndFunc   ;==>SaveConfig_MOD
 ;SaveConfig_MOD()

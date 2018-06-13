@@ -231,5 +231,9 @@ readDemenWarSetting();Func ReadConfig_MOD()
 	IniReadS($g_bCheckWardenMode, $g_sProfileConfigPath, "other", "chkCheckWardenMode", False, "Bool")
 	IniReadS($g_iCheckWardenMode, $g_sProfileConfigPath, "other", "cmbCheckWardenMode", 0, "int")
 
+	; Restart Search Legend league - Team AiO MOD++
+	IniReadS($g_bIsSearchTimeout, $g_sProfileConfigPath, "other", "ChkSearchTimeout", $g_bIsSearchTimeout, "Bool")
+	IniReadS($g_iSearchTimeout, $g_sProfileConfigPath, "other", "SearchTimeout", $g_iSearchTimeout, "int")
+
 ;EndFunc   ;==>ReadConfig_MOD
 ;ReadConfig_MOD()

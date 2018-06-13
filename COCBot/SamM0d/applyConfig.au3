@@ -301,6 +301,10 @@ applyDemenWarSetting($TypeReadSave);Func ApplyConfig_MOD($TypeReadSave)
 			$g_bCheckWardenMode = (GUICtrlRead($g_hChkCheckWardenMode) = $GUI_CHECKED)
 			$g_iCheckWardenMode = _GUICtrlComboBox_GetCurSel($g_hCmbCheckWardenMode)
 
+			; Restart Search Legend league - Team AiO MOD++
+			$g_bIsSearchTimeout = (GUICtrlRead($g_hChkSearchTimeout) = $GUI_CHECKED)
+			$g_iSearchTimeout = GUICtrlRead($g_hTxtSearchTimeout)
+
 ;	EndSwitch
 ; EndFunc   ;==>ApplyConfig_MOD
 ; ApplyConfig_MOD($TypeReadSave)

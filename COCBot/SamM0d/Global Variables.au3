@@ -396,6 +396,8 @@ Global $g_iTxtMinSaveGTFO_Elixir = 200000, $g_iTxtMinSaveGTFO_DE = 2000, _
 ; Check Grand Warden Mode - Team AiO MOD++
 Global $g_bCheckWardenMode = False, $g_iCheckWardenMode = 0
 
+; Restart Search Legend league - Team AiO MOD++
+Global $g_bIsSearchTimeout = False, $g_iSearchTimeout = 10, $g_iTotalSearchTime = 0
 
 
 

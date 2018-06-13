@@ -84,7 +84,19 @@ Func WaitForClouds()
 		If $g_bDebugSetlog Then _GUICtrlStatusBar_SetTextEx($g_hStatusBar, " Status: Loop to clean screen without Clouds, # " & $iCount)
 		$iSearchTime = __TimerDiff($hMinuteTimer) / 60000 ;get time since minute timer start in minutes
 		If $iSearchTime >= $iLastTime + 1 Then
-			SetLog("Cloud wait time " & StringFormat("%.1f", $iSearchTime) & " minute(s)", $COLOR_INFO)
+			$g_iTotalSearchTime += 1
+			SetLog("Cloud wait time " & StringFormat("%.1f", $iSearchTime) & " minute(s), Total Searchtime = " & $g_iTotalSearchTime & " minute(s)", $COLOR_INFO)
+			; Restart Search Legend league ~ back to home on certain minute on cloud and no reach enemy - Team AiO MOD++
+			If $g_bIsSearchTimeout Then
+				If $iSearchTime > $g_iSearchTimeout Then
+					$g_bIsSearchTimeout = True
+					ClickP($aReturnHomeOnSearchButton, 1, 0, "RETURN HOME") ;Click Return Home
+					getArmyTroopCapacity(True, True)
+					$g_bRestart = True ; set force runbot restart flag
+					$g_bIsClientSyncError = True ; set OOS flag for fast restart
+					Return
+				EndIf
+			EndIf
 			$iLastTime += 1
 			; once a minute safety checks for search fail/retry msg and Personal Break events and early detection if CoC app has crashed inside emulator (Bluestacks issue mainly)
 			If chkAttackSearchFail() = 2 Or chkAttackSearchPersonalBreak() = True Or GetAndroidProcessPID() = 0 Then
