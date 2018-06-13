@@ -143,13 +143,6 @@ Func GoldElixirChangeEBO()
 			Else
 				SetLog("Exit in " & $txtDiff & ", [G]: " & $Gold2 & " [E]: " & $Elixir2 & " [DE]: " & $DarkElixir2 & " [%]: " & $CurDamage, $COLOR_INFO)
 			EndIf
-			; Atk-Log ~ Damage %
-			If ($CurDamage > 0 ) Then
-				$eLootPerc = $CurDamage
-				If($CurDamage = 4) Then
-					$eLootPerc = 74
-				EndIf
-			EndIf
 		EndIf
 
 		If Number($CurDamage) >= 92 Then

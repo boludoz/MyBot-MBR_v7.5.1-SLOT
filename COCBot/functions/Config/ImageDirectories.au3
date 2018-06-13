@@ -112,6 +112,11 @@ Global Const $g_sImgGoogleSelectAccount = @ScriptDir & "\imgxml\other\GoogleSele
 Global Const $g_sImgGoogleSelectEmail = @ScriptDir & "\imgxml\other\GoogleSelectEmail*"
 #EndRegion
 
+#Region Grand Warden Mode
+Global $g_sImgGrandWardenHeal = @ScriptDir & "\imgxml\other\GrandWardenMode\GrandWardenHeal"
+Global $g_sImgGrandWardenMode = @ScriptDir & "\imgxml\other\GrandWardenMode\GrandWardenAir"
+#EndRegion
+
 #Region ClanGames
 Global Const $g_sImgCaravan =		@ScriptDir & "\imgxml\Resources\Clan Games Images\MainLoop\Caravan"
 Global Const $g_sImgStart = 		@ScriptDir & "\imgxml\Resources\Clan Games Images\MainLoop\Start"
