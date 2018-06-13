@@ -830,6 +830,7 @@ Func runBot() ;Bot that runs everything in order
 			If $g_bRestart = True Then ContinueLoop
 			If _Sleep($DELAYRUNBOT3) Then Return
 			VillageReport()
+			CheckStopForWar()
 			If $g_bOutOfGold = True And (Number($g_aiCurrentLoot[$eLootGold]) >= Number($g_iTxtRestartGold)) Then ; check if enough gold to begin searching again
 				$g_bOutOfGold = False ; reset out of gold flag
 				SetLog("Switching back to normal after no gold to search ...", $COLOR_SUCCESS)
@@ -863,7 +864,7 @@ Func runBot() ;Bot that runs everything in order
 			If $g_bRestart = True Then ContinueLoop
 			If IsSearchAttackEnabled() Then ; if attack is disabled skip reporting, requesting, donating, training, and boosting
 				; samm0d - ignore request cc, since later when train army will be apply request cc.
-				Local $aRndFuncList = ['ReplayShare', 'NotifyReport', 'DonateCC,Train', 'Boost']
+				Local $aRndFuncList = ['ReplayShare', 'NotifyReport', 'DonateCC,Train', 'Boost', 'RequestCC', 'CollectFreeMagicItems']
 				;Local $aRndFuncList = ['ReplayShare', 'NotifyReport', 'DonateCC,Train', 'BoostBarracks', 'BoostSpellFactory', 'BoostKing', 'BoostQueen', 'BoostWarden', 'RequestCC', 'CollectFreeMagicItems']
 				While 1
 					If $g_bRunState = False Then Return
@@ -904,9 +905,9 @@ Func runBot() ;Bot that runs everything in order
 				EndIf
 				If CheckAndroidReboot() = True Then ContinueLoop 2 ; must be level 2 due to loop-in-loop
 			WEnd
+			ClanHop() ; ClanHop - Team AiO MOD++
 			; samm0d
 			FriendlyChallenge()
-			ClanHop() ; ClanHop - Team AiO MOD++
 			If $g_bRunState = False Then Return
 			If $g_bRestart = True Then ContinueLoop
 			If IsSearchAttackEnabled() Then ; If attack scheduled has attack disabled now, stop wall upgrades, and attack.
@@ -1083,28 +1084,10 @@ Func _Idle() ;Sequence that runs until Full Army
 		$iCollectCounter = $iCollectCounter + 1
 		AddIdleTime()
 		checkMainScreen(False) ; required here due to many possible exits
-        ; samm0d
-        If $ichkModTrain = 0 Then
-		If $g_iCommandStop = -1 Then
-			If $g_iActualTrainSkip < $g_iMaxTrainSkip Then
-				MainSuperXPHandler() ; Goblin XP - Team AiO MOD++
-				If CheckNeedOpenTrain($g_sTimeBeforeTrain) Then TrainRevamp()
-				If $g_bRestart = True Then ExitLoop
-				If _Sleep($DELAYIDLE1) Then ExitLoop
-				checkMainScreen(False)
-			Else
-				Setlog("Humanize bot, prevent to delete and recreate troops " & $g_iActualTrainSkip + 1 & "/" & $g_iMaxTrainSkip, $color_blue)
-				$g_iActualTrainSkip = $g_iActualTrainSkip + 1
-				If $g_iActualTrainSkip >= $g_iMaxTrainSkip Then
-					$g_iActualTrainSkip = 0
-				EndIf
-				CheckArmyCamp(True, True)
-			EndIf
-			MainSuperXPHandler() ; Goblin XP - Team AiO MOD++
-		EndIf
-		If _Sleep($DELAYIDLE1) Then Return
-		If $g_iCommandStop = 0 And $g_bTrainEnabled = True Then
-			If Not ($g_bFullArmy) Then
+
+		; samm0d
+		If $ichkModTrain = 0 Then
+			If $g_iCommandStop = -1 Then
 				If $g_iActualTrainSkip < $g_iMaxTrainSkip Then
 					If CheckNeedOpenTrain($g_sTimeBeforeTrain) Then TrainRevamp()
 					If $g_bRestart = True Then ExitLoop
@@ -1208,7 +1191,6 @@ Func _Idle() ;Sequence that runs until Full Army
 				EndIf
 			EndIf
 		EndIf
-	EndIf
 	WEnd
 EndFunc   ;==>_Idle
 
@@ -1366,12 +1348,12 @@ Func _RunFunction($action)
 				If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)
 			EndIf
 		Case "DonateCC,Train"
+			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			; samm0d
 			If $ichkModTrain = 1 Then
 				ModTrain()
 			EndIf
 
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			If $g_iActiveDonate And $g_bChkDonate Then
 				If $g_bFirstStart Then
 					getArmyTroopCapacity(True, False)

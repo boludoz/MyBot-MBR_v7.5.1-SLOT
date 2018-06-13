@@ -57,6 +57,8 @@ Func SetComboTroopComp()
 	Local $TotalTroopsToTrain = 0
 
 	lblTotalCountTroop1()
+    lblTotalWarTroopCount()
+    lblTotalWarSpellCount()
 
 	; samm0d
 	UpdateTroopSize()
@@ -66,7 +68,9 @@ EndFunc   ;==>SetComboTroopComp
 
 Func chkTotalCampForced()
 	GUICtrlSetState($g_hTxtTotalCampForced, GUICtrlRead($g_hChkTotalCampForced) = $GUI_CHECKED ? $GUI_ENABLE : $GUI_DISABLE)
-EndFunc   ;==>chkTotalCampForced
+    lblTotalWarTroopCount()
+    lblTotalWarSpellCount()
+	EndFunc   ;==>chkTotalCampForced
 
 Func lblTotalCountTroop1()
 	; Calculate count of troops, set progress bars, colors
@@ -242,6 +246,8 @@ Func TotalSpellCountClick()
 	EndIf
 
 	lblTotalCountSpell2()
+    ApplyConfig_600_52_2("Save") ; update total spell value in Village/Misc/War preparation Tab - StopForWar (Demen)
+    lblTotalWarSpellCount()
 	SetRedrawBotWindow($bWasRedraw, Default, Default, Default, "TotalSpellCountClick")
 EndFunc   ;==>TotalSpellCountClick
 

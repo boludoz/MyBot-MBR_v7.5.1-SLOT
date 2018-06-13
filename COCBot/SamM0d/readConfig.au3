@@ -181,7 +181,7 @@ Next
 
 readFriendlyChallengeSetting()
 
-;Func ReadConfig_MOD()
+readDemenWarSetting();Func ReadConfig_MOD()
 	; <><><> Team AiO MOD++ (2018) <><><>
 
 	; ClanHop - Team AiO MOD++

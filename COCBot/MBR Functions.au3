@@ -36,6 +36,7 @@
 ; Goblin XP
 #include "SamM0d\GUI\MOD GUI Design - GoblinXP.au3"
 
+#include "SamM0d\Functions\CheckStopForWar.au3"
 ; Mod Train
 ;---------------------------------------------------------------
 #include "SamM0d\Functions\ModTrain\ModTrain.au3"

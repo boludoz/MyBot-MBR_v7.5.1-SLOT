@@ -97,11 +97,6 @@ Func CheckStopForWar()
 
 EndFunc   ;==>CheckStopForWar
 
-Func IsWarMenu()
-	Local $Result = _ColorCheck(_GetPixelColor(826, 34, True), "FFFFFF", 20)
-	Return $Result
-EndFunc   ;==>IsWarMenu
-
 Func CheckWarTime(ByRef $aResult) ; return Success + $aResult[3] = [ $iBattleStartTime, $iBattleEndTime, $bInWar] OR Failure
 
 	$aResult[0] = -1

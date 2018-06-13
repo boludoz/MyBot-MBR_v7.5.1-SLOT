@@ -191,7 +191,7 @@ GUICtrlSetData($g_hLblTHLevels, $g_iTownHallLevel)
 
 applyFriendlyChallengeSetting()
 
-;Func ApplyConfig_MOD($TypeReadSave)
+applyDemenWarSetting($TypeReadSave);Func ApplyConfig_MOD($TypeReadSave)
 ;	; <><><> Team AiO MOD++ (2018) <><><>
 ;	Switch $TypeReadSave
 ;		Case "Read"

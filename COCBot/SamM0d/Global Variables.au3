@@ -343,6 +343,21 @@ Global $aProfileStats[44][9] = _
 ; ClanHop - Team AiO MOD++
 Global $g_bChkClanHop = False
 
+; Stop for war - War Preparation Demen
+Global $g_bStopForWar
+Global $g_iStopTime, $g_bStopBeforeBattle, $g_iReturnTime
+Global $g_iStartTimerToRecheck, $g_iTimerToRecheck, $g_sCheckOrStop
+Global $g_bTrainWarTroop, $g_bUseQuickTrainWar, $g_aChkArmyWar[3], $g_aiWarCompTroops[$eTroopCount], $g_aiWarCompSpells[$eSpellCount], $g_bChkX2ForWar, $g_hChkX2ForWar ; War
+Global $g_bRequestCCForWar,    $g_sTxtRequestCCForWar
+
+Global $g_abStopForWar[8]
+Global $g_aiStartTimerToRecheck[8], $g_aiTimerToRecheck[8], $g_asCheckOrStop[8]
+
+Global $g_hChkStopForWar = 0, $g_hCmbStopTime = 0, $g_CmbStopBeforeBattle = 0, $g_hCmbReturnTime = 0
+Global $g_hChkTrainWarTroop = 0, $g_hChkUseQuickTrainWar, $g_ahChkArmyWar[3], $g_hLblRemoveArmy, $g_ahTxtTrainWarTroopCount[19], $g_ahTxtTrainWarSpellCount[10]
+Global $g_hCalTotalWarTroops, $g_hLblTotalWarTroopsProgress, $g_hLblCountWarTroopsTotal
+Global $g_hCalTotalWarSpells, $g_hLblTotalWarSpellsProgress, $g_hLblCountWarSpellsTotal
+Global $g_hChkRequestCCForWar = 0, $g_hTxtRequestCCForWar = 0 
 ; Bot Humanization - Team AiO MOD++
 Global $g_iacmbPriority[13] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Global $g_iacmbMaxSpeed[2] = [1, 1]

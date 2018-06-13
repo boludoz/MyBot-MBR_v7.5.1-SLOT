@@ -181,6 +181,7 @@ Next
 
 saveFriendlyChallengeSetting()
 
+saveDemenWarSetting()
 ;Func SaveConfig_MOD()
 	; <><><> Team AiO MOD++ (2018) <><><>
 ;	ApplyConfig_MOD(GetApplyConfigSaveAction())
