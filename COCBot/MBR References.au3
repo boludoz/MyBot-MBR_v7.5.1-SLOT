@@ -443,6 +443,7 @@ Func ReferenceGlobals()
 	$a1 = $eHdV09
 	$a1 = $eHdV10
 	$a1 = $eHdV11
+	$a1 = $eHdV12
 	$a1 = $eUnranked
 	$a1 = $eBronze
 	$a1 = $eSilver

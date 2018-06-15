@@ -19,7 +19,7 @@ Global $g_hGUI_BULLY = 0
 Global $g_hTxtATBullyMode = 0, $g_hCmbBullyMaxTH = 0, $g_hRadBullyUseDBAttack = 0, $g_hRadBullyUseLBAttack = 0
 Global $g_hGrpBullyAtkCombo = 0, $g_hLblBullyMode = 0, $g_hLblATBullyMode = 0
 
-Global $g_ahPicBullyMaxTH[12]
+Global $g_ahPicBullyMaxTH[13]
 
 Func CreateAttackSearchBully()
 
@@ -66,7 +66,9 @@ Func CreateAttackSearchBully()
 			$g_ahPicBullyMaxTH[11] = _GUICtrlCreateIcon($g_sLibIconPath, $eHdV11, $x + 137, $y - 3, 24, 24)
 				_GUICtrlSetTip(-1, $sTxtTip)
 				GUICtrlSetState (-1, $GUI_HIDE)
-
+			$g_ahPicBullyMaxTH[12] = _GUICtrlCreateIcon($g_sLibIconPath, $eHdV12, $x + 137, $y - 3, 24, 24)
+				_GUICtrlSetTip(-1, $sTxtTip)
+				GUICtrlSetState (-1, $GUI_HIDE)
 		$y += 24
 			GUICtrlCreateLabel(GetTranslatedFileIni("MBR GUI Design Child Attack - Bully", "LblWhenFound", "When found, Attack with settings from") & ":", $x + 10, $y, -1, -1, $SS_RIGHT)
 

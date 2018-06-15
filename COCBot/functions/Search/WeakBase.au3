@@ -91,7 +91,7 @@ EndFunc   ;==>displayWeakBaseLog
 Func getTHDefenseMax($levelTownHall, $iDefenseType)
 
 	; replace orginal weak base code with dictionary function used by any attack method
-	If $levelTownHall = 0 Or $levelTownHall = "-" Then $levelTownHall = 11 ; ; If something went wrong with TH search and returned 0, set to max TH level
+	If $levelTownHall = 0 Or $levelTownHall = "-" Then $levelTownHall = 12 ; ; If something went wrong with TH search and returned 0, set to max TH level
 
 	Local $maxLevel = _ObjGetValue($g_oBldgLevels, $iDefenseType + 7)[$levelTownHall - 1] ; add 6 to weakbase enum to equal building enum
 	If @error Then
