@@ -400,5 +400,11 @@ Global $g_bCheckWardenMode = False, $g_iCheckWardenMode = 0
 Global $g_bIsSearchTimeout = False, $g_iSearchTimeout = 10, $g_iTotalSearchTime = 0
 Global $g_hChkSearchTimeout = 0, $g_hLblSearchTimeout = 0, $g_hTxtSearchTimeout = 0, $g_hLblSearchTimeoutminutes = 0
 
-
+; Random _Sleep
+Global $g_iMultiplicando = 0
+Global $cmb_SleepMult = 0
+Global $icmb_SleepMult = 0
+Global $g_fMultiplicando = 1.25
+Global $g_ichkUseRandomSleep = 0, $g_bDebugSleep = 0, $g_ichkUseRandomSleepDbg = 0
+Global $g_chkUseRandomSleep = 0, $g_chkUseRandomSleepDbg = 0
 

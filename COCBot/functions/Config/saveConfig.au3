@@ -246,7 +246,7 @@ Func SaveRegularConfig()
 	; <<< nothing here >>>
 
 	;===========SamM0d Config=======================
-	#include "..\..\SamM0d\saveConfig.au3"
+	SaveConfig_MOD()
 	;==============End SamM0D Config================
 
 	;SetDebugLog("saveConfig: Wrote " & $g_iIniLineCount & " ini lines.")

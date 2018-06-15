@@ -29,10 +29,6 @@ Func readConfig($inputfile = $g_sProfileConfigPath) ;Reads config and sets it to
 	ReadProfileConfig()
 	If FileExists($g_sProfileBuildingPath) Then ReadBuildingConfig()
 	If FileExists($g_sProfileConfigPath) Then ReadRegularConfig()
-
-	;===========SamM0d Config=======================
-	#include "..\..\SamM0d\readConfig.au3"
-	;==============End SamM0D Config================
 	$g_bReadConfigIsActive = False
 EndFunc   ;==>readConfig
 
@@ -261,6 +257,9 @@ Func ReadRegularConfig()
 	; <><><> Attack Plan / Train Army / Options <><><>
 	ReadConfig_641_1()
 
+	;===========SamM0d Config=======================
+	ReadConfig_MOD()
+	;==============End SamM0D Config================
 	; <><><><> Attack Plan / Strategies <><><><>
 	; <<< nothing here >>>
 

@@ -289,9 +289,15 @@ EndFunc
 Func chkForcePreBrewSpell()
 	If GUICtrlRead($chkForcePreBrewSpell) = $GUI_CHECKED Then
 		$ichkForcePreBrewSpell = 1
+	For $i = 0 To UBound($MySpells)-1
+			GUICtrlSetState(Eval("chkPre" & $MySpells[$i][0]), $GUI_CHECKED)
+	Next
 	Else
 		$ichkForcePreBrewSpell = 0
-	EndIf
+	For $i = 0 To UBound($MySpells)-1
+			GUICtrlSetState(Eval("chkPre" & $MySpells[$i][0]), $GUI_UNCHECKED)
+	Next
+EndIf
 EndFunc
 
 Func chkAutoDock()
@@ -990,3 +996,24 @@ Func chkSearchTimeout()
 		_GUI_Value_STATE("DISABLE", $g_hLblSearchTimeout & "#" & $g_hTxtSearchTimeout & "#" & $g_hLblSearchTimeoutminutes)
 	EndIf
 EndFunc   ;==>chkSearchTimeout
+
+;_Sleep 
+Func chkUseRandomSleep()
+	If GUICtrlRead($g_chkUseRandomSleep) = $GUI_CHECKED Then
+			$g_ichkUseRandomSleep = 1
+		Else
+			$g_ichkUseRandomSleep = 0
+			GUICtrlSetState($g_chkUseRandomSleep, $GUI_UNCHECKED)
+		EndIf
+EndFunc   ;==>chkUseRandomSleep
+
+Func chkUseRandomSleepDbg()
+    If GUICtrlRead($g_chkUseRandomSleepDbg) = $GUI_CHECKED Then
+        $g_ichkUseRandomSleepDbg = 1
+        $g_bDebugSleep = 1
+        Else
+        $g_ichkUseRandomSleepDbg = 0
+        $g_bDebugSleep = 0
+            GUICtrlSetState($g_chkUseRandomSleepDbg, $GUI_UNCHECKED)
+        EndIf
+EndFunc   ;==>chkUseRandomSleepDbg

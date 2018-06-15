@@ -329,7 +329,7 @@ $y += 25
 
 Local $x = 10, $y = 30
 SplashStep("Loading M0d - Advanced Random tab...")
-GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d", 10, "Random Click"))
+GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d", 10, "Random Humanization"))
 $grpHLFClick = GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", 11, "Advanced Random Click On Button"), $x, $y, 430, 180)
 	; More Human Like When Train Click By Sam
 	$chkEnableHLFClick = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", 12, "Enable Random Click On Button Area =-= Train/Remove Troops And Etc."),$x+10, $y+20)
@@ -364,10 +364,40 @@ $grpHLFClick = GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", 11, "Advanced 
 		GUICtrlSetState(-1, $GUI_UNCHECKED)
 		GUICtrlSetOnEvent(-1, "chkEnableHLFClickSetlog")
 
-$grpHLFClick = GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", "_Sleep", "Advanced Random _Sleep"), $x, $y, 430, 180)
+	$y += 80
+
+		GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", "_Sleep", "Advanced Random _Sleep"), $x, $y, 430, 180)
+	; More Human _Sleep
+	$g_chkUseRandomSleep = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", "_Sleep", "Advanced Random _Sleep."),$x+10, $y+20)
+		$sTxtTip = "More human _Sleep time. Does not affect the waiting time."
+		GUICtrlSetState(-1, $GUI_CHECKED)
+		_GUICtrlSetTip(-1, $sTxtTip)
+		GUICtrlSetOnEvent(-1, "chkUseRandomSleep")
+
+	GUICtrlCreateLabel(GetTranslatedFileIni("sam m0d", "_SleepMultipler", "Sleep Multipler"), $x+28, $y+42, 40, 30)
+		$sTxtTip = "Extra time you want to add randomly."
+		_GUICtrlSetTip(-1, $sTxtTip)
+			$y += 10
+		$cmb_SleepMult = GUICtrlCreateCombo("", $x+28, $y+58, 40, 30, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+		_GUICtrlSetTip(-1, $sTxtTip)
+		GUICtrlSetData(-1, "1.25x|1.5x|2x|3x", "1.25x")
+
+	$y += 80
+	$g_chkUseRandomSleepDbg = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", "_SleepMultiplerDBG", "Enable Setlog for Random Sleep."),$x+10, $y+20)
+		$sTxtTip = "Logs data for random _Sleep."
+		_GUICtrlSetTip(-1, $sTxtTip)
+		GUICtrlSetState(-1, $GUI_UNCHECKED)
+		GUICtrlSetOnEvent(-1, "chkUseRandomSleepDbg")
+SplashStep("Loading M0d - Humanization tab...")
+GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d","Humanization", "Humanization"))
+HumanizationGUI()
+GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 SplashStep("Loading M0d - My Switch tab...")
 GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d", "My Switch", "My Switch"))
+GUICtrlCreateGroup("", -99, -99, 1, 1)
+Local $x = 10, $y = 30
+
 ; samm0d
 Local $x = 10, $y = 25
 GUICtrlCreateGroup(GetTranslatedFileIni("MBR GUI Design Child Bot - Profiles", "Group_01", "Switch Profiles"), $x, $y, 430, 60)
@@ -782,14 +812,6 @@ GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d","GoblinXP", "Goblin XP"))
 Local $x = 10, $y = 30
 
 GoblinXPGUI()
-
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
-SplashStep("Loading M0d - Humanization tab...")
-GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d","Humanization", "Humanization"))
-
-Local $x = 10, $y = 30
-
-HumanizationGUI()
 
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 SplashStep("Loading M0d - GTFO/FastDon tab...")

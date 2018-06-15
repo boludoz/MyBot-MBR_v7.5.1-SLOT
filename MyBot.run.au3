@@ -1089,6 +1089,7 @@ Func _Idle() ;Sequence that runs until Full Army
 		If $ichkModTrain = 0 Then
 			If $g_iCommandStop = -1 Then
 				If $g_iActualTrainSkip < $g_iMaxTrainSkip Then
+					MainSuperXPHandler()
 					If CheckNeedOpenTrain($g_sTimeBeforeTrain) Then TrainRevamp()
 					If $g_bRestart = True Then ExitLoop
 					If _Sleep($DELAYIDLE1) Then ExitLoop
@@ -1117,6 +1118,7 @@ Func _Idle() ;Sequence that runs until Full Army
 						EndIf
 						CheckArmyCamp(True, True)
 					EndIf
+					MainSuperXPHandler()
 				EndIf
 				If $g_bFullArmy And $g_bTrainEnabled = True Then
 					SetLog("Army Camp and Barracks are full, stop Training...", $COLOR_ACTION)
@@ -1124,6 +1126,7 @@ Func _Idle() ;Sequence that runs until Full Army
 				EndIf
 			EndIf
 		Else
+			MainSuperXPHandler()
 			ModTrain()
 			If $g_bRestart = True Then ExitLoop
 			If _Sleep(200) Then ExitLoop

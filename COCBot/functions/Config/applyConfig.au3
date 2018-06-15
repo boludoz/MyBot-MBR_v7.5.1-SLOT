@@ -57,7 +57,6 @@ Func applyConfig($bRedrawAtExit = True, $TypeReadSave = "Read") ;Applies the dat
 	; <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
 	;===========SamM0d Config=======================
-	#include "..\..\SamM0d\applyConfig.au3"
 	SetComboTroopComp()
 	;==============End SamM0D Config================
 
@@ -141,6 +140,9 @@ Func applyConfig($bRedrawAtExit = True, $TypeReadSave = "Read") ;Applies the dat
 	; <><><> Attack Plan / Train Army / Options <><><>
 	ApplyConfig_641_1($TypeReadSave)
 
+	;===========SamM0d Config=======================
+	ApplyConfig_MOD($TypeReadSave)
+	;==============End SamM0D Config================
 	; <><><><> Attack Plan / Strategies <><><><>
 	; <<< nothing here >>>
 

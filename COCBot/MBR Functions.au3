@@ -19,88 +19,6 @@
 ;#include "functions\Other\Synchronization.au3" ; now included in LaunchConsole.au3
 #include "functions\Other\OnAutoItErrorRegisterBot.au3"
 
-;===========Samm0d collection==============================
-#include "SamM0d\Functions\SamM0dZap.au3"
-#include "SamM0d\Functions\AreCollectorsNearRedline.au3"
-#include "SamM0d\Functions\HLFClick.au3"
-#include "SamM0d\Functions\getMyOcr.au3"
-#include "SamM0d\Functions\FriendlyChallenge.au3"
-#include "SamM0d\Functions\MySwitch\MySwitch.au3"
-
-; Misc Mod
-#include "SamM0d\GUI\MOD GUI Design - Misc.au3"
-
-; Bot Humanization
-#include "SamM0d\GUI\MOD GUI Design - BotHumanization.au3"
-
-; Goblin XP
-#include "SamM0d\GUI\MOD GUI Design - GoblinXP.au3"
-
-#include "SamM0d\Functions\CheckStopForWar.au3"
-; Mod Train
-;---------------------------------------------------------------
-#include "SamM0d\Functions\ModTrain\ModTrain.au3"
-#include "SamM0d\Functions\ModTrain\DeleteTrainHBitmap.au3"
-#include "SamM0d\Functions\ModTrain\CheckAvailableUnit.au3"
-#include "SamM0d\Functions\ModTrain\CheckOnTrainUnit.au3"
-#include "SamM0d\Functions\ModTrain\CheckAvailableSpellUnit.au3"
-#include "SamM0d\Functions\ModTrain\CheckOnBrewUnit.au3"
-#include "SamM0d\Functions\ModTrain\DoRevampTroops.au3"
-#include "SamM0d\Functions\ModTrain\DoRevampSpells.au3"
-#include "SamM0d\Functions\ModTrain\getArmyAndSpellCapacity.au3"
-#include "SamM0d\Functions\ModTrain\getMyArmyHeroCount.au3"
-#include "SamM0d\Functions\ModTrain\MyNameOfTroop.au3"
-#include "SamM0d\Functions\ModTrain\TrainArmyPageControl.au3"
-#include "SamM0d\Functions\ModTrain\MyTrainClick.au3"
-#include "SamM0d\Functions\ModTrain\CheckAvailableCCUnit.au3"
-#include "SamM0d\Functions\ModTrain\CheckAvailableCCSpellUnit.au3"
-;---------------------------------------------------------------
-#include "SamM0d\Functions\Other\_debugSaveHBitmapToImage.au3"
-#include "SamM0d\Functions\Other\_Wait4Pixel.au3"
-#include "SamM0d\GUI\GUI Control MySwitch Setting.au3"
-#include "SamM0d\GUI\MBR GUI Control Child SamM0d.au3"
-;----------------------------------------------------------------
-#include "SamM0d\MBRMates\AreCollectorsOutside\AreCollectorsOutside.au3"
-#include "SamM0d\MBRMates\AD.au3"
-; Multi Finger by LunaEclipse
-;----------------------------------------------------------------
-#include "SamM0d\MBRMates\Multi Fingers\Vectors\fourFingerStandard.au3"
-#include "SamM0d\MBRMates\Multi Fingers\Vectors\fourFingerSpiralLeft.au3"
-#include "SamM0d\MBRMates\Multi Fingers\Vectors\fourFingerSpiralRight.au3"
-#include "SamM0d\MBRMates\Multi Fingers\Vectors\eightFingerPinWheelLeft.au3"
-#include "SamM0d\MBRMates\Multi Fingers\Vectors\eightFingerPinWheelRight.au3"
-#include "SamM0d\MBRMates\Multi Fingers\Vectors\eightFingerBlossom.au3"
-#include "SamM0d\MBRMates\Multi Fingers\Vectors\eightFingerImplosion.au3"
-#include "SamM0d\MBRMates\Multi Fingers\fourFinger.au3"
-#include "SamM0d\MBRMates\Multi Fingers\eightFinger.au3"
-#include "SamM0d\MBRMates\Multi Fingers\multiFinger.au3"
-#include "SamM0d\MBRMates\Multi Fingers\unitInfo.au3"
-;==========================================================
-
-; ClanHop - Team AiO MOD++
-#include "SamM0d\functions\Mod's\ClanHop.au3"
-          
-; Check Grand Warden Mode - Team AiO MOD++
-#include "SamM0d\functions\Mod's\CheckWardenMode.au3"
-          
-; Bot Humanization - Team AiO MOD++
-#include "SamM0d\functions\Bot Humanization\BotHumanization.au3"
-#include "SamM0d\functions\Bot Humanization\AttackNDefenseActions.au3"
-#include "SamM0d\functions\Bot Humanization\BestClansNPlayersActions.au3"
-#include "SamM0d\functions\Bot Humanization\ChatActions.au3"
-#include "SamM0d\functions\Bot Humanization\ClanActions.au3"
-#include "SamM0d\functions\Bot Humanization\ClanWarActions.au3"
-          
-; Goblin XP - Team AiO MOD++
-#include "SamM0d\functions\GoblinXP\GoblinXP.au3"
-#include "SamM0d\functions\GoblinXP\multiSearch.au3"
-#include "SamM0d\functions\GoblinXP\ArrayFunctions.au3"
-          
-; GTFO - Team AiO MOD++
-#include "SamM0d\functions\Bot GTFO\GTFO.au3"
-#include "SamM0d\functions\Bot GTFO\KickOut.au3"
-;==========================================================
-
 #include "functions\Attack\AttackReport.au3"
 #include "functions\Attack\BuildingSide.au3"
 #include "functions\Attack\GoldElixirChangeThSnipes.au3"
@@ -379,3 +297,92 @@
 #include "functions\Config\applyConfig.au3"
 #include "functions\Config\readConfig.au3"
 #include "functions\Config\saveConfig.au3"
+
+; SamM0d config
+#include "SamM0d\Functions\Config\applyConfig.au3"
+#include "SamM0d\Functions\Config\readConfig.au3"
+#include "SamM0d\Functions\Config\saveConfig.au3"
+
+;===========Samm0d collection==============================
+; Random _Sleep
+#include "SamM0d\functions\_Sleep random.au3"
+#include "SamM0d\Functions\SamM0dZap.au3"
+#include "SamM0d\Functions\AreCollectorsNearRedline.au3"
+#include "SamM0d\Functions\HLFClick.au3"
+#include "SamM0d\Functions\getMyOcr.au3"
+#include "SamM0d\Functions\FriendlyChallenge.au3"
+#include "SamM0d\Functions\MySwitch\MySwitch.au3"
+
+; Misc Mod
+#include "SamM0d\GUI\MOD GUI Design - Misc.au3"
+
+; Bot Humanization
+#include "SamM0d\GUI\MOD GUI Design - BotHumanization.au3"
+
+; Goblin XP
+#include "SamM0d\GUI\MOD GUI Design - GoblinXP.au3"
+
+#include "SamM0d\Functions\CheckStopForWar.au3"
+; Mod Train
+;---------------------------------------------------------------
+#include "SamM0d\Functions\ModTrain\ModTrain.au3"
+#include "SamM0d\Functions\ModTrain\DeleteTrainHBitmap.au3"
+#include "SamM0d\Functions\ModTrain\CheckAvailableUnit.au3"
+#include "SamM0d\Functions\ModTrain\CheckOnTrainUnit.au3"
+#include "SamM0d\Functions\ModTrain\CheckAvailableSpellUnit.au3"
+#include "SamM0d\Functions\ModTrain\CheckOnBrewUnit.au3"
+#include "SamM0d\Functions\ModTrain\DoRevampTroops.au3"
+#include "SamM0d\Functions\ModTrain\DoRevampSpells.au3"
+#include "SamM0d\Functions\ModTrain\getArmyAndSpellCapacity.au3"
+#include "SamM0d\Functions\ModTrain\getMyArmyHeroCount.au3"
+#include "SamM0d\Functions\ModTrain\MyNameOfTroop.au3"
+#include "SamM0d\Functions\ModTrain\TrainArmyPageControl.au3"
+#include "SamM0d\Functions\ModTrain\MyTrainClick.au3"
+#include "SamM0d\Functions\ModTrain\CheckAvailableCCUnit.au3"
+#include "SamM0d\Functions\ModTrain\CheckAvailableCCSpellUnit.au3"
+;---------------------------------------------------------------
+#include "SamM0d\Functions\Other\_debugSaveHBitmapToImage.au3"
+#include "SamM0d\Functions\Other\_Wait4Pixel.au3"
+#include "SamM0d\GUI\GUI Control MySwitch Setting.au3"
+#include "SamM0d\GUI\MBR GUI Control Child SamM0d.au3"
+;----------------------------------------------------------------
+#include "SamM0d\MBRMates\AreCollectorsOutside\AreCollectorsOutside.au3"
+#include "SamM0d\MBRMates\AD.au3"
+; Multi Finger by LunaEclipse
+;----------------------------------------------------------------
+#include "SamM0d\MBRMates\Multi Fingers\Vectors\fourFingerStandard.au3"
+#include "SamM0d\MBRMates\Multi Fingers\Vectors\fourFingerSpiralLeft.au3"
+#include "SamM0d\MBRMates\Multi Fingers\Vectors\fourFingerSpiralRight.au3"
+#include "SamM0d\MBRMates\Multi Fingers\Vectors\eightFingerPinWheelLeft.au3"
+#include "SamM0d\MBRMates\Multi Fingers\Vectors\eightFingerPinWheelRight.au3"
+#include "SamM0d\MBRMates\Multi Fingers\Vectors\eightFingerBlossom.au3"
+#include "SamM0d\MBRMates\Multi Fingers\Vectors\eightFingerImplosion.au3"
+#include "SamM0d\MBRMates\Multi Fingers\fourFinger.au3"
+#include "SamM0d\MBRMates\Multi Fingers\eightFinger.au3"
+#include "SamM0d\MBRMates\Multi Fingers\multiFinger.au3"
+#include "SamM0d\MBRMates\Multi Fingers\unitInfo.au3"
+;==========================================================
+
+; ClanHop - Team AiO MOD++
+#include "SamM0d\functions\Mod's\ClanHop.au3"
+
+; Check Grand Warden Mode - Team AiO MOD++
+#include "SamM0d\functions\Mod's\CheckWardenMode.au3"
+
+; Bot Humanization - Team AiO MOD++
+#include "SamM0d\functions\Bot Humanization\BotHumanization.au3"
+#include "SamM0d\functions\Bot Humanization\AttackNDefenseActions.au3"
+#include "SamM0d\functions\Bot Humanization\BestClansNPlayersActions.au3"
+#include "SamM0d\functions\Bot Humanization\ChatActions.au3"
+#include "SamM0d\functions\Bot Humanization\ClanActions.au3"
+#include "SamM0d\functions\Bot Humanization\ClanWarActions.au3"
+
+; Goblin XP - Team AiO MOD++
+#include "SamM0d\functions\GoblinXP\GoblinXP.au3"
+#include "SamM0d\functions\GoblinXP\multiSearch.au3"
+#include "SamM0d\functions\GoblinXP\ArrayFunctions.au3"
+
+; GTFO - Team AiO MOD++
+#include "SamM0d\functions\Bot GTFO\GTFO.au3"
+#include "SamM0d\functions\Bot GTFO\KickOut.au3"
+;==========================================================

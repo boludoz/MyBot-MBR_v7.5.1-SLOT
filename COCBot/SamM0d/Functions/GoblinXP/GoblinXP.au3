@@ -127,22 +127,22 @@ Func chkEnableSuperXP2()
 EndFunc   ;==>chkEnableSuperXP2
 
 Func MainSuperXPHandler()
-	If $ichkEnableSuperXP = 0 Then Return
-	If $g_bDebugSetlog Or $g_bDebugSX Then SetDebugLog("Begin MainSuperXPHandler, $irbSXTraining=" & $irbSXTraining & ", $IsFullArmywithHeroesAndSpells=" & $g_bIsFullArmywithHeroesAndSpells, $COLOR_DEBUG)
-	If $irbSXTraining = 1 And $g_bIsFullArmywithHeroesAndSpells Then Return ; If Gain while Training Enabled but Army is Full Then Return
-	If $iGainedXP >= $itxtMaxXPtoGain Then
-		SetLog("You have Max XP to Gain GoblinXP", $COLOR_DEBUG)
-		If $g_bDebugSX Then SetDebugLog("$iGainedXP = " & $iGainedXP & "|$itxtMaxXPtoGain = " & $itxtMaxXPtoGain, $COLOR_DEBUG)
-		$ichkEnableSuperXP = 0
-		GUICtrlSetState($chkEnableSuperXP, $GUI_UNCHECKED)
-		Return ; If Gain XP More Than Max XP to Gain Then Exit/Return
-	EndIf
-
-	If Not WaitForMain() Then
-		SetLog("Cannot get in Main Screen!! Exiting SuperXP", $COLOR_RED)
-		Return False
-	EndIf
-
+	;If $ichkEnableSuperXP = 0 Then Return
+	;If $g_bDebugSetlog Or $g_bDebugSX Then SetDebugLog("Begin MainSuperXPHandler, $irbSXTraining=" & $irbSXTraining & ", $IsFullArmywithHeroesAndSpells=" & $g_bIsFullArmywithHeroesAndSpells, $COLOR_DEBUG)
+	;If $irbSXTraining = 1 And $g_bIsFullArmywithHeroesAndSpells Then Return ; If Gain while Training Enabled but Army is Full Then Return
+	;If $iGainedXP >= $itxtMaxXPtoGain Then
+	;	SetLog("You have Max XP to Gain GoblinXP", $COLOR_DEBUG)
+	;	If $g_bDebugSX Then SetDebugLog("$iGainedXP = " & $iGainedXP & "|$itxtMaxXPtoGain = " & $itxtMaxXPtoGain, $COLOR_DEBUG)
+	;	$ichkEnableSuperXP = 0
+	;	GUICtrlSetState($chkEnableSuperXP, $GUI_UNCHECKED)
+	;	Return ; If Gain XP More Than Max XP to Gain Then Exit/Return
+	;EndIf
+    ;
+	;If Not WaitForMain() Then
+	;	SetLog("Cannot get in Main Screen!! Exiting SuperXP", $COLOR_RED)
+	;	Return False
+	;EndIf
+SETLOG("TOPO")
 	$g_aiCurrentLoot[$eLootTrophy] = getTrophyMainScreen($aTrophies[0], $aTrophies[1]) ; get OCR to read current Village Trophies
 	If $g_bDebugSetlog Then SetDebugLog("Current Trophy Count: " & $g_aiCurrentLoot, $COLOR_DEBUG) ;Debug
 	If Number($g_aiCurrentLoot) > Number($g_iDropTrophyMax) Then Return
