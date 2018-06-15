@@ -112,6 +112,7 @@ Global $aArmyTab[4] = [115, 110, 0xF9F9F7, 20] ; Army Tab, right from text, whit
 Global $aTroopsTab[4] = [265, 110, 0xF9F9F7, 20] ; Troops Tab, right from text, white
 Global $aSpellsTab[4] = [450, 110, 0xF9F9F7, 20] ; Spells Tab, right from text, white
 Global $aQuickTrainTab[4] = [600, 110, 0xFAFAF7, 20] ; Quick Train Tab, right from text, white
+Global $aQuickTrainTabTH12[4] = [783, 219, 0xF8F8F8, 20] ; Quick Train Tab, right from text, white
 Global $aRecievedTroops[4] = [200 ,215 ,0xFFFFFF, 20] ; Y of You have recieved blabla from xx!
 
 ; Check healthy color RGB ( 220,255,19~27) ; the king and queen haves the same Y , but warden is a little lower ...
