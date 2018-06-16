@@ -238,12 +238,12 @@ Func SlotAttack($PosX, $CheckSlot12, $CheckSlotwHero, $SRIGHT, $Troop)
 	ElseIf $CheckSlot12 Then
 		$iStartOffset = 11
 	Else
-		$iStartOffset = 33
+		$iStartOffset = 32
 		If $CheckSlotwHero Then $iStartOffset = 25
 	EndIf
 
 	For $i = 0 To 12
-		If $PosX >= $iStartOffset + ($i * 73) And $PosX < (($iStartOffset + 88 + $iStartOffsetHero) + ($i * 73)) Then
+		If $PosX >= $iStartOffset + ($i * 73) And $PosX < (($iStartOffset + 73 + $iStartOffsetHero) + ($i * 73)) Then
 
 			$Slottemp[0] = $iStartOffset + ($i * 73) + 10 + $iStartOffsetHero
 			$Slottemp[1] = $i

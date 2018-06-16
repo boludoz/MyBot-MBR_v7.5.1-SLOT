@@ -1404,6 +1404,9 @@ Func _RunFunction($action)
 			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			Laboratory()
 			If _Sleep($DELAYRUNBOT3) = False Then checkMainScreen(False)
+			Setlog("Checking Lab Status", $COLOR_INFO)
+			LabGuiDisplay()
+			_Sleep($DELAYRUNBOT3)	
 		Case "UpgradeHeroes"
 			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			UpgradeHeroes()
