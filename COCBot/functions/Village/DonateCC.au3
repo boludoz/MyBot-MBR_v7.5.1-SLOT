@@ -1371,9 +1371,10 @@ Func DetectSlotTroop(Const $iTroopIndex)
 
 		If StringInStr($FullTemp[0] & " ", "empty") > 0 Then ExitLoop
 
-            Local $iFoundTroopIndex = TroopIndexLookup($FullTemp[0])
+		If $FullTemp[0] <> "" Then
+			Local $iFoundTroopIndex = TroopIndexLookup($FullTemp[0])
 			For $i = $eTroopBarbarian To $eTroopBowler
-                If $iFoundTroopIndex = $i Then
+				If $iFoundTroopIndex = $i Then
 					If $g_bDebugSetlog Then SetDebugLog("Detected " & $g_asTroopNames[$i], $COLOR_DEBUG)
 					If $iTroopIndex = $i Then Return $Slot
 					ExitLoop
