@@ -128,7 +128,7 @@ Func AttackBarCheck($Remaining = False, $SRIGHT = False)
 				Next
 			EndIf
 
-			;Local $iSlotCompensation = -6
+			;Local $iSlotCompensation = -8
 			For $i = 0 To UBound($aResult) - 1
 				Local $Slottemp
 				If $aResult[$i][1] > 0 Then
@@ -149,10 +149,17 @@ Func AttackBarCheck($Remaining = False, $SRIGHT = False)
 							$aResult[$i][3] = 1
 							$aResult[$i][4] = $Slottemp[1]
 						Else
-							$aResult[$i][3] = Number(getTroopCountBig(Number($Slottemp[0]), 636)) ; For Big Numbers, when the troops is selected
+                            ; In case of Spells + Heroes
+                            ; June 2018 Update
+                            If StringInStr($aResult[$i][0], "Spell") <> 0 And $CheckSlotwHero = True then
+                                $Slottemp[0] = $Slottemp[0] + 13
+                                $iSlotCompensation = -6
+                            EndIf
+
+                            $aResult[$i][3] = Number(getTroopCountBig(Number($Slottemp[0]), 633)) ; For Big Numbers, when the troops is selected
 							$aResult[$i][4] = $Slottemp[1]
 							If $aResult[$i][3] = "" Or $aResult[$i][3] = 0 Then
-								$aResult[$i][3] = Number(getTroopCountSmall(Number($Slottemp[0]), 641)) ; For small Numbers
+                                $aResult[$i][3] = Number(getTroopCountSmall(Number($Slottemp[0]), 640)) ; For small Numbers
 								$aResult[$i][4] = $Slottemp[1]
 							EndIf
 							If StringInStr($aResult[$i][0], "ESpell") <> 0 And $g_bSmartZapEnable = True Then
@@ -236,7 +243,7 @@ Func SlotAttack($PosX, $CheckSlot12, $CheckSlotwHero, $SRIGHT, $Troop)
 	EndIf
 
 	For $i = 0 To 12
-		If $PosX >= $iStartOffset + ($i * 73) And $PosX < (($iStartOffset + 73 + $iStartOffsetHero) + ($i * 73)) Then
+		If $PosX >= $iStartOffset + ($i * 73) And $PosX < (($iStartOffset + 88 + $iStartOffsetHero) + ($i * 73)) Then
 
 			$Slottemp[0] = $iStartOffset + ($i * 73) + 10 + $iStartOffsetHero
 			$Slottemp[1] = $i
@@ -252,6 +259,7 @@ Func SlotAttack($PosX, $CheckSlot12, $CheckSlotwHero, $SRIGHT, $Troop)
 		EndIf
 		If $g_bRunState = False Then Return
 	Next
+
 	Return $Slottemp
 
 EndFunc   ;==>SlotAttack
