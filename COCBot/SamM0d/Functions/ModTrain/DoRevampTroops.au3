@@ -17,7 +17,7 @@
 Func DoRevampTroops($bDoPreTrain = False)
 	If _Sleep(500) Then Return
 	Local $bReVampFlag = False
-	Local $tempTroops[19][5]
+	Local $tempTroops[20][5]
 	$tempTroops	= $MyTroops
 
 	If $ichkMyTroopsOrder Then

@@ -31,6 +31,7 @@ Global $sTxtLavaHounds = GetTranslatedFileIni("MBR Global GUI Design Names Troop
 Global $sTxtBowlers = GetTranslatedFileIni("MBR Global GUI Design Names Troops", "TxtBowlers", "Bowlers")
 Global $sTxtBabyDragons = GetTranslatedFileIni("MBR Global GUI Design Names Troops", "TxtBabyDragons", "Baby Dragons")
 Global $sTxtMiners = GetTranslatedFileIni("MBR Global GUI Design Names Troops", "TxtMiners", "Miners")
+Global $sTxtElectroDragons = GetTranslatedFileIni("MBR Global GUI Design Names Troops", "TxtElectroDragons", "Electro Dragons")
 Global $sTxtLightningSpells = GetTranslatedFileIni("MBR Global GUI Design Names Spells", "TxtShortLightningSpells", "Lightning")
 Global $sTxtHealSpells = GetTranslatedFileIni("MBR Global GUI Design Names Spells", "TxtShortHealSpells", "Heal")
 Global $sTxtRageSpells = GetTranslatedFileIni("MBR Global GUI Design Names Spells", "TxtShortRageSpells", "Rage")
@@ -448,8 +449,8 @@ $cmbMyQuickTrain = GUICtrlCreateCombo("", $x+300, $y+20, 130, 20, BitOR($CBS_DRO
 
 
 Local $sComboData= ""
-Local $aTroopOrderList[20] = ["","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19"]
-For $j = 0 To 19
+Local $aTroopOrderList[21] = ["","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"]
+For $j = 0 To 20
 	$sComboData &= $aTroopOrderList[$j] & "|"
 Next
 
@@ -831,8 +832,8 @@ GUICtrlCreateTab(0, 0, $_GUI_MAIN_WIDTH - 20, $_GUI_MAIN_HEIGHT - 255, $TCS_FLAT
 GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d","Clan War Troops", "War troops"))
 
 
-    Local $aTroopsIcons[19] = [$eIcnBarbarian, $eIcnArcher, $eIcnGiant, $eIcnGoblin, $eIcnWallBreaker, $eIcnBalloon, _
-            $eIcnWizard, $eIcnHealer, $eIcnDragon, $eIcnPekka, $eIcnBabyDragon, $eIcnMiner, $eIcnMinion, _
+    Local $aTroopsIcons[20] = [$eIcnBarbarian, $eIcnArcher, $eIcnGiant, $eIcnGoblin, $eIcnWallBreaker, $eIcnBalloon, _
+            $eIcnWizard, $eIcnHealer, $eIcnDragon, $eIcnPekka, $eIcnBabyDragon, $eIcnMiner, $eIcnElectroDragon, $eIcnMinion, _
             $eIcnHogRider, $eIcnValkyrie, $eIcnGolem, $eIcnWitch, $eIcnLavaHound, $eIcnBowler]
     Local $aSpellsIcons[10] =[$eIcnLightSpell, $eIcnHealSpell, $eIcnRageSpell, $eIcnJumpSpell, $eIcnFreezeSpell, _
             $eIcnCloneSpell, $eIcnPoisonSpell, $eIcnEarthQuakeSpell, $eIcnHasteSpell, $eIcnSkeletonSpell]
@@ -877,7 +878,7 @@ GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d","Clan War Troops", "War troo
 
     $x = 30
     $y += 25
-        For $i = 0 To 18 ; Troops
+        For $i = 0 To 19 ; Troops
             If $i >= 12 Then $x = 37
             _GUICtrlCreateIcon($g_sLibIconPath, $aTroopsIcons[$i], $x + Int($i / 2) * 38, $y + Mod($i, 2) * 60, 32, 32)
 
@@ -936,23 +937,23 @@ Local $x = 10, $y = 30
 SplashStep("Loading M0d - Other tab...")
 $grpStatsMisc = GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", 14, "Other"), $x, $y, 430, 360)
 
-$y += 20
-
-$chkSmartUpdateWall = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", 18, "Enable advanced update for wall"), $x+10, $y, -1, -1)
-	$sTxtTip = "Save the last position, then next update will start at last position and checking around if got wall match for update."
-	GUICtrlSetOnEvent(-1, "chkSmartUpdateWall")
-	_GUICtrlSetTip(-1, $sTxtTip)
-	GUICtrlSetState(-1, $GUI_CHECKED)
-
-
-$y += 20
-GUICtrlCreateLabel(GetTranslatedFileIni("sam m0d", 19, "Delay: "), $x + 30, $y, -1, -1)
-$sTxtTip = "Set the delay between each click of wall. Increase the delay if your PC is slow."
-_GUICtrlSetTip(-1, $sTxtTip)
-$txtClickWallDelay = GUICtrlCreateInput("500", $x + 60, $y, 31, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
-	_GUICtrlSetTip(-1, $sTxtTip)
-	GUICtrlSetLimit(-1, 3)
-	GUICtrlSetData(-1, 500)
+;-$y += 20
+;-
+;-$chkSmartUpdateWall = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", 18, "Enable advanced update for wall"), $x+10, $y, -1, -1)
+;-	$sTxtTip = "Save the last position, then next update will start at last position and checking around if got wall match for update."
+;-	GUICtrlSetOnEvent(-1, "chkSmartUpdateWall")
+;-	_GUICtrlSetTip(-1, $sTxtTip)
+;-	GUICtrlSetState(-1, $GUI_CHECKED)
+;-
+;-
+;-$y += 20
+;-GUICtrlCreateLabel(GetTranslatedFileIni("sam m0d", 19, "Delay: "), $x + 30, $y, -1, -1)
+;-$sTxtTip = "Set the delay between each click of wall. Increase the delay if your PC is slow."
+;-_GUICtrlSetTip(-1, $sTxtTip)
+;-$txtClickWallDelay = GUICtrlCreateInput("500", $x + 60, $y, 31, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+;-	_GUICtrlSetTip(-1, $sTxtTip)
+;-	GUICtrlSetLimit(-1, 3)
+;-	GUICtrlSetData(-1, 500)
 
 $x = 10
 $y += 20

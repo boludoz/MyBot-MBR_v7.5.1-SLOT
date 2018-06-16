@@ -162,7 +162,7 @@ Func StopAndPrepareForWar($iSleepTime)
 			$g_bQuickTrainEnable = $g_bUseQuickTrainWar
 			$g_bQuickTrainArmy = $g_aChkArmyWar
 
-			Local $aiArmyCompTroopsEmpty[$eTroopCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+			Local $aiArmyCompTroopsEmpty[$eTroopCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 			Local $aiArmyCompSpellsEmpty[$eSpellCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 			$g_aiArmyCompTroops = $aiArmyCompTroopsEmpty
 			$g_aiArmyCompSpells = $aiArmyCompSpellsEmpty

@@ -7,13 +7,13 @@ Func chkMyTroopOrder()
 EndFunc
 
 Func cmbMyTroopOrder()
-	Local $tempOrder[19]
-	For $i = 0 To 18
+	Local $tempOrder[20]
+	For $i = 0 To 19
 		$tempOrder[$i] = Int(GUICtrlRead(Eval("cmbMy" & $MyTroops[$i][0] & "Order")))
 	Next
-	For $i = 0 To 18
+	For $i = 0 To 19
 		If $tempOrder[$i] <> $MyTroops[$i][1] Then
-			For $j = 0 To 18
+			For $j = 0 To 19
 				If $MyTroops[$j][1] = $tempOrder[$i] Then
 					$tempOrder[$j] = Int($MyTroops[$i][1])
 					ExitLoop
@@ -22,7 +22,7 @@ Func cmbMyTroopOrder()
 			ExitLoop
 		EndIf
 	Next
-	For $i = 0 To 18
+	For $i = 0 To 19
 		$MyTroopsSetting[$icmbTroopSetting][$i][1] = Int($tempOrder[$i])
 		$MyTroops[$i][1] = $MyTroopsSetting[$icmbTroopSetting][$i][1]
 		_GUICtrlComboBox_SetCurSel(Eval("cmbMy" & $MyTroops[$i][0] & "Order"), $MyTroops[$i][1]-1)
@@ -208,7 +208,7 @@ Func cmbMyQuickTrain()
 EndFunc
 
 Func btnResetTroops()
-	For $i = 0 To 18
+	For $i = 0 To 19
 		GUICtrlSetData(Eval("txtMy" & $MyTroops[$i][0]),"0")
 		$MyTroops[$i][3] = 0
 	Next
@@ -216,7 +216,7 @@ Func btnResetTroops()
 EndFunc
 
 Func btnResetOrder()
-	For $i = 0 To 18
+	For $i = 0 To 19
 		_GUICtrlComboBox_SetCurSel(Eval("cmbMy" & $MyTroops[$i][0] & "Order"), $i)
 		$MyTroops[$i][1] = $i + 1
 	Next
@@ -558,22 +558,22 @@ Func chkEnableHLFClick()
 	EndIf
 EndFunc
 
-Func chkSmartUpdateWall()
-	If GUICtrlRead($chkSmartUpdateWall) = $GUI_CHECKED Then
-		GUICtrlSetState($txtClickWallDelay, $GUI_ENABLE)
-		If $g_bDebugSetlog Then SetLog("BaseNode: " & $aBaseNode[0] & "," & $aBaseNode[1])
-		If $g_bDebugSetlog Then SetLog("LastWall: " & $aLastWall[0] & "," & $aLastWall[1])
-		If $g_bDebugSetlog Then SetLog("FaceDirection: " & $iFaceDirection)
-	Else
-		GUICtrlSetState($txtClickWallDelay, $GUI_DISABLE)
-		; reset all data
-		$aLastWall[0] = -1
-		$aLastWall[1] = -1
-		$aBaseNode[0] = -1
-		$aBaseNode[1] = -1
-		$iFaceDirection = 1
-	EndIf
-EndFunc
+;-Func chkSmartUpdateWall()
+;-	If GUICtrlRead($chkSmartUpdateWall) = $GUI_CHECKED Then
+;-		GUICtrlSetState($txtClickWallDelay, $GUI_ENABLE)
+;-		If $g_bDebugSetlog Then SetLog("BaseNode: " & $aBaseNode[0] & "," & $aBaseNode[1])
+;-		If $g_bDebugSetlog Then SetLog("LastWall: " & $aLastWall[0] & "," & $aLastWall[1])
+;-		If $g_bDebugSetlog Then SetLog("FaceDirection: " & $iFaceDirection)
+;-	Else
+;-		GUICtrlSetState($txtClickWallDelay, $GUI_DISABLE)
+;-		; reset all data
+;-		$aLastWall[0] = -1
+;-		$aLastWall[1] = -1
+;-		$aBaseNode[0] = -1
+;-		$aBaseNode[1] = -1
+;-		$iFaceDirection = 1
+;-	EndIf
+;-EndFunc
 
 Func chkDropCCFirst()
 	$ichkDropCCFirst = (GUICtrlRead($chkDropCCFirst) = $GUI_CHECKED ? 1 : 0)
@@ -891,7 +891,7 @@ EndFunc
 
 Func lblTotalWarTroopCount($TotalArmyCamp = 0)
     Local $TotalTroopsToTrain
-    If $TotalArmyCamp = 0 Then $TotalArmyCamp = $g_bTotalCampForced ? $g_iTotalCampForcedValue : 260
+    If $TotalArmyCamp = 0 Then $TotalArmyCamp = $g_bTotalCampForced ? $g_iTotalCampForcedValue : 280
 
     For $i = 0 To $eTroopCount - 1
         Local $iCount = GUICtrlRead($g_ahTxtTrainWarTroopCount[$i])

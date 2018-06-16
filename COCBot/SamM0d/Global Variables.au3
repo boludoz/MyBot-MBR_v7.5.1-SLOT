@@ -202,11 +202,11 @@ Global $grpHLFClick, $lblHLFClickDelay, $lblDesc1, $chkEnableHLFClick, $lblHLFCl
 
 
 ; advanced update for wall by Samkie
-Global $ichkSmartUpdateWall = 1
-Global $itxtClickWallDelay = 500
-Global $aBaseNode[2] = [-1,-1] ;first found with core
-Global $aLastWall[2] = [-1,-1]
-Global $iFaceDirection = -1
+;Global $ichkSmartUpdateWall = 1
+;Global $itxtClickWallDelay = 500
+;Global $aBaseNode[2] = [-1,-1] ;first found with core
+;Global $aLastWall[2] = [-1,-1]
+;Global $iFaceDirection = -1
 
 Global $grpStatsMisc, $chkSmartUpdateWall,$txtClickWallDelay, $chkEnableCustomOCR4CCRequest, $chkCheck4CC, $txtCheck4CCWaitTime, $chkIncreaseGlobalDelay, $txtIncreaseGlobalDelay, _
 $chkAutoDock
@@ -354,9 +354,10 @@ Global $g_abStopForWar[8]
 Global $g_aiStartTimerToRecheck[8], $g_aiTimerToRecheck[8], $g_asCheckOrStop[8]
 
 Global $g_hChkStopForWar = 0, $g_hCmbStopTime = 0, $g_CmbStopBeforeBattle = 0, $g_hCmbReturnTime = 0
-Global $g_hChkTrainWarTroop = 0, $g_hChkUseQuickTrainWar, $g_ahChkArmyWar[3], $g_hLblRemoveArmy, $g_ahTxtTrainWarTroopCount[19], $g_ahTxtTrainWarSpellCount[10]
+Global $g_hChkTrainWarTroop = 0, $g_hChkUseQuickTrainWar, $g_ahChkArmyWar[3], $g_hLblRemoveArmy, $g_ahTxtTrainWarTroopCount[20], $g_ahTxtTrainWarSpellCount[10]
 Global $g_hCalTotalWarTroops, $g_hLblTotalWarTroopsProgress, $g_hLblCountWarTroopsTotal
 Global $g_hCalTotalWarSpells, $g_hLblTotalWarSpellsProgress, $g_hLblCountWarSpellsTotal
+
 Global $g_hChkRequestCCForWar = 0, $g_hTxtRequestCCForWar = 0 
 ; Bot Humanization - Team AiO MOD++
 Global $g_iacmbPriority[13] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
