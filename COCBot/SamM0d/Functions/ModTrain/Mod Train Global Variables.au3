@@ -139,7 +139,7 @@ Global $MyTroopsButton[20][3] = _
 ["Pekk",1, 4], _       
 ["BabyD",0, 5], _       
 ["Mine",1, 5], _       
-["EDrag",0, 6], _       
+["EDrag",0, 5], _       
 ["Mini",0, 7], _       
 ["Hogs",1, 7], _       
 ["Valk",2, 0], _       
