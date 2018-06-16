@@ -499,7 +499,7 @@ GUICtrlSetFont(-1,10,$FW_BOLD)
 $idProgressbar = GUICtrlCreateProgress($x+210, $y+20,15, 165,$PBS_VERTICAL)
 
 
-$y = $yStart + 220
+$y = $yStart + 240
 
 $chkDisablePretrainTroops = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", 69, "Disable pre-train troops"), $x, $y, -1, -1)
 _GUICtrlSetTip(-1, GetTranslatedFileIni("sam m0d", 70, "Disable pre-train troops, normally use by donate and train setting together."))

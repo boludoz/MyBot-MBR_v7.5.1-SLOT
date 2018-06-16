@@ -32,17 +32,17 @@ $txtMyMini, $txtMyHogs, $txtMyValk, $txtMyGole, $txtMyWitc, $txtMy, $txtMyLava, 
 Global $cmbMyBarbOrder, $cmbMyArchOrder, $cmbMyGiantOrder, $cmbMyGoblOrder, $cmbMyWallOrder, $cmbMyBallOrder, $cmbMyWizaOrder, $cmbMyHealOrder, $cmbMyDragOrder, $cmbMyPekkOrder, $cmbMyBabyDOrder, $cmbMyMineOrder, $cmbMyEDragOrder, _
 $cmbMyMiniOrder, $cmbMyHogsOrder, $cmbMyValkOrder, $cmbMyGoleOrder, $cmbMyWitcOrder, $cmbMyOrder, $cmbMyLavaOrder, $cmbMyBowlOrder
 
-Global $CurBarb = 0, $CurArch = 0, $CurGiant = 0, $CurGobl = 0, $CurWall = 0, $CurBall = 0, $CurWiza = 0, $CurHeal = 0
-Global $CurMini = 0, $CurHogs = 0, $CurValk = 0, $CurGole = 0, $CurWitc = 0, $CurLava = 0, $CurBowl = 0, $CurDrag = 0, $CurPekk = 0, $CurBabyD = 0, $CurMine = 0, $CurEDrag = 0
+Global $CurBarb = 0, $CurArch = 0, $CurGiant = 0, $CurGobl = 0, $CurWall = 0, $CurBall = 0, $CurWiza = 0, $CurHeal = 0, $CurEDrag = 0
+Global $CurMini = 0, $CurHogs = 0, $CurValk = 0, $CurGole = 0, $CurWitc = 0, $CurLava = 0, $CurBowl = 0, $CurDrag = 0, $CurPekk = 0, $CurBabyD = 0, $CurMine = 0
                                                                                                                                                                       
-Global $OnQBarb = 0, $OnQArch = 0, $OnQGiant = 0, $OnQGobl = 0, $OnQWall = 0, $OnQBall = 0, $OnQWiza = 0, $OnQHeal = 0                                                
-Global $OnQMini = 0, $OnQHogs = 0, $OnQValk = 0, $OnQGole = 0, $OnQWitc = 0, $OnQLava = 0, $OnQBowl = 0, $OnQDrag = 0, $OnQPekk = 0, $OnQBabyD = 0, $OnQMine = 0, $OnQEDrag = 0
+Global $OnQBarb = 0, $OnQArch = 0, $OnQGiant = 0, $OnQGobl = 0, $OnQWall = 0, $OnQBall = 0, $OnQWiza = 0, $OnQHeal = 0, $OnQEDrag = 0                                                
+Global $OnQMini = 0, $OnQHogs = 0, $OnQValk = 0, $OnQGole = 0, $OnQWitc = 0, $OnQLava = 0, $OnQBowl = 0, $OnQDrag = 0, $OnQPekk = 0, $OnQBabyD = 0, $OnQMine = 0
                                                                                                                                                                       
-Global $OnTBarb = 0, $OnTArch = 0, $OnTGiant = 0, $OnTGobl = 0, $OnTWall = 0, $OnTBall = 0, $OnTWiza = 0, $OnTHeal = 0                                                
-Global $OnTMini = 0, $OnTHogs = 0, $OnTValk = 0, $OnTGole = 0, $OnTWitc = 0, $OnTLava = 0, $OnTBowl = 0, $OnTDrag = 0, $OnTPekk = 0, $OnTBabyD = 0, $OnTMine = 0, $OnTEDrag = 0
+Global $OnTBarb = 0, $OnTArch = 0, $OnTGiant = 0, $OnTGobl = 0, $OnTWall = 0, $OnTBall = 0, $OnTWiza = 0, $OnTHeal = 0, $OnTEDrag = 0                                                
+Global $OnTMini = 0, $OnTHogs = 0, $OnTValk = 0, $OnTGole = 0, $OnTWitc = 0, $OnTLava = 0, $OnTBowl = 0, $OnTDrag = 0, $OnTPekk = 0, $OnTBabyD = 0, $OnTMine = 0
 
-Global $ReadyBarb = 0, $ReadyArch = 0, $ReadyGiant = 0, $ReadyGobl = 0, $ReadyWall = 0, $ReadyBall = 0, $ReadyWiza = 0, $ReadyHeal = 0
-Global $ReadyMini = 0, $ReadyHogs = 0, $ReadyValk = 0, $ReadyGole = 0, $ReadyWitc = 0, $ReadyLava = 0, $ReadyBowl = 0, $ReadyDrag = 0, $ReadyPekk = 0, $ReadyBabyD = 0, $ReadyMine = 0, $ReadyEDrag = 0
+Global $ReadyBarb = 0, $ReadyArch = 0, $ReadyGiant = 0, $ReadyGobl = 0, $ReadyWall = 0, $ReadyBall = 0, $ReadyWiza = 0, $ReadyHeal = 0, $ReadyEDrag = 0
+Global $ReadyMini = 0, $ReadyHogs = 0, $ReadyValk = 0, $ReadyGole = 0, $ReadyWitc = 0, $ReadyLava = 0, $ReadyBowl = 0, $ReadyDrag = 0, $ReadyPekk = 0, $ReadyBabyD = 0, $ReadyMine = 0
 
 
 Global $MyTroopsSetting[3][20][2]=[[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]]
@@ -103,50 +103,50 @@ Global $OnTEventSpell2 = 0
 ;~ 		$eTrainMini, $eTrainHogs, $eTrainValk, $eTrainGole, $eTrainWitc, $eTrainLava, $eTrainBowl
 
 ;~ Global $MyTroopsButton[21][3] = _
-;~ [["Barb", 0, 0], _
-;~ ["Pumpkin", 1, 0], _
-;~ ["Arch"	, 0, 1], _
-;~ ["Giant", 1, 1], _
+;~ [["Barb"		   , 0, 0], _
+;~ ["Pumpkin",       1, 0], _
+;~ ["Arch"	,        0, 1], _
+;~ ["Giant",         1, 1], _
 ;~ ["GiantSkeleton", 0, 2], _
-;~ ["Gobl"	, 1, 2], _
-;~ ["Wall"	, 0, 3], _
-;~ ["Ball"	, 1, 3], _
-;~ ["Wiza"	, 0, 4], _
-;~ ["Heal"	, 1, 4], _
-;~ ["Drag"	, 0, 5], _
-;~ ["Pekk"	, 1, 5], _
-;~ ["BabyD", 0, 6], _
-;~ ["Mine"	, 1, 5], _
-;~ ["EDrag", 0, 5], _
-;~ ["Mini"	, 0, 7], _
-;~ ["Hogs"	, 1, 7], _
-;~ ["Valk"	, 2, 0], _
-;~ ["Gole"	, 3, 0], _
-;~ ["Witc"	, 2, 1], _
-;~ ["Lava"	, 3, 1], _
-;~ ["Bowl"	, 2, 2]]
+;~ ["Gobl"	, 		 1, 2], _
+;~ ["Wall"	, 		 0, 3], _
+;~ ["Ball"	, 		 1, 3], _
+;~ ["Wiza"	, 		 0, 4], _
+;~ ["Heal"	, 		 1, 4], _
+;~ ["Drag"	, 		 0, 5], _
+;~ ["Pekk"	, 		 1, 5], _
+;~ ["BabyD",  		 0, 6], _
+;~ ["Mine"	, 		 1, 5], _
+;~ ["EDrag",  		 0, 5], _
+;~ ["Mini",0, 7], _
+;~ ["Hogs",1, 7], _
+;~ ["Valk",2, 0], _
+;~ ["Gole",3, 0], _
+;~ ["Witc",2, 1], _
+;~ ["Lava",3, 1], _
+;~ ["Bowl",2, 2]]
 
 Global $MyTroopsButton[20][3] = _
-[["Barb", 0, 0], _
-["Arch"	, 1, 0], _
-["Giant", 0, 1], _
-["Gobl"	, 1, 1], _
-["Wall"	, 0, 2], _
-["Ball"	, 1, 2], _
-["Wiza"	, 0, 3], _
-["Heal"	, 1, 3], _
-["Drag"	, 0, 4], _
-["Pekk"	, 1, 4], _
-["BabyD", 0, 5], _
-["Mine"	, 1, 5], _
-["EDrag", 0, 5], _
-["Mini"	, 0, 6], _
-["Hogs"	, 1, 6], _
-["Valk"	, 0, 7], _
-["Gole"	, 1, 7], _
-["Witc"	, 2, 0], _
-["Lava"	, 3, 0], _
-["Bowl"	, 2, 1]]
+[["Barb",0, 0], _       
+["Arch",1, 0], _       
+["Giant",0, 1], _       
+["Gobl",1, 1], _       
+["Wall",0, 2], _       
+["Ball",1, 2], _       
+["Wiza",0, 3], _       
+["Heal",1, 3], _       
+["Drag",0, 4], _       
+["Pekk",1, 4], _       
+["BabyD",0, 5], _       
+["Mine",1, 5], _       
+["EDrag",0, 6], _       
+["Mini",0, 7], _       
+["Hogs",1, 7], _       
+["Valk",2, 0], _       
+["Gole",3, 0], _       
+["Witc",2, 1], _       
+["Lava",3, 1], _       
+["Bowl",2, 2]]      
 
 Global Enum $eTrainBarb, $eTrainArch, $eTrainGiant, $eTrainGobl, $eTrainWall, $eTrainBall, $eTrainWiza, $eTrainHeal, $eTrainDrag, $eTrainPekk, $eTrainBabyD, $eTrainMine, $eTrainEDrag, _
 		$eTrainMini, $eTrainHogs, $eTrainValk, $eTrainGole, $eTrainWitc, $eTrainLava, $eTrainBowl

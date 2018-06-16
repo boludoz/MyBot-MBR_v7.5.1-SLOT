@@ -26,7 +26,7 @@ Func MyNameOfTroop($iKind, $iPlural = 0)
 		Case $eMine
 			$sTroopname = "Miner"
 		Case $eEDrag
-			$sTroopname = "Electro Dragons"
+			$sTroopname = "Electro Dragon"
 		Case $eMini
 			$sTroopname = "Minion"
 		Case $eHogs
