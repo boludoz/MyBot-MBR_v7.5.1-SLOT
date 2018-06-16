@@ -23,7 +23,7 @@ Global $g_chkSCIDSwitchAccAF, $g_ichkSCIDSwitchAccAF
 Global Enum $g_eFull, $g_eRemained, $g_eNoTrain
 Global $g_abRCheckWrongArmyCamp[2] = [False, False] ; Result of checking wrong Troops & Spells
 Global $g_bChkMultiClick, $g_iMultiClick = 1
-Global $g_aiQueueTroops[$eTroopCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Global $g_aiQueueTroops[$eTroopCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Global $g_aiQueueSpells[$eSpellCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 Global $aIsOnBuilderBase[4] = [359, 9, 0x75BDE4, 6] ; Check the Gold Coin from resources , is a square not round

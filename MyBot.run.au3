@@ -758,6 +758,7 @@ Func runBot() ;Bot that runs everything in order
 		$tempDisableBrewSpell = False
 		$tempDisableTrain = False
 		$bAvoidSwitch = False
+		$g_bFullArmy = False
 		$g_iCommandStop = -1
 
 		; samm0d switch
@@ -807,6 +808,9 @@ Func runBot() ;Bot that runs everything in order
 
 		PrepareDonateCC()
 
+		If _Sleep($DELAYRUNBOT1) Then Return
+		checkMainScreen()
+		If $g_bRestart = True Then ContinueLoop
 		chkShieldStatus()
 		If $g_bRestart = True Then ContinueLoop
 
@@ -844,7 +848,7 @@ Func runBot() ;Bot that runs everything in order
 			If _Sleep($DELAYRUNBOT5) Then Return
 			checkMainScreen(False)
 			If $g_bRestart = True Then ContinueLoop
-			Local $aRndFuncList = ['Collect', 'CheckTombs', 'ReArm', 'CleanYard']
+			Local $aRndFuncList = ['LabCheck','Collect', 'CheckTombs', 'ReArm', 'CleanYard']
 			While 1
 				If $g_bRunState = False Then Return
 				If $g_bRestart = True Then ContinueLoop 2 ; must be level 2 due to loop-in-loop
@@ -1005,6 +1009,7 @@ Func _Idle() ;Sequence that runs until Full Army
 		If _Sleep($DELAYIDLE1) Then Return
 		If $g_iCommandStop = -1 Then SetLog("====== Waiting for full army ======", $COLOR_SUCCESS)
 		Local $hTimer = __TimerInit()
+		Local $iReHere = 0
 
 		BotHumanization() ; Bot Humanization - Team AiO MOD++
 
@@ -1020,7 +1025,8 @@ Func _Idle() ;Sequence that runs until Full Army
 				$aHeroResult = CheckArmyCamp(True, True, True, False)
 			EndIf
 
-			While $iReHere < $iReHereMax
+			Local $aHeroResult = CheckArmyCamp(True, True, True, False)
+			While $iReHere < 7
 				$iReHere += 1
 				If $iReHere = 1 And SkipDonateNearFullTroops(True, $aHeroResult) = False And BalanceDonRec(True) Then
 					DonateCC(True)

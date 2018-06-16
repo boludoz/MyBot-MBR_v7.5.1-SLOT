@@ -38,7 +38,7 @@ Func getArmyTroops($bOpenArmyWindow = False, $bCloseArmyWindow = False, $bCheckW
 		WEnd
 	EndIf
 
-	Local $sTroopDiamond = GetDiamondFromRect("23,215,840,255") ; Contains iXStart, $iYStart, $iXEnd, $iYEnd
+	Local $sTroopDiamond = GetDiamondFromRect("23,215,585,255") ; Contains iXStart, $iYStart, $iXEnd, $iYEnd
 	If $g_bDebugFuncTime Then StopWatchStart("findMultiple, \imgxml\ArmyOverview\Troops")
 	Local $aCurrentTroops = findMultiple(@ScriptDir & "\imgxml\ArmyOverview\Troops", $sTroopDiamond, $sTroopDiamond, 0, 1000, 0, "objectname,objectpoints", $bNeedCapture) ; Returns $aCurrentTroops[index] = $aArray[2] = ["TroopShortName", CordX,CordY]
 	If $g_bDebugFuncTime Then StopWatchStopLog()
@@ -46,8 +46,8 @@ Func getArmyTroops($bOpenArmyWindow = False, $bCloseArmyWindow = False, $bCheckW
 	Local $aTempTroopArray, $aTroopCoords
 	Local $sTroopName = ""
 	Local $iTroopIndex = -1, $iDropTrophyIndex = -1
-	Local $aCurrentTroopsEmpty[$eTroopCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ; Local Copy to reset Troops Array
-	Local $aTroopsForTropyDropEmpty[7][2] = [["Barb", 0], ["Arch", 0], ["Giant", 0], ["Wall", 0], ["Gobl", 0], ["Mini", 0], ["Ball", 0]] ; Local Copy to reset Troop Drop Trophy Array
+	Local $aCurrentTroopsEmpty[$eTroopCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ; Local Copy to reset Troops Array
+	Local $aTroopsForTropyDropEmpty[6][2] = [["Barb", 0], ["Arch", 0], ["Giant", 0], ["Wall", 0], ["Gobl", 0], ["Mini", 0]] ; Local Copy to reset Troop Drop Trophy Array
 
 	$g_aiCurrentTroops = $aCurrentTroopsEmpty ; Reset Current Troops Array
 	$g_avDTtroopsToBeUsed = $aTroopsForTropyDropEmpty ; Reset Drop Trophy Troops Array

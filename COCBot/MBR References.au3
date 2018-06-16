@@ -410,6 +410,7 @@ Func ReferenceGlobals()
 	$a1 = $eIcnLootCart
 	$a1 = $eIcnSleepMode
 	$a1 = $eIcnTH11
+	$a1 = $eIcnTH12
 	$a1 = $eIcnTrainMode
 	$a1 = $eIcnSleepingWarden
 	$a1 = $eIcnCloneSpell
@@ -499,6 +500,7 @@ Func ReferenceGlobals()
 	$a1 = $eTroopPekka
 	$a1 = $eTroopBabyDragon
 	$a1 = $eTroopMiner
+	$a1 = $eTroopElectroDragon
 
 	$a1 = $eTroopMinion
 	$a1 = $eTroopHogRider
