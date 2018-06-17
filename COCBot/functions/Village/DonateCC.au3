@@ -753,11 +753,11 @@ Func DonateTroopType(Const $iTroopIndex, $Quant = 0, Const $Custom = False, Cons
 	Local $donateposinrow = -1
 	Local $sTextToAll = ""
 
-	If $g_iTotalDonateTroopCapacity = 0 Then Return
+	If $g_iTotalDonateCapacity = 0 Then Return
 	If $g_bDebugSetlog Then SetDebugLog("$DonateTroopType Start: " & $g_asTroopNames[$iTroopIndex], $COLOR_DEBUG)
 
 	; Space to donate troop?
-    $g_iDonTroopsQuantityAv = Floor($g_iTotalDonateTroopCapacity / $g_aiTroopSpace[$iTroopIndex])
+    $g_iDonTroopsQuantityAv = Floor($g_iTotalDonateCapacity / $g_aiTroopSpace[$iTroopIndex])
 	If $g_iDonTroopsQuantityAv < 1 Then
 		SetLog("Sorry Chief! " & $g_asTroopNamesPlural[$iTroopIndex] & " don't fit in the remaining space!")
 		Return
@@ -884,7 +884,7 @@ Func DonateTroopType(Const $iTroopIndex, $Quant = 0, Const $Custom = False, Cons
 			; Adjust Values for donated troops to prevent a Double ghost donate to stats and train
 			If $iTroopIndex >= $eTroopBarbarian And $iTroopIndex <= $eTroopBowler Then
 				;Reduce iTotalDonateCapacity by troops donated
-                $g_iTotalDonateTroopCapacity -= ($Quant * $g_aiTroopSpace[$iTroopIndex])
+                $g_iTotalDonateCapacity -= ($Quant * $g_aiTroopSpace[$iTroopIndex])
 				;If donated max allowed troop qty set $g_bSkipDonTroops = True
 				If $g_iDonTroopsLimit = $Quant Then
 					$g_bSkipDonTroops = True
@@ -961,7 +961,7 @@ Func DonateTroopType(Const $iTroopIndex, $Quant = 0, Const $Custom = False, Cons
 			; Adjust Values for donated troops to prevent a Double ghost donate to stats and train
 			If $iTroopIndex >= $eTroopBarbarian And $iTroopIndex <= $eTroopBowler Then
 				;Reduce iTotalDonateCapacity by troops donated
-                $g_iTotalDonateTroopCapacity -= ($g_iDonTroopsQuantity * $g_aiTroopSpace[$iTroopIndex])
+                $g_iTotalDonateCapacity -= ($g_iDonTroopsQuantity * $g_aiTroopSpace[$iTroopIndex])
 				;If donated max allowed troop qty set $g_bSkipDonTroops = True
 				If $g_iDonTroopsLimit = $g_iDonTroopsQuantity Then
 					$g_bSkipDonTroops = True
@@ -1227,14 +1227,14 @@ EndFunc   ;==>DonateWindowCap
 
 Func RemainingCCcapacity()
 	; Remaining CC capacity of requested troops from your ClanMates
-    ; Will return the $g_iTotalDonateTroopCapacity with that capacity for use in donation logic.
+    ; Will return the $g_iTotalDonateCapacity with that capacity for use in donation logic.
 
     Local $sCapTroops = "", $aTempCapTroops, $sCapSpells = "", $aTempCapSpells, $sCapSiegeMachine = "", $aTempCapSiegeMachine
     Local $iDonatedTroops = 0, $iDonatedSpells = 0, $iDonatedSiegeMachine = 0
     Local $iCapTroopsTotal = 0, $iCapSpellsTotal = 0, $iCapSiegeMachineTotal = 0
 
 	$g_iTotalDonateCapacity = -1
-    $g_iTotalDonateTroopCapacity = -1
+    $g_iTotalDonateCapacity = -1
 
 	; Verify with OCR the Donation Clan Castle capacity
     If $g_bDebugSetLog Then SetDebugLog("Start dual getOcrSpaceCastleDonate", $COLOR_DEBUG)
@@ -1341,12 +1341,12 @@ Func RemainingCCcapacity()
 		EndIf
 	EndIf
 
-    ; $g_iTotalDonateTroopCapacity it will be use to determinate the quantity of kind troop to donate
-    $g_iTotalDonateTroopCapacity = ($iCapTroopsTotal - $iDonatedTroops)
+    ; $g_iTotalDonateCapacity it will be use to determinate the quantity of kind troop to donate
+    $g_iTotalDonateCapacity = ($iCapTroopsTotal - $iDonatedTroops)
     If $sCapSpells <> -1 Then $g_iTotalDonateSpellCapacity = ($iCapSpellsTotal - $iDonatedSpells)
     If $sCapSiegeMachine <> -1 Then $g_iTotalDonateSiegeMachineCapacity = ($iCapSiegeMachineTotal - $iDonatedSiegeMachine)
 
-    If $g_iTotalDonateTroopCapacity < 0 Then
+    If $g_iTotalDonateCapacity < 0 Then
         SetLog("Unable to read Clan Castle Capacity!", $COLOR_ERROR)
     Else
         Local $sSpellText = $sCapSpells <> -1 ? ", Spells: " & $iDonatedSpells & "/" & $iCapSpellsTotal : ""
