@@ -141,7 +141,7 @@ Func AttackBarCheck($Remaining = False, $SRIGHT = False)
 					If _Sleep(20) Then Return ; Pause function
 					If UBound($Slottemp) = 2 Then
 						If $g_bDebugSetlog Then SetLog("OCR : " & $Slottemp[0] & "|SLOT: " & $Slottemp[1], $COLOR_DEBUG) ;Debug
-						Local $iSlotCompensation = -6
+						Local $iSlotCompensation = -8
 						If $g_iSamM0dDebug = 1 Then $aResult[$i][5] = getTroopsSpellsLevel(Number($Slottemp[0]) + $iSlotCompensation, 704)
 						If $g_iSamM0dDebug = 1 Then SetLog("$aResult[$i][5]: " & $aResult[$i][5])
 						If $CheckSlotwHero Then $iSlotCompensation = 10
@@ -156,10 +156,10 @@ Func AttackBarCheck($Remaining = False, $SRIGHT = False)
                                 $iSlotCompensation = -6
                             EndIf
 
-                            $aResult[$i][3] = Number(getTroopCountBig(Number($Slottemp[0]), 633)) ; For Big Numbers, when the troops is selected
+							$aResult[$i][3] = Number(getTroopCountBig(Number($Slottemp[0]), 636)) ; For Big Numbers, when the troops is selected
 							$aResult[$i][4] = $Slottemp[1]
 							If $aResult[$i][3] = "" Or $aResult[$i][3] = 0 Then
-                                $aResult[$i][3] = Number(getTroopCountSmall(Number($Slottemp[0]), 640)) ; For small Numbers
+								$aResult[$i][3] = Number(getTroopCountSmall(Number($Slottemp[0]), 641)) ; For small Numbers
 								$aResult[$i][4] = $Slottemp[1]
 							EndIf
 							If StringInStr($aResult[$i][0], "ESpell") <> 0 And $g_bSmartZapEnable = True Then
