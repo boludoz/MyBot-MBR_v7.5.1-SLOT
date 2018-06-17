@@ -1397,6 +1397,9 @@ Func _RunFunction($action)
 			BoostKing()
 			BoostQueen()
 			BoostWarden()
+		Case "LabCheck"
+			LabGuiDisplay()
+			_Sleep($DELAYRUNBOT3)
 		Case "RequestCC"
 			RequestCC()
 			If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)
@@ -1405,8 +1408,6 @@ Func _RunFunction($action)
 			Laboratory()
 			If _Sleep($DELAYRUNBOT3) = False Then checkMainScreen(False)
 			Setlog("Checking Lab Status", $COLOR_INFO)
-			LabGuiDisplay()
-			_Sleep($DELAYRUNBOT3)	
 		Case "UpgradeHeroes"
 			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			UpgradeHeroes()
