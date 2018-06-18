@@ -41,20 +41,20 @@ Func ApplyConfig_MOD($TypeReadSave)
 			; prevent over donate
 			GUICtrlSetState($chkEnableLimitDonateUnit, ($ichkEnableLimitDonateUnit = 1 ? $GUI_CHECKED : $GUI_UNCHECKED))
 			GUICtrlSetData($txtLimitDonateUnit, $itxtLimitDonateUnit)
-			chkEnableLimitDonateUnit()
+			chkEnableLimitDonateUnit($TypeReadSave)
 			
 			; max logout time
 			GUICtrlSetState($chkEnableLogoutLimit, ($ichkEnableLogoutLimit = 1 ? $GUI_CHECKED : $GUI_UNCHECKED))
 			GUICtrlSetData($txtLogoutLimitTime, $itxtLogoutLimitTime)
-			chkEnableLogoutLimit()
+			chkEnableLogoutLimit($TypeReadSave)
 			
 			; Unit Wave Factor
 			GUICtrlSetState($chkUnitFactor, ($ichkUnitFactor = 1 ? $GUI_CHECKED : $GUI_UNCHECKED))
 			GUICtrlSetData($txtUnitFactor, $itxtUnitFactor)
 			GUICtrlSetState($chkWaveFactor, ($ichkWaveFactor = 1 ? $GUI_CHECKED : $GUI_UNCHECKED))
 			GUICtrlSetData($txtWaveFactor, $itxtWaveFactor)
-			chkUnitFactor()
-			chkWaveFactor()
+			chkUnitFactor($TypeReadSave)
+			chkWaveFactor($TypeReadSave)
 			
 			; SmartZap from ChaCalGyn (LunaEclipse) - DEMEN
 			; ExtremeZap - Added by TheRevenor
@@ -142,7 +142,7 @@ Func ApplyConfig_MOD($TypeReadSave)
 			; check 4 cc
 			GUICtrlSetState($chkCheck4CC, ($ichkCheck4CC = 1 ? $GUI_CHECKED : $GUI_UNCHECKED))
 			GUICtrlSetData($txtCheck4CCWaitTime, $itxtCheck4CCWaitTime)
-			chkCheck4CC()
+			chkCheck4CC($TypeReadSave)
 			
 			; global delay increse
 			GUICtrlSetState($chkIncreaseGlobalDelay, ($ichkIncreaseGlobalDelay = 1 ? $GUI_CHECKED : $GUI_UNCHECKED))
@@ -171,7 +171,7 @@ Func ApplyConfig_MOD($TypeReadSave)
 				$g_iMyTroopsSize += $MyTroops[$i][3] * $MyTroops[$i][2]
 			Next
 			
-			UpdateTroopSize()
+			UpdateTroopSize($TypeReadSave)
 			
 			;cmbMyTroopOrder()
 			
@@ -189,7 +189,7 @@ Func ApplyConfig_MOD($TypeReadSave)
 			
 			GUICtrlSetData($txtTotalCountSpell2, $g_iTotalSpellValue)
 			
-			lblMyTotalCountSpell()
+			lblMyTotalCountSpell($TypeReadSave)
 			
 			_GUI_Value_STATE("HIDE",$g_aGroupListTHLevels)
 			If $g_iTownHallLevel >= 4 And $g_iTownHallLevel <= 11 Then
@@ -198,7 +198,7 @@ Func ApplyConfig_MOD($TypeReadSave)
 			
 			GUICtrlSetData($g_hLblTHLevels, $g_iTownHallLevel)
 			
-			applyFriendlyChallengeSetting()
+			applyFriendlyChallengeSetting($TypeReadSave)
 
 			; Restart Search Legend league - Team AiO MOD++
 			GUICtrlSetState($g_hChkSearchTimeout, $g_bIsSearchTimeout = True ? $GUI_CHECKED : $GUI_UNCHECKED)
@@ -227,12 +227,12 @@ Func ApplyConfig_MOD($TypeReadSave)
 			Next
 			_GUICtrlComboBox_SetCurSel($g_cmbMaxActionsNumber, $g_icmbMaxActionsNumber)
 			GUICtrlSetData($g_challengeMessage, $g_ichallengeMessage)
-			cmbStandardReplay()
-			cmbWarReplay()
+			cmbStandardReplay($TypeReadSave)
+			cmbWarReplay($TypeReadSave)
 
 			; Goblin XP - Team AiO MOD++
 			GUICtrlSetState($chkEnableSuperXP, $ichkEnableSuperXP = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
-			chkEnableSuperXP()
+			chkEnableSuperXP($TypeReadSave)
 			GUICtrlSetState($chkSkipZoomOutXP, $ichkSkipZoomOutXP = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetState($chkFastGoblinXP, $ichkFastGoblinXP = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetState($rbSXTraining, ($irbSXTraining = 1) ? $GUI_CHECKED : $GUI_UNCHECKED)
@@ -246,14 +246,14 @@ Func ApplyConfig_MOD($TypeReadSave)
 			GUICtrlSetState($g_hChkUseGTFO, $g_bChkUseGTFO = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetData($g_hTxtMinSaveGTFO_Elixir, $g_iTxtMinSaveGTFO_Elixir)
 			GUICtrlSetData($g_hTxtMinSaveGTFO_DE, $g_iTxtMinSaveGTFO_DE)
-			ApplyGTFO()
+			ApplyGTFO($TypeReadSave)
 
 			GUICtrlSetState($g_hChkUseKickOut, $g_bChkUseKickOut = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetData($g_hTxtDonatedCap, $g_iTxtDonatedCap)
 			GUICtrlSetData($g_hTxtReceivedCap, $g_iTxtReceivedCap)
 			GUICtrlSetState($g_hChkKickOutSpammers, $g_bChkKickOutSpammers = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetData($g_hTxtKickLimit, $g_iTxtKickLimit)
-			ApplyKickOut()
+			ApplyKickOut($TypeReadSave)
 
 			; Check Grand Warden Mode - Team AiO MOD++
 			GUICtrlSetState($g_hChkCheckWardenMode, $g_bCheckWardenMode ? $GUI_CHECKED : $GUI_UNCHECKED)
