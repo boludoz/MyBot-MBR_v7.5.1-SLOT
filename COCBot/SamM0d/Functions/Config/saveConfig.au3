@@ -14,6 +14,7 @@
 ; ===============================================================================================================================
 
 Func SaveConfig_MOD()
+	saveDemenWarSetting()
 	ApplyConfig_MOD(GetApplyConfigSaveAction())
 
 	; Random _Sleep
@@ -189,8 +190,6 @@ Func SaveConfig_MOD()
 	
 	saveFriendlyChallengeSetting()
 	
-	saveDemenWarSetting()
-
 	; <><><> Team AiO MOD++ (2018) <><><>
 	; ClanHop - Team AiO MOD++
 	_Ini_Add("donate", "chkClanHop", $g_bChkClanHop)

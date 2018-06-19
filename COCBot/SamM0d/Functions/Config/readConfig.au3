@@ -15,6 +15,8 @@
 
 
 Func ReadConfig_MOD()
+	readDemenWarSetting()
+
 	Global $iMultiFingerStyle = 0
 	
 	; Random _Sleep
@@ -187,7 +189,6 @@ Func ReadConfig_MOD()
 	
 	readFriendlyChallengeSetting()
 	
-	readDemenWarSetting()
 
 	; <><><> Team AiO MOD++ (2018) <><><>
 
