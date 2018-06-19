@@ -24,7 +24,7 @@ Func AttackReport()
 		$iCount += 1
 		If _Sleep($DELAYATTACKREPORT1) Then Return
 		If $g_bDebugSetlog Then SetDebugLog("Waiting Attack Report Ready, " & ($iCount / 2) & " Seconds.", $COLOR_DEBUG)
-		If $iCount > 20 Then ExitLoop ; wait 20*500ms = 10 seconds max before we have call the OCR read an error
+		If $iCount > 30 Then ExitLoop ; wait 30*500ms = 15 seconds max for the window to render
 	WEnd
 	If $iCount > 20 Then SetLog("End of Attack scene slow to appear, attack values my not be correct", $COLOR_INFO)
 
