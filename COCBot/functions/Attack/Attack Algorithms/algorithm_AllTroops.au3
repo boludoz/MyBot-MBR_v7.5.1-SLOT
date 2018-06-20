@@ -77,6 +77,7 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 				SetLog("Attacking on Dark Elixir Side.", $COLOR_INFO)
 				If Not ($g_abAttackStdSmartAttack[$g_iMatchMode]) Then GetBuildingEdge($eSideBuildingDES) ; Get DE Storage side when Redline is not used.
 			EndIf
+			If Not ($g_abAttackStdSmartAttack[$g_iMatchMode]) Then GetBuildingEdge($eSideBuildingDES) ; Get DE Storage side when Redline is not used.
 		Case 5 ;TH Side - Live Base only ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			SetLog("Attacking on Town Hall Side.", $COLOR_INFO)
 			$nbSides = 1
@@ -290,7 +291,6 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 			$listInfoDeploy[0][4] = 1
 		EndIf
 	EndIf
-
 	If $ichkEnableUseEventTroop = 1 Then
 		Local $iListInfoDeployCount = UBound($listInfoDeploy) + 2
 		ReDim $listInfoDeploy[$iListInfoDeployCount][5]
@@ -425,7 +425,6 @@ Func SmartAttackStrategy($imode)
 			If ($g_abAttackStdSmartNearCollectors[$imode][0] Or $g_abAttackStdSmartNearCollectors[$imode][1] Or $g_abAttackStdSmartNearCollectors[$imode][2]) Then
 				SetLog("Locating Mines, Collectors & Drills", $COLOR_INFO)
 				$hTimer = __TimerInit()
-
 				Global $g_aiPixelMine[0]
 				Global $g_aiPixelElixir[0]
 				Global $g_aiPixelDarkElixir[0]

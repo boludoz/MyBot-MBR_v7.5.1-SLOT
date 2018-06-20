@@ -46,6 +46,7 @@ Func PrepareAttack($pMatchMode, $Remaining = False, $SRIGHT = False) ;Assigns tr
 	; samm0d - AttackBarCheck() already had capture.
 	;_CaptureRegion2(0, 571 + $g_iBottomOffsetY, 859, 671 + $g_iBottomOffsetY)
 	;If _Sleep($DELAYPREPAREATTACK1) Then Return
+
 	; JUNE 2018 @PROMAC
 	; Lets Select The CC and not the Siege Machine ; $eCastle
 	If Not $Remaining  And IsTroopToBeUsed($pMatchMode, $eCastle) Then
@@ -68,10 +69,6 @@ Func PrepareAttack($pMatchMode, $Remaining = False, $SRIGHT = False) ;Assigns tr
 			If _Sleep(1500) then return
 		EndIf
 	EndIf
-	;
-
-	_CaptureRegion2(0, 571 + $g_iBottomOffsetY, 859, 671 + $g_iBottomOffsetY)
-	If _Sleep($DELAYPREPAREATTACK1) Then Return
 
 	For $i = 0 To UBound($g_avAttackTroops) - 1
 		$g_avAttackTroops[$i][0] = -1
