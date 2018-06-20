@@ -28,9 +28,28 @@ Func RequestCC($ClickPAtEnd = True, $specifyText = "", $bOpenTrainWindow = True)
 		EndIf
 	EndIf
 
-	SetLog("Requesting Clan Castle Troops", $COLOR_INFO)
+	; samm0d
+	Local $bRequestCCTroops = True
+	Local $bRequestCCSpells = True
 
-	;open army overview
+	If $g_iChkWait4CC = 1 Then
+		If $FullCCTroops = True Then
+			$bRequestCCTroops = False
+		EndIf
+	EndIf
+
+	If $g_iChkWait4CCSpell = 1 Then
+		If $g_bFullCCSpells = True Then
+			$bRequestCCSpells = False
+		EndIf
+	EndIf
+
+	If $bRequestCCTroops = False And $bRequestCCSpells = False Then
+		SetLog("Skip request since Clan Castle Troops and Spells ready.", $COLOR_ACTION)
+		Return ; exit func if no planned donate checkmarks
+	EndIf
+
+	SetLog("Requesting Clan Castle Troops", $COLOR_INFO)
 
 	; samm0d
 	If $bOpenTrainWindow = True Then

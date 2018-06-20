@@ -517,6 +517,7 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 			GUICtrlSetState($i, $GUI_SHOW)
 		Next
 	EndIf
+
 	;--- write in log match found ----
 	If $g_bSearchAlertMe Then
 		TrayTip($g_asModeText[$g_iMatchMode] & " Match Found!", "Gold: " & $g_iSearchGold & "; Elixir: " & $g_iSearchElixir & "; Dark: " & $g_iSearchDark & "; Trophy: " & $g_iSearchTrophy, "", 0)
