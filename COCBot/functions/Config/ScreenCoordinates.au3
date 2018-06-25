@@ -18,8 +18,9 @@ Global $aIsReloadError[4] = [457, 301 + $g_iMidOffsetY, 0x33B5E5, 10] ; Pixel Se
 Global $aIsMain[4] = [431, 10, 0x75BDE4, 6] ; Main Screen, Shield Info ! icon
 Global $aIsMainGrayed[4] = [431, 10, 0x3B5F72, 6] ; Main Screen, Shield Info ! icon
 
+Global $aIsOnBuilderBase[4] = [359, 9, 0x75BDE4, 6] ; Check the Gold Coin from resources , is a square not round
 Global $aIsOnBuilderBaseGrayed[4] = [359, 9, 0x3B5F72, 6] ; Check the Gold Coin from resources , is a square not round
-Global $aIsOnBuilderBase[4] = [838, 18, 0xffff46, 10] ; Check the Gold Coin from resources , is a square not round
+;Global $aIsOnBuilderBase[4] = [838, 18, 0xffff46, 10] ; Check the Gold Coin from resources , is a square not round
 
 Global $aTopLeftClient[4] = [1, 1, 0x000000, 0] ; TopLeftClient: Tolerance not needed
 Global $aTopMiddleClient[4] = [475, 1, 0x000000, 0] ; TopMiddleClient: Tolerance not needed
@@ -149,8 +150,7 @@ Global Const $aRtnHomeCheck2[4] = [497, 548 + $g_iMidOffsetY, 0x79C326, 20]
 Global Const $aSearchLimit[6] = [19, 565, 104, 580, 0xD9DDCF, 10] ; (kaganus) no idea what this is for
 
 ;inattackscreen
-; samm0d
-Global Const $aIsAttackPage[4] = [70, 548 + $g_iBottomOffsetY, 0xD10D0E, 20] ; red button "end battle" 860x780
+Global Const $aIsAttackPage[4] = [70, 548 + $g_iBottomOffsetY, 0xC80000, 20] ; red button "end battle" 860x780
 
 ;CheckImageType (Normal, Snow, etc)
 Global Const $aImageTypeN1[4] = [237, 161, 0xD5A849, 30] ; Sand on Forest Edge 'Lane' 860x780

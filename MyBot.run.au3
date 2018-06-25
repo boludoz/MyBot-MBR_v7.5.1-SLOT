@@ -73,7 +73,7 @@ MainLoop(CheckPrerequisites())
 
 Func UpdateBotTitle()
 	Local $sConsoleTitle ; Console title has also Android Emulator Name
-	Local $sTitle = "My Bot " & $g_sBotVersion & " @Samkie M0d v1.3.8 "
+	Local $sTitle = "My Bot " & $g_sBotVersion & " @Samkie M0d v1.4.4 + v16"
 	If $g_sBotTitle = "" Then
 		$g_sBotTitle = $sTitle
 		$sConsoleTitle = $sTitle
@@ -1353,24 +1353,39 @@ Func _RunFunction($action)
 			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			; samm0d
 			If $ichkModTrain = 1 Then
-				ModTrain()
-			EndIf
+				If $g_bTrainEnabled Then
+					ModTrain()
+				Else
+					If $g_iSamM0dDebug = 1 Then SetLog("Halt mode - training disabled [Before donate]", $COLOR_DEBUG)
+				EndIf
 
 			If $g_iActiveDonate And $g_bChkDonate Then
 				If $g_bFirstStart Then
 					getArmyTroopCapacity(True, False)
 					getArmySpellCapacity(False, True)
 				EndIf
-				If SkipDonateNearFullTroops(True) = False And BalanceDonRec(True) Then DonateCC()
+					If SkipDonateNearFullTroops(True) = False And BalanceDonRec(True) Then DonateCC()
 			EndIf
 
 			If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)
 
 			If $ichkModTrain = 1 Then
 				If $bJustMakeDonate Then
-					ModTrain()
+					If $g_bTrainEnabled Then
+						ModTrain()
+					Else
+						If $g_iSamM0dDebug = 1 Then SetLog("Halt mode - training disabled [After donate]", $COLOR_DEBUG)
+					EndIf
 				EndIf
 			Else
+				If $g_iActiveDonate And $g_bChkDonate Then
+					If $g_bFirstStart Then
+						getArmyTroopCapacity(True, False)
+						getArmySpellCapacity(False, True)
+					EndIf
+					If SkipDonateNearFullTroops(True) = False And BalanceDonRec(True) Then DonateCC()
+				EndIf
+				If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)
 				If $g_bTrainEnabled Then ; check for training enabled in halt mode
 					If $g_iActualTrainSkip < $g_iMaxTrainSkip Then
 						;Train()

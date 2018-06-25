@@ -14,13 +14,7 @@
 ; ===============================================================================================================================
 
 Func SaveConfig_MOD()
-	saveDemenWarSetting()
-	ApplyConfig_MOD(GetApplyConfigSaveAction())
-
-	; Random _Sleep
-	_Ini_Add("Pico Bot Humanization", "UseRandomSleepDbg", $g_ichkUseRandomSleepDbg)
-	_Ini_Add("Pico Bot Humanization", "cmb_SleepMult", _GUICtrlComboBox_GetCurSel($cmb_SleepMult))
-	
+	saveModCFG()
 	
 	; Multi Finger (LunaEclipse)
 	_Ini_Add("MultiFinger", "Select", _GUICtrlComboBox_GetCurSel($cmbDBMultiFinger))
@@ -90,6 +84,11 @@ Func SaveConfig_MOD()
 	_Ini_Add("HLFClick", "EnableHLFClick", (GUICtrlRead($chkEnableHLFClick) = $GUI_CHECKED ? 1 : 0))
 	_Ini_Add("HLFClick", "HLFClickDelayTime", GUICtrlRead($sldHLFClickDelayTime))
 	_Ini_Add("HLFClick", "EnableHLFClickSetlog", (GUICtrlRead($chkEnableHLFClickSetlog) = $GUI_CHECKED ? 1 : 0))
+
+	; Random _Sleep by BOLUDOZ
+	_Ini_Add("Random_Sleep", "EnableRandom_Sleep", (GUICtrlRead($g_chkUseRandomSleep) = $GUI_CHECKED ? 1 : 0))
+    _Ini_Add("Random_Sleep", "cmb_SleepMult", _GUICtrlComboBox_GetCurSel($cmb_SleepMult))
+	_Ini_Add("Random_Sleep", "EnableRandom_SleepDbg", (GUICtrlRead($g_chkUseRandomSleepDbg) = $GUI_CHECKED ? 1 : 0))
 	
 	; samm0d ocr
 	_Ini_Add("GetMyOcr", "EnableCustomOCR4CCRequest", (GUICtrlRead($chkEnableCustomOCR4CCRequest) = $GUI_CHECKED ? 1 : 0))
@@ -132,6 +131,15 @@ Func SaveConfig_MOD()
 	; check 4 cc
 	_Ini_Add("Check4CC", "Enable", (GUICtrlRead($chkCheck4CC) = $GUI_CHECKED ? 1 : 0))
 	_Ini_Add("Check4CC", "WaitTime", GUICtrlRead($txtCheck4CCWaitTime))
+	
+	; request cc
+	_Ini_Add("RequestCC4Troop", "Enable", (GUICtrlRead($chkRequestCC4Troop) = $GUI_CHECKED ? 1 : 0))
+	_Ini_Add("RequestCC4Spell", "Enable", (GUICtrlRead($chkRequestCC4Spell) = $GUI_CHECKED ? 1 : 0))
+	_Ini_Add("RequestCC4SeigeMachine", "Enable", (GUICtrlRead($chkRequestCC4SeigeMachine) = $GUI_CHECKED ? 1 : 0))
+	_Ini_Add("RequestCC4Troop", "CCStrength", GUICtrlRead($txtRequestCC4Troop))
+	_Ini_Add("RequestCC4Spell", "SpellHousing", GUICtrlRead($txtRequestCC4Spell))
+	_Ini_Add("RequestCC4SeigeMachine", "SiegeMachineHousing", GUICtrlRead($txtRequestCC4SeigeMachine))
+	
 	
 	; global delay increse
 	_Ini_Add("GlobalDelay", "Enable", (GUICtrlRead($chkIncreaseGlobalDelay) = $GUI_CHECKED ? 1 : 0))
@@ -189,57 +197,5 @@ Func SaveConfig_MOD()
 	Next
 	
 	saveFriendlyChallengeSetting()
-	
-	; <><><> Team AiO MOD++ (2018) <><><>
-	; ClanHop - Team AiO MOD++
-	_Ini_Add("donate", "chkClanHop", $g_bChkClanHop)
-
-	; Bot Humanization - Team AiO MOD++
-	_Ini_Add("Bot Humanization", "chkUseBotHumanization", $g_ichkUseBotHumanization)
-	_Ini_Add("Bot Humanization", "chkUseAltRClick", $g_ichkUseAltRClick)
-	_Ini_Add("Bot Humanization", "chkCollectAchievements", $g_ichkCollectAchievements)
-	_Ini_Add("Bot Humanization", "chkLookAtRedNotifications", $g_ichkLookAtRedNotifications)
-	For $i = 0 To 12
-		_Ini_Add("Bot Humanization", "cmbPriority[" & $i & "]", _GUICtrlComboBox_GetCurSel($g_acmbPriority[$i]))
-	Next
-	For $i = 0 To 1
-		_Ini_Add("Bot Humanization", "cmbMaxSpeed[" & $i & "]", _GUICtrlComboBox_GetCurSel($g_acmbMaxSpeed[$i]))
-	Next
-	For $i = 0 To 1
-		_Ini_Add("Bot Humanization", "cmbPause[" & $i & "]", _GUICtrlComboBox_GetCurSel($g_acmbPause[$i]))
-	Next
-	For $i = 0 To 1
-		_Ini_Add("Bot Humanization", "humanMessage[" & $i & "]", GUICtrlRead($g_ahumanMessage[$i]))
-	Next
-	_Ini_Add("Bot Humanization", "cmbMaxActionsNumber", _GUICtrlComboBox_GetCurSel($g_cmbMaxActionsNumber))
-	_Ini_Add("Bot Humanization", "challengeMessage", GUICtrlRead($g_challengeMessage))
-
-	; Goblin XP - Team AiO MOD++
-	_Ini_Add("GoblinXP", "EnableSuperXP", $ichkEnableSuperXP)
-	_Ini_Add("GoblinXP", "SkipZoomOutXP", $ichkSkipZoomOutXP)
-	_Ini_Add("GoblinXP", "FastGoblinXP", $ichkFastGoblinXP)
-	_Ini_Add("GoblinXP", "SXTraining",  $irbSXTraining)
-	_Ini_Add("GoblinXP", "SXBK", $ichkSXBK)
-	_Ini_Add("GoblinXP", "SXAQ", $ichkSXAQ)
-	_Ini_Add("GoblinXP", "SXGW", $ichkSXGW)
-	_Ini_Add("GoblinXP", "MaxXptoGain", GUICtrlRead($txtMaxXPtoGain))
-
-	; GTFO - Team AiO MOD++
-	_Ini_Add("GTFO", "chkUseGTFO", $g_bChkUseGTFO)
-	_Ini_Add("GTFO", "txtMinSaveGTFO_Elixir",$g_iTxtMinSaveGTFO_Elixir)
-	_Ini_Add("GTFO", "txtMinSaveGTFO_DE", $g_iTxtMinSaveGTFO_DE)
-	_Ini_Add("GTFO", "chkUseKickOut", $g_bChkUseKickOut)
-	_Ini_Add("GTFO", "txtDonatedCap", $g_iTxtDonatedCap)
-	_Ini_Add("GTFO", "txtReceivedCap", $g_iTxtReceivedCap)
-	_Ini_Add("GTFO", "chkKickOutSpammers", $g_bChkKickOutSpammers)
-	_Ini_Add("GTFO", "txtKickLimit", $g_iTxtKickLimit)
-
-	; Check Grand Warden Mode - Team AiO MOD++
-	_Ini_Add("other", "chkCheckWardenMode", $g_bCheckWardenMode ? 1 : 0)
-	_Ini_Add("other", "cmbCheckWardenMode", $g_iCheckWardenMode)
-
-	; Restart Search Legend league - Team AiO MOD++
-	_Ini_Add("other", "ChkSearchTimeout", $g_bIsSearchTimeout)
-	_Ini_Add("other", "SearchTimeout", $g_iSearchTimeout)
 
 EndFunc   ;==>SaveConfig_MOD

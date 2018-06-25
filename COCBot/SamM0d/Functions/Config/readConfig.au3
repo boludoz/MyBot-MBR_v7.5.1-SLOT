@@ -15,13 +15,9 @@
 
 
 Func ReadConfig_MOD()
-	readDemenWarSetting()
+	readModCFG()
 
 	Global $iMultiFingerStyle = 0
-	
-	; Random _Sleep
-	IniReadS($g_ichkUseRandomSleepDbg, $g_sProfileConfigPath, "Pico Bot Humanization", "chkUseRandomSleepDbg", $g_ichkUseRandomSleepDbg, "Int")
-	IniReadS($icmb_SleepMult, $g_sProfileConfigPath, "Pico Bot Humanization", "cmb_SleepMult", $icmb_SleepMult, "Int")
 	
 	; Multi Finger (LunaEclipse)
 	IniReadS($iMultiFingerStyle, $g_sProfileConfigPath, "MultiFinger", "Select", "1")
@@ -95,14 +91,19 @@ Func ReadConfig_MOD()
 	IniReadS($isldHLFClickDelayTime, $g_sProfileConfigPath, "HLFClick", "HLFClickDelayTime", "500", "Int")
 	IniReadS($EnableHMLSetLog, $g_sProfileConfigPath, "HLFClick", "EnableHLFClickSetlog", "0", "Int")
 	
-	; advanced update for wall by Samkie
-;-	IniReadS($ichkSmartUpdateWall, $g_sProfileConfigPath, "AU4Wall", "EnableSmartUpdateWall", "0", "Int")
-;-	IniReadS($itxtClickWallDelay, $g_sProfileConfigPath, "AU4Wall", "ClickWallDelay", "500", "Int")
-;-	IniReadS($aBaseNode[0], $g_sProfileConfigPath, "AU4Wall", "BaseNodeX", "-1", "Int")
-;-	IniReadS($aBaseNode[1], $g_sProfileConfigPath, "AU4Wall", "BaseNodeY", "-1", "Int")
-;-	IniReadS($aLastWall[0], $g_sProfileConfigPath, "AU4Wall", "LastWallX", "-1", "Int")
-;-	IniReadS($aLastWall[1], $g_sProfileConfigPath, "AU4Wall", "LastWallY", "-1", "Int")
-;-	IniReadS($iFaceDirection, $g_sProfileConfigPath, "AU4Wall", "FaceDirection", "1", "Int")
+	; Random _Sleep
+	IniReadS($g_ichkUseRandomSleep, $g_sProfileConfigPath, "Random_Sleep", "EnableRandom_Sleep", $g_ichkUseRandomSleep, "Int")
+	IniReadS($g_ichkUseRandomSleepDbg, $g_sProfileConfigPath, "Random_Sleep", "EnableRandom_SleepDbg", $g_ichkUseRandomSleepDbg, "Int")
+	IniReadS($icmb_SleepMult, $g_sProfileConfigPath, "Random_Sleep", "cmb_SleepMult", $icmb_SleepMult, "Int")
+	
+	;~ ; advanced update for wall by Samkie
+	;~ IniReadS($ichkSmartUpdateWall, $g_sProfileConfigPath, "AU4Wall", "EnableSmartUpdateWall", "0", "Int")
+	;~ IniReadS($itxtClickWallDelay, $g_sProfileConfigPath, "AU4Wall", "ClickWallDelay", "500", "Int")
+	;~ IniReadS($aBaseNode[0], $g_sProfileConfigPath, "AU4Wall", "BaseNodeX", "-1", "Int")
+	;~ IniReadS($aBaseNode[1], $g_sProfileConfigPath, "AU4Wall", "BaseNodeY", "-1", "Int")
+	;~ IniReadS($aLastWall[0], $g_sProfileConfigPath, "AU4Wall", "LastWallX", "-1", "Int")
+	;~ IniReadS($aLastWall[1], $g_sProfileConfigPath, "AU4Wall", "LastWallY", "-1", "Int")
+	;~ IniReadS($iFaceDirection, $g_sProfileConfigPath, "AU4Wall", "FaceDirection", "1", "Int")
 	
 	; samm0d ocr
 	IniReadS($ichkEnableCustomOCR4CCRequest, $g_sProfileConfigPath, "GetMyOcr", "EnableCustomOCR4CCRequest", "0", "Int")
@@ -134,6 +135,14 @@ Func ReadConfig_MOD()
 	; check 4 cc
 	IniReadS($ichkCheck4CC, $g_sProfileConfigPath, "Check4CC", "Enable", "0", "Int")
 	IniReadS($itxtCheck4CCWaitTime, $g_sProfileConfigPath, "Check4CC", "WaitTime", "7", "Int")
+	
+	; request cc
+	IniReadS($ichkRequestCC4Troop, $g_sProfileConfigPath, "RequestCC4Troop", "Enable", "0", "Int")
+	IniReadS($ichkRequestCC4Spell, $g_sProfileConfigPath, "RequestCC4Spell", "Enable", "0", "Int")
+	IniReadS($ichkRequestCC4SeigeMachine, $g_sProfileConfigPath, "RequestCC4SeigeMachine", "Enable", "0", "Int")
+	IniReadS($itxtRequestCC4Troop, $g_sProfileConfigPath, "RequestCC4Troop", "CCStrength", "100", "Int")
+	IniReadS($itxtRequestCC4Spell, $g_sProfileConfigPath, "RequestCC4Spell", "SpellHousing", "2", "Int")
+	IniReadS($itxtRequestCC4SeigeMachine, $g_sProfileConfigPath, "RequestCC4SeigeMachine", "SiegeMachineHousing", "1", "Int")
 	
 	; global delay increse
 	IniReadS($ichkIncreaseGlobalDelay, $g_sProfileConfigPath, "GlobalDelay", "Enable", "0", "Int")
@@ -188,59 +197,5 @@ Func ReadConfig_MOD()
 	Next
 	
 	readFriendlyChallengeSetting()
-	
-
-	; <><><> Team AiO MOD++ (2018) <><><>
-
-	; ClanHop - Team AiO MOD++
-	IniReadS($g_bChkClanHop, $g_sProfileConfigPath, "donate", "chkClanHop", $g_bChkClanHop, "Bool")
-
-	; Bot Humanization - Team AiO MOD++
-	IniReadS($g_ichkUseBotHumanization, $g_sProfileConfigPath, "Bot Humanization", "chkUseBotHumanization", $g_ichkUseBotHumanization, "int")
-	IniReadS($g_ichkUseAltRClick, $g_sProfileConfigPath, "Bot Humanization", "chkUseAltRClick", $g_ichkUseAltRClick, "int")
-	IniReadS($g_ichkCollectAchievements, $g_sProfileConfigPath, "Bot Humanization", "chkCollectAchievements", $g_ichkCollectAchievements, "int")
-	IniReadS($g_ichkLookAtRedNotifications, $g_sProfileConfigPath, "Bot Humanization", "chkLookAtRedNotifications", $g_ichkLookAtRedNotifications, "int")
-	For $i = 0 To 12
-		IniReadS($g_iacmbPriority[$i], $g_sProfileConfigPath, "Bot Humanization", "cmbPriority[" & $i & "]", $g_iacmbPriority[$i], "int")
-	Next
-	For $i = 0 To 1
-		IniReadS($g_iacmbMaxSpeed[$i], $g_sProfileConfigPath, "Bot Humanization", "cmbMaxSpeed[" & $i & "]", $g_iacmbMaxSpeed[$i], "int")
-	Next
-	For $i = 0 To 1
-		IniReadS($g_iacmbPause[$i], $g_sProfileConfigPath, "Bot Humanization", "cmbPause[" & $i & "]", $g_iacmbPause[$i], "int")
-	Next
-	For $i = 0 To 1
-		IniReadS($g_iahumanMessage[$i], $g_sProfileConfigPath, "Bot Humanization", "humanMessage[" & $i & "]", $g_iahumanMessage[$i])
-	Next
-	IniReadS($g_icmbMaxActionsNumber, $g_sProfileConfigPath, "Bot Humanization", "cmbMaxActionsNumber", $g_icmbMaxActionsNumber, "int")
-	IniReadS($g_ichallengeMessage, $g_sProfileConfigPath, "Bot Humanization", "challengeMessage", $g_ichallengeMessage)
-
-	; Goblin XP - Team AiO MOD++
-	IniReadS($ichkEnableSuperXP, $g_sProfileConfigPath, "GoblinXP", "EnableSuperXP", 0, "int")
-	IniReadS($ichkSkipZoomOutXP, $g_sProfileConfigPath, "GoblinXP", "SkipZoomOutXP", 0, "int")
-	IniReadS($ichkFastGoblinXP, $g_sProfileConfigPath, "GoblinXP", "FastGoblinXP", 0, "int")
-	IniReadS($irbSXTraining, $g_sProfileConfigPath, "GoblinXP", "SXTraining", 1, "int")
-	IniReadS($itxtMaxXPtoGain, $g_sProfileConfigPath, "GoblinXP", "MaxXptoGain", 500, "int")
-	IniReadS($ichkSXBK, $g_sProfileConfigPath, "GoblinXP", "SXBK", $eHeroNone)
-	IniReadS($ichkSXAQ, $g_sProfileConfigPath, "GoblinXP", "SXAQ", $eHeroNone)
-	IniReadS($ichkSXGW, $g_sProfileConfigPath, "GoblinXP", "SXGW", $eHeroNone)
-
-	; GTFO - Team AiO MOD++
-	IniReadS($g_bChkUseGTFO, $g_sProfileConfigPath, "GTFO", "chkUseGTFO", $g_bChkUseGTFO, "Bool")
-	IniReadS($g_iTxtMinSaveGTFO_Elixir, $g_sProfileConfigPath, "GTFO", "txtMinSaveGTFO_Elixir", $g_iTxtMinSaveGTFO_Elixir, "Int")
-	IniReadS($g_iTxtMinSaveGTFO_DE, $g_sProfileConfigPath, "GTFO", "txtMinSaveGTFO_DE", $g_iTxtMinSaveGTFO_DE, "Int")
-	IniReadS($g_bChkUseKickOut, $g_sProfileConfigPath, "GTFO", "chkUseKickOut", $g_bChkUseKickOut, "Bool")
-	IniReadS($g_iTxtDonatedCap, $g_sProfileConfigPath, "GTFO", "txtDonatedCap", $g_iTxtDonatedCap, "Int")
-	IniReadS($g_iTxtReceivedCap, $g_sProfileConfigPath, "GTFO", "txtReceivedCap", $g_iTxtReceivedCap, "Int")
-	IniReadS($g_bChkKickOutSpammers, $g_sProfileConfigPath, "GTFO", "chkKickOutSpammers", $g_bChkKickOutSpammers, "Bool")
-	IniReadS($g_iTxtKickLimit, $g_sProfileConfigPath, "GTFO", "txtKickLimit", $g_iTxtKickLimit, "Int")
-
-	; Check Grand Warden Mode - Team AiO MOD++
-	IniReadS($g_bCheckWardenMode, $g_sProfileConfigPath, "other", "chkCheckWardenMode", False, "Bool")
-	IniReadS($g_iCheckWardenMode, $g_sProfileConfigPath, "other", "cmbCheckWardenMode", 0, "int")
-
-	; Restart Search Legend league - Team AiO MOD++
-	IniReadS($g_bIsSearchTimeout, $g_sProfileConfigPath, "other", "ChkSearchTimeout", $g_bIsSearchTimeout, "Bool")
-	IniReadS($g_iSearchTimeout, $g_sProfileConfigPath, "other", "SearchTimeout", $g_iSearchTimeout, "int")
 
 EndFunc   ;==>ReadConfig_MOD

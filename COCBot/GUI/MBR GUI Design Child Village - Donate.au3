@@ -53,12 +53,6 @@ Global $g_hLblDonateTroopTBD1 = 0, $g_hLblDonateTroopTBD2 = 0, $g_hLblDonateTroo
 Global $g_hGrpDonateGeneralBlacklist = 0, $g_hTxtGeneralBlacklist = 0
 Global $lblBtnCustomE = 0
 
-; ClanHop - Team AiO MOD++
-Global $g_hGrpDonateOptions = 0, $g_hChkClanHop = 0
-
-; Request CC Troops at first - Team AiO MOD++
-Global $g_hChkReqCCFirst = 0
-
 ; Schedule
 Global $g_hChkDonateHoursEnable = 0, $g_ahChkDonateHours[24] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Global $g_hCmbFilterDonationsCC = 0, $g_hChkSkipDonateNearFullTroopsEnable = 0

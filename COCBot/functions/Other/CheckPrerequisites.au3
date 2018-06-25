@@ -60,6 +60,7 @@ Func CheckPrerequisites($bSilent = False)
 
 	Return $isAllOK
 EndFunc   ;==>CheckPrerequisites
+
 Func isNetFramework4Installed()
 	Local $z = 0, $sKeyName, $success = False
 	Do

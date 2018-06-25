@@ -74,6 +74,8 @@ MBR GUI Design.au3; CreateMainGUI()
 #include "Functions\GUI\_GUICtrlSetTip.au3"
 #include "functions\GUI\_GUICtrlCreatePic.au3"
 #include "functions\GUI\GUI_State.au3"
+; Sanm0d
+#include "SamM0d\Functions\GUI\GUIScrollbars_Ex.au3"
 
 Global Const $TCM_SETITEM = 0x1306
 Global $_GUI_MAIN_WIDTH = 472 ; changed from 470 to 472 for DPI scaling cutting off right by 2 pixel

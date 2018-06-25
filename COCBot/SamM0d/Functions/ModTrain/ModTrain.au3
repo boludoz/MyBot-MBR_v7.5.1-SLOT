@@ -99,6 +99,8 @@ Func ModTrain($ForcePreTrain = False)
 	If _Sleep(50) Then Return ; 50ms improve pause button response
 	getMyArmyCCSpellCapacity()
 	If _Sleep(50) Then Return ; 50ms improve pause button response
+	getMyArmyCCSeigeMachineCapacity()
+	If _Sleep(50) Then Return ; 50ms improve pause button response
 
 	If $ichkEnableMySwitch = 1 Then
 		Local $iKTime[5] = [0,0,0,0,0]
@@ -180,17 +182,13 @@ Func ModTrain($ForcePreTrain = False)
 	EndGainCost("Train")
 	UpdateStats()
 
-	If $g_bFullArmySpells = False Then
-		$g_bFullArmySpells = ($g_abAttackTypeEnable[$DB] = True And $g_abSearchSpellsWaitEnable[$DB] = False) Or ($g_abAttackTypeEnable[$LB] = True And $g_abSearchSpellsWaitEnable[$LB] = False)
-	EndIf
-
 	If $g_iSamM0dDebug = 1 Then SetLog("$g_bfullArmy: " & $g_bfullArmy)
 	If $g_iSamM0dDebug = 1 Then SetLog("$g_bFullArmyHero: " & $g_bFullArmyHero)
 	If $g_iSamM0dDebug = 1 Then SetLog("$g_bFullArmySpells: " & $g_bFullArmySpells)
 	If $g_iSamM0dDebug = 1 Then SetLog("$g_bFullCCSpells: " & $g_bFullCCSpells)
-	If $g_iSamM0dDebug = 1 Then SetLog("$FullCCTroops: " & $FullCCTroops)
+	If $g_iSamM0dDebug = 1 Then SetLog("$g_FullCCTroops: " & $g_FullCCTroops)
 
-	If $FullCCTroops = False Or $g_bFullCCSpells = False Then
+	If $g_FullCCTroops = False Or $g_bFullCCSpells = False Then
 		If $ichkEnableMySwitch = 1 Then
 			; If waiting for cc or cc spell, ignore stay to the account, cause you don't know when the cc or spell will be ready.
 			If $g_iSamM0dDebug = 1 Then SetLog("Disable Avoid Switch cause of waiting cc or cc spell enable.")
@@ -198,7 +196,7 @@ Func ModTrain($ForcePreTrain = False)
 		EndIf
 	EndIf
 
-	If $g_bFullArmy = True And $g_bFullArmyHero = True And $g_bFullArmySpells = True And $g_bFullCCSpells = True And $FullCCTroops = True Then
+	If $g_bFullArmy = True And $g_bFullArmyHero = True And $g_bFullArmySpells = True And $g_bFullCCSpells = True And $g_FullCCTroops = True Then
 		$g_bIsFullArmywithHeroesAndSpells = True
 	Else
 		$g_bIsFullArmywithHeroesAndSpells = False

@@ -470,7 +470,6 @@ Func UpdateStats($bForceUpdate = False)
 		$bDonateSpellsStatsChanged = False
 	EndIf
 
-
 	; samm0d - samm0dzap
 	; SmartZap DE Gain
 	If $s_iOldSmartZapGain <> $g_iSmartZapGain Then
@@ -486,7 +485,6 @@ Func UpdateStats($bForceUpdate = False)
 		GUICtrlSetData($lblMyLightningUsed, _NumberFormat($g_iNumLSpellsUsed, True))
 		$s_iOldNumLSpellsUsed = $g_iNumLSpellsUsed
 	EndIf
-	;--------------------
 
 	If $s_iOldNumEQSpellsUsed <> $g_iNumEQSpellsUsed Then
 		$bStatsUpdated = True
@@ -707,7 +705,6 @@ Func UpdateStats($bForceUpdate = False)
 		EndIf
 	EndIf
 	;===================================
-
 
 	If ProfileSwitchAccountEnabled() Then
 		For $i = 0 To 7

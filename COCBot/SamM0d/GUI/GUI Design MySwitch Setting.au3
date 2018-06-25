@@ -29,7 +29,7 @@ For $i = 0 To 7
 		GUICtrlSetData(-1, GetTranslatedFileIni("sam m0d", "SwitchTypeAttack", "Attack") & "|" & GetTranslatedFileIni("sam m0d", "SwitchTypeDonate", "Donate"), GetTranslatedFileIni("sam m0d", "SwitchTypeAttack", "Attack"))
 		GUICtrlSetOnEvent(-1, "chkEnableAcc")
 	$cmbStayTime[$i] = GUICtrlCreateCombo("", $x + 363, $y + 1, 38, 18, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-		GUICtrlSetData(-1, "0|5|10|15|30","0")
+		GUICtrlSetData(-1, "0|5|10|15|20|25|30|45|60|120","0")
 		_GUICtrlSetTip(-1, GetTranslatedFileIni("sam m0d", "Setting for Stay how long (minutes) with this account.", "Setting for Stay how long (minutes) with this account."))
 		GUICtrlSetOnEvent(-1, "chkEnableAcc")
 	$chkPriority[$i] = GUICtrlCreateCheckbox(" ", $x + 405, $y + 6, 12, 12)

@@ -84,55 +84,38 @@ Func ReturnHome($TakeSS = 1, $GoldChangeCheck = True) ;Return main screen
 	SetLog("Returning Home", $COLOR_INFO)
 	If $g_bRunState = False Then Return
 
+	TrayTip($g_sBotTitle, "", BitOR($TIP_ICONASTERISK, $TIP_NOSOUND)) ; clear village search match found message
+
 	; ---- CLICK SURRENDER BUTTON ----
 	; samm0d - waiting for return home button appear
 	$i = 0 ; Reset Loop counter
 	While IsReturnHomeBattlePage(True, False) = False ; dynamic wait loop for surrender button to appear
-		If $g_bDebugSetlog Then SetDebugLog("Wait for surrender button to appear #" & $i)
-		If _CheckPixel($aSurrenderButton, $g_bCapturePixel) Then ;is surrender button is visible?
-			If IsAttackPage() Then ; verify still on attack page, and battle has not ended magically before clicking
-				ClickP($aSurrenderButton, 1, 0, "#0099") ;Click Surrender
-				$j = 0
-				While 1 ; dynamic wait for Okay button
-					If $g_bDebugSetlog Then SetDebugLog("Wait for OK button to appear #" & $j)
-					If IsEndBattlePage(False) Then
-						ClickOkay("SurrenderOkay") ; Click Okay to Confirm surrender
-						ExitLoop 2
-					Else
-						$j += 1
-					EndIf
-					If ReturnHomeMainPage() Then Return
-					If $j > 10 Then ExitLoop ; if Okay button not found in 10*(200)ms or 2 seconds, then give up.
-					If _Sleep($DELAYRETURNHOME5) Then Return
-				WEnd
-			Else
-				$i += 1
-			EndIf
-		Else
-			$i += 1
-		EndIf
 		If ReturnHomeMainPage() Then Return
-		If $i > 5 Then ExitLoop ; if end battle or surrender button are not found in 5*(200)ms + 10*(200)ms or 3 seconds, then give up.
+		If IsAttackPage() Then
+			If $g_bDebugSetlog Then SetDebugLog("Wait for surrender button to appear #" & $i)
+			If _Wait4Pixel($aSurrenderButton[0], $aSurrenderButton[1], $aSurrenderButton[2], $aSurrenderButton[3], 3000) = False Then
+				;SetLog("surrender or end battle button not found.")
+				Return
+			EndIf
+			ClickP($aSurrenderButton, 1, 0, "#0099") ;Click Surrender
+			If _Wait4Pixel(470, 410, 0xE0F78B, 40, 3000) = False Then
+				;SetLog("Okay button not found.")
+				Return
+			EndIf
+			Click(Random(487,543,1),Random(415,445,1), 1, 0, "#SurrenderOkay") ;Click Surrender
+		EndIf
+		$i += 1
+		If $i > 5 Then
+			CheckAndroidReboot(False)
+			Return ; if end battle or surrender button are not found in 5*(200)ms + 10*(200)ms or 3 seconds, then give up.
+		EndIf
 		If _Sleep($DELAYRETURNHOME5) Then Return
 	WEnd
 
-	TrayTip($g_sBotTitle, "", BitOR($TIP_ICONASTERISK, $TIP_NOSOUND)) ; clear village search match found message
-
-	CheckAndroidReboot(False)
+	;CheckAndroidReboot(False)
 
 	If $GoldChangeCheck Then
-		; samm0d - cannot be still at attack page
-;~ 		If IsAttackPage() Then
-;~ 			$counter = 0
-;~ 			While _ColorCheck(_GetPixelColor($aRtnHomeCheck1[0], $aRtnHomeCheck1[1], True), Hex($aRtnHomeCheck1[2], 6), $aRtnHomeCheck1[3]) = False And _ColorCheck(_GetPixelColor($aRtnHomeCheck2[0], $aRtnHomeCheck2[1], True), Hex($aRtnHomeCheck2[2], 6), $aRtnHomeCheck2[3]) = False ; test for Return Home Button
-;~ 				If $g_bDebugSetlog Then SetDebugLog("Wait for Return Home Button to appear #" & $counter)
-;~ 				If _Sleep($DELAYRETURNHOME2) Then ExitLoop
-;~ 				$counter += 1
-;~ 				If $counter > 40 Then ExitLoop
-;~ 			WEnd
-;~ 		EndIf
-;~ 		If _Sleep($DELAYRETURNHOME3) Then Return ; wait for all report details
-		_CaptureRegion()
+		; samm0d
 		AttackReport()
 		If _Sleep(200) Then Return ; setlog and pause response
 	EndIf

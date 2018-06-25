@@ -11,6 +11,7 @@
 ; Related .......:
 ; Link ..........: https://github.com/MyBotRun/MyBot/wiki
 ; Example .......: No
+; #FUNCTION# ====================================================================================================================
 
 Global $sTxtBarbarians = GetTranslatedFileIni("MBR Global GUI Design Names Troops", "TxtBarbarians", "Barbarians")
 Global $sTxtArchers = GetTranslatedFileIni("MBR Global GUI Design Names Troops", "TxtArchers", "Archers")
@@ -42,14 +43,15 @@ Global $sTxtPoisonSpells = GetTranslatedFileIni("MBR Global GUI Design Names Spe
 Global $sTxtEarthquakeSpells = GetTranslatedFileIni("MBR Global GUI Design Names Spells", "TxtShortEarthquakeSpells", "EarthQuake")
 Global $sTxtHasteSpells = GetTranslatedFileIni("MBR Global GUI Design Names Spells", "TxtShortHasteSpells", "Haste")
 Global $sTxtSkeletonSpells = GetTranslatedFileIni("MBR Global GUI Design Names Spells", "TxtShortSkeletonSpells", "Skeleton")
+
 ; Check Grand Warden Mode - Team AiO MOD++
 Global $g_hChkCheckWardenMode = 0, $g_hCmbCheckWardenMode = 0
 Global $hGUI_MOD = 0
 Local $sTxtTip
 
-$hGUI_MOD = GUICreate("", $_GUI_MAIN_WIDTH - 20, $_GUI_MAIN_HEIGHT - 255, $_GUI_CHILD_LEFT, $_GUI_CHILD_TOP, $WS_CHILD, -1, $g_hFrmBotEx)
+$hGUI_MOD = _GUICreate("", $_GUI_MAIN_WIDTH - 10, $_GUI_MAIN_HEIGHT - 255, $_GUI_CHILD_LEFT, $_GUI_CHILD_TOP, $WS_CHILD, -1, $g_hFrmBotEx)
 
-;GUISetBkColor($COLOR_WHITE, $hGUI_BOT)
+GUISetBkColor($COLOR_WHITE, $hGUI_MOD)
 
 GUISwitch($hGUI_MOD)
 
@@ -192,12 +194,15 @@ GUICtrlCreateGroup("", -99, -99, 1, 1)
 				;GUISetState(@SW_SHOW)
 				GUICtrlSetOnEvent(-1, "AttackNowLB")
 
-SplashStep("Loading M0d - Attack II tab...")
-GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d", 112, "Attack II"))
+;SplashStep("Loading M0d - Attack II tab...")
+;GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d", 112, "Attack II"))
 
-GUICtrlCreateGroup("", -99, -99, 1, 1)
+;GUICtrlCreateGroup("", -99, -99, 1, 1)
+;
+;Local $x = 10, $y = 30
 
-Local $x = 10, $y = 30
+$x += 10
+$y += 30 + 75
 
 GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", 107, "Deploy speed for all standard attack mode."), $x, $y, 430, 82)
 
@@ -327,7 +332,12 @@ $y += 25
 	GUICtrlSetState(-1, $GUI_CHECKED)
 	$txtIFTHLevel = GUICtrlCreateCombo("", $x+30, $y+25, 100, 20, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			GUICtrlSetData(-1, "7|8|9|10","7")
+; Create scrollbars in child
 
+_GUIScrollbars_Generate ($hGUI_MOD, 300, $y + 100, 0, 0, False, 0, True)
+GUICtrlCreateGroup("", -99, -99, 1, 1)
+
+; ========================================================================================================================
 Local $x = 10, $y = 30
 SplashStep("Loading M0d - Advanced Random tab...")
 GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d", 10, "Random Humanization"))
@@ -366,9 +376,8 @@ $grpHLFClick = GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", 11, "Advanced 
 		GUICtrlSetOnEvent(-1, "chkEnableHLFClickSetlog")
 
 	$y += 80
-
-		GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", "_Sleep", "Advanced Random _Sleep"), $x, $y, 430, 180)
 	; More Human _Sleep
+		GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", "_Sleep", "Advanced Random _Sleep"), $x, $y, 430, 180)
 	$g_chkUseRandomSleep = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", "_Sleep", "Advanced Random _Sleep."),$x+10, $y+20)
 		$sTxtTip = "More human _Sleep time. Does not affect the waiting time."
 		GUICtrlSetState(-1, $GUI_CHECKED)
@@ -389,6 +398,7 @@ $grpHLFClick = GUICtrlCreateGroup(GetTranslatedFileIni("sam m0d", 11, "Advanced 
 		_GUICtrlSetTip(-1, $sTxtTip)
 		GUICtrlSetState(-1, $GUI_UNCHECKED)
 		GUICtrlSetOnEvent(-1, "chkUseRandomSleepDbg")
+		
 SplashStep("Loading M0d - Humanization tab...")
 GUICtrlCreateTabItem(GetTranslatedFileIni("sam m0d","Humanization", "Humanization"))
 HumanizationGUI()
@@ -449,8 +459,8 @@ $cmbMyQuickTrain = GUICtrlCreateCombo("", $x+300, $y+20, 130, 20, BitOR($CBS_DRO
 
 
 Local $sComboData= ""
-Local $aTroopOrderList[21] = ["","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"]
-For $j = 0 To 20
+Local $aTroopOrderList[20] = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"]
+For $j = 0 To 19
 	$sComboData &= $aTroopOrderList[$j] & "|"
 Next
 
@@ -481,7 +491,7 @@ For $i = 0 To UBound($MyTroops) - 1
 		GUICtrlSetData(-1, $sComboData, $i + 1)
 		GUICtrlSetOnEvent(-1, "cmbMyTroopOrder")
 	$y +=24
-	If $i = 11 Then
+	If $i = 12 Then
 		$x = 205
 		$y = $yStart + 40
 	EndIf
@@ -766,7 +776,7 @@ $txtCCStrength = GUICtrlCreateInput("100", $x + 255, $y+2, 31, 20, BitOR($GUI_SS
 	Local $asTroopsList[11]
 	Local $sComboData= GetTranslatedFileIni("sam m0d", "Un specify","Un specify")
 	For $i = 1 To UBound($MySpells)
-		$sComboData =  $sComboData & "|" & Eval("sTxt" & StringReplace(MyNameOfTroop($i - 1 + 23,2)," ",""))
+		$sComboData =  $sComboData & "|" & Eval("sTxt" & StringReplace(MyNameOfTroop($i - 1 + $eLSpell,2)," ",""))
 	Next
 
 	$y += 55
@@ -796,6 +806,50 @@ $txtCCStrength = GUICtrlCreateInput("100", $x + 255, $y+2, 31, 20, BitOR($GUI_SS
 	_GUICtrlSetTip(-1, GetTranslatedFileIni("sam m0d", "Unit Quantity", "Unit Quantity"))
 	GUICtrlSetLimit(-1, 3)
 	GUICtrlSetOnEvent(-1, "chkWait4CCSpell")
+
+	$y += 50
+
+	$chkRequestCC4Troop = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", "Request CC for troop", "Only Request CC Troops when CC Troops Strength less than:"), $x+10, $y, -1, -1)
+	GUICtrlSetOnEvent(-1, "chkRequestCC4Troop")
+	GUICtrlSetState(-1, $GUI_UNCHECKED)
+
+	$txtRequestCC4Troop = GUICtrlCreateInput("100", $x + 335, $y+2, 31, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+		$sTxtTip = "CC Troops Strength"
+		_GUICtrlSetTip(-1, $sTxtTip)
+		GUICtrlSetLimit(-1, 3)
+		GUICtrlSetState(-1, $GUI_DISABLE)
+		GUICtrlSetData(-1, 100)
+		GUICtrlSetOnEvent(-1, "chkRequestCC4Troop")
+		GUICtrlCreateLabel("%", $x + 366, $y+6, -1, -1)
+		_GUICtrlSetTip(-1, $sTxtTip)
+	
+		$y += 25
+
+	$chkRequestCC4Spell = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", "Request CC for spell", "Only Request CC Spell when housing space less than:"), $x+10, $y,  -1, -1)
+		GUICtrlSetOnEvent(-1, "chkRequestCC4Troop")
+		GUICtrlSetState(-1, $GUI_UNCHECKED)
+	
+	$txtRequestCC4Spell = GUICtrlCreateInput("2", $x + 335, $y+2, 31, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+		$sTxtTip = "CC Spells Housing Space"
+		_GUICtrlSetTip(-1, $sTxtTip)
+		GUICtrlSetLimit(-1, 2)
+		GUICtrlSetState(-1, $GUI_DISABLE)
+		GUICtrlSetData(-1, 2)
+		GUICtrlSetOnEvent(-1, "chkRequestCC4Troop")
+		
+		$y += 25
+	
+	$chkRequestCC4SeigeMachine = GUICtrlCreateCheckbox(GetTranslatedFileIni("sam m0d", "Request CC for seige machine", "Only Request CC Seige Machine when housing space less than:"), $x+10, $y,  -1, -1)
+		GUICtrlSetOnEvent(-1, "chkRequestCC4Troop")
+		GUICtrlSetState(-1, $GUI_UNCHECKED)
+	
+	$txtRequestCC4SeigeMachine = GUICtrlCreateInput("1", $x + 335, $y+2, 31, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+	$sTxtTip = "Seige Machine Housing Space"
+	_GUICtrlSetTip(-1, $sTxtTip)
+	GUICtrlSetLimit(-1, 1)
+	GUICtrlSetState(-1, $GUI_DISABLE)
+	GUICtrlSetData(-1, 1)
+	GUICtrlSetOnEvent(-1, "chkRequestCC4Troop")
 
 
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
@@ -1081,12 +1135,7 @@ $txtLogLineLimit = GUICtrlCreateInput("240", $x + 300, $y+2, 35, 18, BitOR($GUI_
 ;~ 	GUICtrlSetOnEvent(-1, "chkRemoveSpecialObstacleBB")
 ;~ 	GUICtrlSetState(-1, $GUI_UNCHECKED)
 
+GUICtrlCreateGroup("", -99, -99, 1, 1)
+
+
 GUICtrlCreateTabItem("") ; end tabitem definition
-
-
-
-
-
-
-
-

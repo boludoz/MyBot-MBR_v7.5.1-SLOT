@@ -299,10 +299,10 @@
 #include "functions\Config\saveConfig.au3"
 
 ; SamM0d config
-#include "SamM0d\Functions\Config\applyConfig.au3"
-#include "SamM0d\Functions\Config\readConfig.au3"
 #include "SamM0d\Functions\Config\saveConfig.au3"
-
+#include "SamM0d\Functions\Config\readConfig.au3"
+#include "SamM0d\Functions\Config\applyConfig.au3"
+#include "SamM0d\SaveModCFG.au3"
 ;===========Samm0d collection==============================
 ; Random _Sleep
 #include "SamM0d\functions\_Sleep random.au3"
@@ -313,16 +313,9 @@
 #include "SamM0d\Functions\FriendlyChallenge.au3"
 #include "SamM0d\Functions\MySwitch\MySwitch.au3"
 
-; Misc Mod
-#include "SamM0d\GUI\MOD GUI Design - Misc.au3"
-
-; Bot Humanization
-#include "SamM0d\GUI\MOD GUI Design - BotHumanization.au3"
-
-; Goblin XP
-#include "SamM0d\GUI\MOD GUI Design - GoblinXP.au3"
-
+; Stop War
 #include "SamM0d\Functions\CheckStopForWar.au3"
+
 ; Mod Train
 ;---------------------------------------------------------------
 #include "SamM0d\Functions\ModTrain\ModTrain.au3"
@@ -362,6 +355,13 @@
 #include "SamM0d\MBRMates\Multi Fingers\multiFinger.au3"
 #include "SamM0d\MBRMates\Multi Fingers\unitInfo.au3"
 ;==========================================================
+
+; Misc Mod
+#include "SamM0d\GUI\MOD GUI Design - Misc.au3"
+; Bot Humanization
+#include "SamM0d\GUI\MOD GUI Design - BotHumanization.au3"
+; Goblin XP
+#include "SamM0d\GUI\MOD GUI Design - GoblinXP.au3"
 
 ; ClanHop - Team AiO MOD++
 #include "SamM0d\functions\Mod's\ClanHop.au3"

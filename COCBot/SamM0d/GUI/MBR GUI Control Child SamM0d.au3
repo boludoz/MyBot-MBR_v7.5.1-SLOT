@@ -8,12 +8,12 @@ EndFunc
 
 Func cmbMyTroopOrder()
 	Local $tempOrder[20]
-	For $i = 0 To 19
+	For $i = 0 To UBound($MyTroops) - 1
 		$tempOrder[$i] = Int(GUICtrlRead(Eval("cmbMy" & $MyTroops[$i][0] & "Order")))
 	Next
-	For $i = 0 To 19
+	For $i = 0 To UBound($MyTroops) - 1
 		If $tempOrder[$i] <> $MyTroops[$i][1] Then
-			For $j = 0 To 19
+			For $j = 0 To UBound($MyTroops) - 1
 				If $MyTroops[$j][1] = $tempOrder[$i] Then
 					$tempOrder[$j] = Int($MyTroops[$i][1])
 					ExitLoop
@@ -22,7 +22,7 @@ Func cmbMyTroopOrder()
 			ExitLoop
 		EndIf
 	Next
-	For $i = 0 To 19
+	For $i = 0 To UBound($MyTroops) - 1
 		$MyTroopsSetting[$icmbTroopSetting][$i][1] = Int($tempOrder[$i])
 		$MyTroops[$i][1] = $MyTroopsSetting[$icmbTroopSetting][$i][1]
 		_GUICtrlComboBox_SetCurSel(Eval("cmbMy" & $MyTroops[$i][0] & "Order"), $MyTroops[$i][1]-1)
@@ -72,12 +72,12 @@ EndFunc
 Func cmbMySpellOrder()
 	Local $tempOrder[10]
 
-	For $i = 0 To 9
+	For $i = 0 To UBound($MySpells) - 1
 		$tempOrder[$i] = Int(GUICtrlRead(Eval("cmbMy" & $MySpells[$i][0] & "SpellOrder")))
 	Next
-	For $i = 0 To 9
+	For $i = 0 To UBound($MySpells) - 1
 		If $tempOrder[$i] <> $MySpells[$i][1] Then
-			For $j = 0 To 9
+			For $j = 0 To UBound($MySpells) - 1
 				If $MySpells[$j][1] = $tempOrder[$i] Then
 					$tempOrder[$j] = Int($MySpells[$i][1])
 					ExitLoop
@@ -86,7 +86,7 @@ Func cmbMySpellOrder()
 			ExitLoop
 		EndIf
 	Next
-	For $i = 0 To 9
+	For $i = 0 To UBound($MySpells) - 1
 		$MySpellSetting[$icmbTroopSetting][$i][1] = Int($tempOrder[$i])
 		$MySpells[$i][1] =  $MySpellSetting[$icmbTroopSetting][$i][1]
 		_GUICtrlComboBox_SetCurSel(Eval("cmbMy" & $MySpells[$i][0] & "SpellOrder"), $MySpells[$i][1]-1)
@@ -208,7 +208,7 @@ Func cmbMyQuickTrain()
 EndFunc
 
 Func btnResetTroops()
-	For $i = 0 To 19
+	For $i = 0 To UBound($MyTroops)-1
 		GUICtrlSetData(Eval("txtMy" & $MyTroops[$i][0]),"0")
 		$MyTroops[$i][3] = 0
 	Next
@@ -216,21 +216,21 @@ Func btnResetTroops()
 EndFunc
 
 Func btnResetOrder()
-	For $i = 0 To 19
+	For $i = 0 To UBound($MyTroops)-1
 		_GUICtrlComboBox_SetCurSel(Eval("cmbMy" & $MyTroops[$i][0] & "Order"), $i)
 		$MyTroops[$i][1] = $i + 1
 	Next
 EndFunc
 
 Func btnResetSpells()
-	For $i = 0 To 9
+	For $i = 0 To UBound($MySpells)-1
 		GUICtrlSetData(Eval("txtNum" & $MySpells[$i][0] & "Spell"),"0")
 		$MySpells[$i][3] = 0
 	Next
 EndFunc
 
 Func btnResetSpellOrder()
-	For $i = 0 To 9
+	For $i = 0 To UBound($MySpells)-1
 		_GUICtrlComboBox_SetCurSel(Eval("cmbMy" & $MySpells[$i][0] & "SpellOrder"), $i)
 		$MySpells[$i][1] = $i + 1
 	Next
@@ -481,6 +481,45 @@ Func chkWait4CC()
 	$iCCTroopSlotQty3 = GUICtrlRead($txtCCTroopSlotQty3)
 EndFunc
 
+Func chkRequestCC4Troop()
+	If GUICtrlRead($chkRequestCC4Troop) = $GUI_CHECKED Then
+		$ichkRequestCC4Troop = 1
+		GUICtrlSetState($txtRequestCC4Troop, $GUI_ENABLE)
+		;SetLog("$ichkRequestCC4Troop: " & $ichkRequestCC4Troop)
+	Else
+		$ichkRequestCC4Troop = 0
+		GUICtrlSetState($txtRequestCC4Troop, $GUI_DISABLE)
+		;SetLog("$ichkRequestCC4Troop: " & $ichkRequestCC4Troop)
+	EndIf
+	$itxtRequestCC4Troop = GUICtrlRead($txtRequestCC4Troop)
+	;SetLog("$itxtRequestCC4Troop: " & $itxtRequestCC4Troop)
+
+	If GUICtrlRead($chkRequestCC4Spell) = $GUI_CHECKED Then
+		$ichkRequestCC4Spell = 1
+		GUICtrlSetState($txtRequestCC4Spell, $GUI_ENABLE)
+		;SetLog("$ichkRequestCC4Spell: " & $ichkRequestCC4Spell)
+	Else
+		$ichkRequestCC4Spell = 0
+		GUICtrlSetState($txtRequestCC4Spell, $GUI_DISABLE)
+		;SetLog("$ichkRequestCC4Spell: " & $ichkRequestCC4Spell)
+	EndIf
+	$itxtRequestCC4Spell = GUICtrlRead($txtRequestCC4Spell)
+	;SetLog("$itxtRequestCC4Spell: " & $itxtRequestCC4Spell)
+
+
+	If GUICtrlRead($chkRequestCC4SeigeMachine) = $GUI_CHECKED Then
+		$ichkRequestCC4SeigeMachine = 1
+		GUICtrlSetState($txtRequestCC4SeigeMachine, $GUI_ENABLE)
+		;SetLog("$ichkRequestCC4SeigeMachine: " & $ichkRequestCC4SeigeMachine)
+	Else
+		$ichkRequestCC4SeigeMachine = 0
+		GUICtrlSetState($txtRequestCC4SeigeMachine, $GUI_DISABLE)
+		;SetLog("$ichkRequestCC4SeigeMachine: " & $ichkRequestCC4SeigeMachine)
+	EndIf
+	$itxtRequestCC4SeigeMachine = GUICtrlRead($txtRequestCC4SeigeMachine)
+	;SetLog("$itxtRequestCC4SeigeMachine: " & $itxtRequestCC4SeigeMachine)
+EndFunc
+
 Func chkWait4CCSpell()
 	If GUICtrlRead($chkWait4CCSpell) = $GUI_CHECKED Then
 		$g_iChkWait4CCSpell = 1
@@ -557,6 +596,25 @@ Func chkEnableHLFClick()
 		$ichkEnableHLFClick = 0
 	EndIf
 EndFunc
+
+;_Sleep 
+Func chkUseRandomSleep()
+	If GUICtrlRead($g_chkUseRandomSleep) = $GUI_CHECKED Then
+		$g_ichkUseRandomSleep = 1
+		Else
+		$g_ichkUseRandomSleep = 0
+		EndIf
+EndFunc   ;==>chkUseRandomSleep
+
+Func chkUseRandomSleepDbg()
+    If GUICtrlRead($g_chkUseRandomSleepDbg) = $GUI_CHECKED Then
+        $g_ichkUseRandomSleepDbg = 1
+		$g_bDebugSleep = 1
+        Else
+        $g_ichkUseRandomSleepDbg = 0
+        $g_bDebugSleep = 0
+        EndIf
+EndFunc   ;==>chkUseRandomSleepDbg
 
 ;-Func chkSmartUpdateWall()
 ;-	If GUICtrlRead($chkSmartUpdateWall) = $GUI_CHECKED Then
@@ -996,24 +1054,3 @@ Func chkSearchTimeout()
 		_GUI_Value_STATE("DISABLE", $g_hLblSearchTimeout & "#" & $g_hTxtSearchTimeout & "#" & $g_hLblSearchTimeoutminutes)
 	EndIf
 EndFunc   ;==>chkSearchTimeout
-
-;_Sleep 
-Func chkUseRandomSleep()
-	If GUICtrlRead($g_chkUseRandomSleep) = $GUI_CHECKED Then
-			$g_ichkUseRandomSleep = 1
-		Else
-			$g_ichkUseRandomSleep = 0
-			GUICtrlSetState($g_chkUseRandomSleep, $GUI_UNCHECKED)
-		EndIf
-EndFunc   ;==>chkUseRandomSleep
-
-Func chkUseRandomSleepDbg()
-    If GUICtrlRead($g_chkUseRandomSleepDbg) = $GUI_CHECKED Then
-        $g_ichkUseRandomSleepDbg = 1
-        $g_bDebugSleep = 1
-        Else
-        $g_ichkUseRandomSleepDbg = 0
-        $g_bDebugSleep = 0
-            GUICtrlSetState($g_chkUseRandomSleepDbg, $GUI_UNCHECKED)
-        EndIf
-EndFunc   ;==>chkUseRandomSleepDbg

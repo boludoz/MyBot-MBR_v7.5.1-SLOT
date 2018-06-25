@@ -41,6 +41,7 @@ Func LimitLines(ByRef $hRichText, $sDelimiter = @CR, $iMaxLength = 200) ;$iMaxLe
         ;_SendMessage($hTxtLog, $WM_SETREDRAW, True, 0) ; enabled RechEdit redraw again
     EndIf
 EndFunc
+
 Global $g_oTxtSALogInitText = ObjCreate("Scripting.Dictionary")
 Global $g_bSilentSetDebugLog = False
 Global $g_aLastStatusBar
@@ -327,6 +328,7 @@ Func SetAtkLog($String1, $String2 = "", $Color = $COLOR_BLACK, $Font = "Lucida C
 	;string1 see in video, string1&string2 put in file
 	_FileWriteLog($g_hAttackLogFile, $String1 & $String2)
 
+	; samm0d
 	If $g_iLCID = 1028 Then
 		If $Font = "Lucida Console" And $FontSize = 7.5 Then
 			$Font = "MingLiU"
@@ -381,6 +383,7 @@ EndFunc   ;==>__FileWriteLog
 Func ClearLog($hRichEditCtrl = $g_hTxtLog)
 	Switch $hRichEditCtrl
 		Case $g_hTxtLog
+			; samm0d
 			If $ichkBotLogLineLimit Then Return
 			$g_oTxtLogInitText($g_oTxtLogInitText.Count + 1) = 0
 		Case $g_hTxtAtkLog

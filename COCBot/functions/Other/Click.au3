@@ -17,6 +17,7 @@
 #include <WinAPISys.au3>
 
 Func Click($x, $y, $times = 1, $speed = 0, $debugtxt = "")
+	; samm0d
 	If $ichkEnableHLFClick = 1 Then
 		Local $txt =""
 		Local $PrevCoor = $x & "," & $y
@@ -133,6 +134,7 @@ Func BuildingClickP($point, $debugtxt = "")
 EndFunc   ;==>BuildingClickP
 
 Func PureClick($x, $y, $times = 1, $speed = 0, $debugtxt = "")
+	; samm0d
 	If $ichkEnableHLFClick = 1 Then
 		Local $txt = ""
 		Local $PrevCoor = $x & "," & $y
@@ -185,7 +187,7 @@ Func PureClickP($point, $howMuch = 1, $speed = 0, $debugtxt = "")
 EndFunc   ;==>PureClickP
 
 Func GemClick($x, $y, $times = 1, $speed = 0, $debugtxt = "")
-
+	; samm0d
 	If $ichkEnableHLFClick = 1 Then
 		Local $txt = ""
 		Local $PrevCoor = $x & "," & $y

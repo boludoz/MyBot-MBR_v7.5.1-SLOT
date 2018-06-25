@@ -36,9 +36,6 @@ Func checkObstacles($bBuilderBase = False) ;Checks if something is in the way fo
 	Local $checkObstaclesWasActive = $checkObstaclesActive
 	$checkObstaclesActive = True
 
-	; samm0d
-	_CaptureRegions()
-
 	Local $Result = _checkObstacles($bBuilderBase, $checkObstaclesWasActive)
 	OcrForceCaptureRegion($wasForce)
 	$checkObstaclesActive = $checkObstaclesWasActive
@@ -49,7 +46,7 @@ Func _checkObstacles($bBuilderBase = False, $bRecursive = False) ;Checks if some
 	Local $msg, $x, $y, $Result
 	$g_bMinorObstacle = False
 
-	;_CaptureRegions()
+	_CaptureRegions()
 
 	If Not $bRecursive Then
 		If checkObstacles_Network() Then Return True
@@ -237,6 +234,7 @@ Func _checkObstacles($bBuilderBase = False, $bRecursive = False) ;Checks if some
 		Return checkObstacles_ReloadCoC(Default, "", $bRecursive) ; just start CoC (but first close it!)
 	EndIf
 
+
 	;samm0d for my switch problem prevention
 	;=======================================
 	If _ColorCheck(_GetPixelColor(160, 380,$g_bNoCapturePixel), Hex(0xFFFFFF, 6),5) And _ColorCheck(_GetPixelColor(699, 380,$g_bNoCapturePixel), Hex(0xFFFFFF, 6),5) Then
@@ -292,7 +290,6 @@ Func _checkObstacles($bBuilderBase = False, $bRecursive = False) ;Checks if some
 		Return False
 	EndIf
 	;=============================
-
 
 	Local $bHasTopBlackBar = _ColorCheck(_GetPixelColor(10, 3), Hex(0x000000, 6), 1) And _ColorCheck(_GetPixelColor(300, 6), Hex(0x000000, 6), 1) And _ColorCheck(_GetPixelColor(600, 9), Hex(0x000000, 6), 1)
 	If _ColorCheck(_GetPixelColor(235, 209 + $g_iMidOffsetY), Hex(0x9E3826, 6), 20) Then

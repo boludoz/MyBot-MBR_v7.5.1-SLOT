@@ -62,6 +62,17 @@ Global $ichkDropCCFirst = 0
 ;~ ; Remove Special Obstacle at Builder Base
 ;~ Global $ichkRemoveSpecialObstacleBB, $chkRemoveSpecialObstacleBB
 
+
+; Only Request CC
+Global $chkRequestCC4Troop, $txtRequestCC4Troop
+Global $chkRequestCC4Spell, $txtRequestCC4Spell
+Global $chkRequestCC4SeigeMachine, $txtRequestCC4SeigeMachine
+
+Global $ichkRequestCC4Troop, $itxtRequestCC4Troop, $ichkRequestCC4Spell, $itxtRequestCC4Spell, $ichkRequestCC4SeigeMachine, $itxtRequestCC4SeigeMachine
+Global $g_bNeedRequestCCTroop = False
+Global $g_bNeedRequestCCSpell = False
+Global $g_bNeedRequestCCSeigeMachine = False
+
 ; Donate not over unit
 Global $ichkEnableLimitDonateUnit, $chkEnableLimitDonateUnit, $itxtLimitDonateUnit, $txtLimitDonateUnit, $iDonatedUnit
 
@@ -114,12 +125,16 @@ Global $CurCCCamp = 0
 Global $CurTotalCCCamp = 0
 Global $CCCapacity = 0
 Global $CCStrength = 100
-Global $FullCCTroops = False
+Global $g_FullCCTroops = False
 ; Wait For CC Spell
 Global $g_iChkWait4CCSpell = False
 Global $g_iCurCCSpellCamp = 0
 Global $g_iCurTotalCCSpellCamp = 0
 Global $g_bFullCCSpells = False
+
+Global $g_iCurCCSeigeMachineCamp = 0
+Global $g_iCurTotalCCSeigeMachineCamp = 0
+Global $g_bFullCCSeigeMachine = False
 
 
 ;~ Global $chkEnableADBClick
@@ -361,6 +376,7 @@ Global $g_hCalTotalWarTroops, $g_hLblTotalWarTroopsProgress, $g_hLblCountWarTroo
 Global $g_hCalTotalWarSpells, $g_hLblTotalWarSpellsProgress, $g_hLblCountWarSpellsTotal
 
 Global $g_hChkRequestCCForWar = 0, $g_hTxtRequestCCForWar = 0 
+
 ; Bot Humanization - Team AiO MOD++
 Global $g_iacmbPriority[13] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Global $g_iacmbMaxSpeed[2] = [1, 1]
