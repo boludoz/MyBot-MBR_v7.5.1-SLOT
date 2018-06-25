@@ -73,7 +73,7 @@ MainLoop(CheckPrerequisites())
 
 Func UpdateBotTitle()
 	Local $sConsoleTitle ; Console title has also Android Emulator Name
-	Local $sTitle = "My Bot " & $g_sBotVersion & " @Samkie M0d v1.4.4 + v16"
+	Local $sTitle = "My Bot " & $g_sBotVersion & " @Samkie M0d v1.4.4 + v17.b"
 	If $g_sBotTitle = "" Then
 		$g_sBotTitle = $sTitle
 		$sConsoleTitle = $sTitle
@@ -1358,7 +1358,7 @@ Func _RunFunction($action)
 				Else
 					If $g_iSamM0dDebug = 1 Then SetLog("Halt mode - training disabled [Before donate]", $COLOR_DEBUG)
 				EndIf
-
+		Endif
 			If $g_iActiveDonate And $g_bChkDonate Then
 				If $g_bFirstStart Then
 					getArmyTroopCapacity(True, False)
