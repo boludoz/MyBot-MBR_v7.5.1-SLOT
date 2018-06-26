@@ -385,4 +385,7 @@
 ; GTFO - Team AiO MOD++
 #include "SamM0d\functions\Bot GTFO\GTFO.au3"
 #include "SamM0d\functions\Bot GTFO\KickOut.au3"
+
+;auto camp
+#include "SamM0d\Functions\OCRbyPass.au3"
 ;==========================================================

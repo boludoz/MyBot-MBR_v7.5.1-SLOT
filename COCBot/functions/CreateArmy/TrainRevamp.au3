@@ -1936,7 +1936,26 @@ Func GetOCRCurrent($x_start, $y_start)
 	Return $aResult
 
 EndFunc   ;==>GetOCRCurrent
-
+; ========================================================================
+;Func GetOCRCurrentCamp($x_start, $y_start)
+;
+;	Local $aResult[2] = [0, 0]
+;	If Not $g_bRunState Then Return $aResult
+;
+;	Local $iOCRResult = getArmyCapacityOnTrainTroops($x_start, $y_start)
+;
+;	If StringInStr($iOCRResult, "#") Then
+;		Local $aTempResult = StringSplit($iOCRResult, "#", $STR_NOCOUNT)
+;		$aResult[0] = Number($aTempResult[0])
+;		$aResult[1] = Number($aTempResult[1]) / 2
+;	Else
+;		SetLog("DEBUG | ERROR on GetOCRCurrentCamp", $COLOR_ERROR)
+;	EndIf
+;
+;	Return $aResult
+;
+;EndFunc   ;==>GetOCRCurrent
+; ========================================================================
 Func CheckIsFullQueuedAndNotFullArmy()
 
 	SetLog(" - Checking: FULL Queue and Not Full Army", $COLOR_INFO)

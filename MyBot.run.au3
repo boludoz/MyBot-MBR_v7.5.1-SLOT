@@ -830,6 +830,15 @@ Func runBot() ;Bot that runs everything in order
 			If $g_bRestart = True Then ContinueLoop
 			If _Sleep($DELAYRUNBOT3) Then Return
 			VillageReport()
+			click(30, 584)
+			if _sleep(1000) then return 
+			click(407, 132)
+			if _sleep(1000) then return 
+		Local $NewCampOCR = GetOCRCurrent(48, 160)
+		setlog($NewCampOCR[0] & "Current Army " & $NewCampOCR[1] & "Total Army Capacity " & $NewCampOCR[2] & "Remain Space for the current Army")
+		Local $NewCampOCR = getArmyCapacityOnTrainTroops(48, 160)
+		setlog($NewCampOCR)
+
 			CheckStopForWar()
 			If $g_bOutOfGold = True And (Number($g_aiCurrentLoot[$eLootGold]) >= Number($g_iTxtRestartGold)) Then ; check if enough gold to begin searching again
 				$g_bOutOfGold = False ; reset out of gold flag
