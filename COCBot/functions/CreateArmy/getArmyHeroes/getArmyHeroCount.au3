@@ -228,86 +228,86 @@ Func ArmyHeroStatus($i)
 
 EndFunc   ;==>ArmyHeroStatus
 
-Func LabGuiDisplay() ; called from main loop to get an early status for indictors in bot bottom
-
-	Local Static $iLastTimeChecked[8] = [0, 0, 0, 0, 0, 0, 0, 0]
-	If $iLastTimeChecked[$g_iCurAccount] < @HOUR + 1 And Not $g_bSearchAttackNowEnable And $iLastTimeChecked[$g_iCurAccount] <> 0 Then Return
-	;CLOSE ARMY WINDOW
-	ClickP($aAway, 2, 0, "#0346") ;Click Away
-	If _Sleep(1500) Then Return ; Delay AFTER the click Away Prevents lots of coc restarts
-
-	Setlog("Checking Lab Status", $COLOR_INFO)
-
-	;=================Section 2 Lab Gui
-
-	; If $g_bAutoLabUpgradeEnable = True Then  ====>>>> TODO : or use this or make a checkbox on GUI
-	; make sure lab is located, if not locate lab
-	If $g_aiLaboratoryPos[0] <= 0 Or $g_aiLaboratoryPos[1] <= 0 Then
-		SetLog("Laboratory Location not found!", $COLOR_ERROR)
-		LocateLab() ; Lab location unknown, so find it.
-		If $g_aiLaboratoryPos[0] = 0 Or $g_aiLaboratoryPos[1] = 0 Then
-			SetLog("Problem locating Laboratory, train laboratory position before proceeding", $COLOR_ERROR)
-			;============Hide Red  Hide Green  Show Gray==
-			GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)
-			GUICtrlSetState($g_hPicLabRed, $GUI_HIDE)
-			GUICtrlSetState($g_hPicLabGray, $GUI_SHOW)
-			;============================================
-			Return
-		EndIf
-	EndIf
-	BuildingClickP($g_aiLaboratoryPos, "#0197") ;Click Laboratory
-	If _Sleep(1500) Then Return ; Wait for window to open
-	; Find Research Button
-
-	If QuickMIS("BC1", @ScriptDir & "\imgxml\Lab\Research", 200, 620, 700, 700) Then
-		;If $g_iDebugImageSave = 1 Then DebugImageSave("LabUpgrade") ; Debug Only
-		Click($g_iQuickMISX + 200, $g_iQuickMISY + 620)
-		If _Sleep($DELAYLABORATORY1) Then Return ; Wait for window to open
-	Else
-		Setlog("Trouble finding research button, try again...", $COLOR_WARNING)
-		ClickP($aAway, 2, $DELAYLABORATORY4, "#0199")
-		;===========Hide Red  Hide Green  Show Gray==
-		GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)
-		GUICtrlSetState($g_hPicLabRed, $GUI_HIDE)
-		GUICtrlSetState($g_hPicLabGray, $GUI_SHOW)
-		;===========================================
-		Return
-	EndIf
-
-	; check for upgrade in process - look for green in finish upgrade with gems button
-	If _ColorCheck(_GetPixelColor(730, 200, True), Hex(0xA2CB6C, 6), 20) Then ; Look for light green in upper right corner of lab window.
-		SetLog("Laboratory is Running. ", $COLOR_INFO)
-		;==========Hide Red  Show Green Hide Gray===
-		GUICtrlSetState($g_hPicLabGray, $GUI_HIDE)
-		GUICtrlSetState($g_hPicLabRed, $GUI_HIDE)
-		GUICtrlSetState($g_hPicLabGreen, $GUI_SHOW)
-		;===========================================
-		If _Sleep($DELAYLABORATORY2) Then Return
-		ClickP($aAway, 2, $DELAYLABORATORY4, "#0359")
-		Return True
-	ElseIf _ColorCheck(_GetPixelColor(730, 200, True), Hex(0x8088B0, 6), 20) Then ; Look for light purple in upper right corner of lab window.
-		SetLog("Laboratory has Stopped", $COLOR_INFO)
-		ClickP($aAway, 2, $DELAYLABORATORY4, "#0359")
-		;========Show Red  Hide Green  Hide Gray=====
-		GUICtrlSetState($g_hPicLabGray, $GUI_HIDE)
-		GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)
-		GUICtrlSetState($g_hPicLabRed, $GUI_SHOW)
-		;============================================
-		ClickP($aAway, 2, $DELAYLABORATORY4, "#0359")
-		$g_sLabUpgradeTime = ""
-		Return
-	Else
-		SetLog("Unable to determine Lab Status", $COLOR_INFO)
-		ClickP($aAway, 2, $DELAYLABORATORY4, "#0359")
-		;========Hide Red  Hide Green  Show Gray======
-		GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)
-		GUICtrlSetState($g_hPicLabRed, $GUI_HIDE)
-		GUICtrlSetState($g_hPicLabGray, $GUI_SHOW)
-		;=============================================
-		Return
-	EndIf
-
-	$iLastTimeChecked[$g_iCurAccount] = @HOUR
-
-	; EndIf
-EndFunc   ;==>LabGuiDisplay
+;Func LabGuiDisplay() ; called from main loop to get an early status for indictors in bot bottom
+;
+;	Local Static $iLastTimeChecked[8] = [0, 0, 0, 0, 0, 0, 0, 0]
+;	If $iLastTimeChecked[$g_iCurAccount] < @HOUR + 1 And Not $g_bSearchAttackNowEnable And $iLastTimeChecked[$g_iCurAccount] <> 0 Then Return
+;	;CLOSE ARMY WINDOW
+;	ClickP($aAway, 2, 0, "#0346") ;Click Away
+;	If _Sleep(1500) Then Return ; Delay AFTER the click Away Prevents lots of coc restarts
+;
+;	Setlog("Checking Lab Status", $COLOR_INFO)
+;
+;	;=================Section 2 Lab Gui
+;
+;	; If $g_bAutoLabUpgradeEnable = True Then  ====>>>> TODO : or use this or make a checkbox on GUI
+;	; make sure lab is located, if not locate lab
+;	If $g_aiLaboratoryPos[0] <= 0 Or $g_aiLaboratoryPos[1] <= 0 Then
+;		SetLog("Laboratory Location not found!", $COLOR_ERROR)
+;		LocateLab() ; Lab location unknown, so find it.
+;		If $g_aiLaboratoryPos[0] = 0 Or $g_aiLaboratoryPos[1] = 0 Then
+;			SetLog("Problem locating Laboratory, train laboratory position before proceeding", $COLOR_ERROR)
+;			;============Hide Red  Hide Green  Show Gray==
+;			GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)
+;			GUICtrlSetState($g_hPicLabRed, $GUI_HIDE)
+;			GUICtrlSetState($g_hPicLabGray, $GUI_SHOW)
+;			;============================================
+;			Return
+;		EndIf
+;	EndIf
+;	BuildingClickP($g_aiLaboratoryPos, "#0197") ;Click Laboratory
+;	If _Sleep(1500) Then Return ; Wait for window to open
+;	; Find Research Button
+;
+;	If QuickMIS("BC1", @ScriptDir & "\imgxml\Lab\Research", 200, 620, 700, 700) Then
+;		;If $g_iDebugImageSave = 1 Then DebugImageSave("LabUpgrade") ; Debug Only
+;		Click($g_iQuickMISX + 200, $g_iQuickMISY + 620)
+;		If _Sleep($DELAYLABORATORY1) Then Return ; Wait for window to open
+;	Else
+;		Setlog("Trouble finding research button, try again...", $COLOR_WARNING)
+;		ClickP($aAway, 2, $DELAYLABORATORY4, "#0199")
+;		;===========Hide Red  Hide Green  Show Gray==
+;		GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)
+;		GUICtrlSetState($g_hPicLabRed, $GUI_HIDE)
+;		GUICtrlSetState($g_hPicLabGray, $GUI_SHOW)
+;		;===========================================
+;		Return
+;	EndIf
+;
+;	; check for upgrade in process - look for green in finish upgrade with gems button
+;	If _ColorCheck(_GetPixelColor(730, 200, True), Hex(0xA2CB6C, 6), 20) Then ; Look for light green in upper right corner of lab window.
+;		SetLog("Laboratory is Running. ", $COLOR_INFO)
+;		;==========Hide Red  Show Green Hide Gray===
+;		GUICtrlSetState($g_hPicLabGray, $GUI_HIDE)
+;		GUICtrlSetState($g_hPicLabRed, $GUI_HIDE)
+;		GUICtrlSetState($g_hPicLabGreen, $GUI_SHOW)
+;		;===========================================
+;		If _Sleep($DELAYLABORATORY2) Then Return
+;		ClickP($aAway, 2, $DELAYLABORATORY4, "#0359")
+;		Return True
+;	ElseIf _ColorCheck(_GetPixelColor(730, 200, True), Hex(0x8088B0, 6), 20) Then ; Look for light purple in upper right corner of lab window.
+;		SetLog("Laboratory has Stopped", $COLOR_INFO)
+;		ClickP($aAway, 2, $DELAYLABORATORY4, "#0359")
+;		;========Show Red  Hide Green  Hide Gray=====
+;		GUICtrlSetState($g_hPicLabGray, $GUI_HIDE)
+;		GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)
+;		GUICtrlSetState($g_hPicLabRed, $GUI_SHOW)
+;		;============================================
+;		ClickP($aAway, 2, $DELAYLABORATORY4, "#0359")
+;		$g_sLabUpgradeTime = ""
+;		Return
+;	Else
+;		SetLog("Unable to determine Lab Status", $COLOR_INFO)
+;		ClickP($aAway, 2, $DELAYLABORATORY4, "#0359")
+;		;========Hide Red  Hide Green  Show Gray======
+;		GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)
+;		GUICtrlSetState($g_hPicLabRed, $GUI_HIDE)
+;		GUICtrlSetState($g_hPicLabGray, $GUI_SHOW)
+;		;=============================================
+;		Return
+;	EndIf
+;
+;	$iLastTimeChecked[$g_iCurAccount] = @HOUR
+;
+;	; EndIf
+;EndFunc   ;==>LabGuiDisplay

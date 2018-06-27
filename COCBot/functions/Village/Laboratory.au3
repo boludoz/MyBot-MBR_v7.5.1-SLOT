@@ -20,7 +20,6 @@ Global Const $sColorNotPossible = Hex(0xC0C0C0, 6) ; relative location: 3,19, up
 Global Const $sColorMaxTroop = Hex(0xFFC360, 6) ; relative location: 23,60; troop already MAX
 
 Func Laboratory()
-
 	;Create local static array to hold upgrade values
 	Static $aUpgradeValue[31] = [-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	Local $iAvailElixir, $iAvailDark, $sElixirCount, $sDarkCount, $TimeDiff, $aArray, $Result
@@ -33,6 +32,11 @@ Func Laboratory()
 
 	If $g_iCmbLaboratory = 0 Then
 		SetLog("Laboratory enabled, but no troop upgrade selected", $COLOR_WARNING)
+		;========Show Red  Hide Green  Hide Gray=====
+		GUICtrlSetState($g_hPicLabGray, $GUI_HIDE)
+		GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)
+		GUICtrlSetState($g_hPicLabRed, $GUI_SHOW)
+		;============================================
 		Return False ; Nothing selected to upgrade
 	EndIf
 	If $g_aiLaboratoryPos[0] = 0 Or $g_aiLaboratoryPos[1] = 0 Then
@@ -40,6 +44,11 @@ Func Laboratory()
 		LocateLab() ; Lab location unknown, so find it.
 		If $g_aiLaboratoryPos[0] = 0 Or $g_aiLaboratoryPos[1] = 0 Then
 			SetLog("Problem locating Laboratory, train laboratory position before proceeding", $COLOR_ERROR)
+			;============Hide Red  Hide Green  Show Gray==
+			GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)
+			GUICtrlSetState($g_hPicLabRed, $GUI_HIDE)
+			GUICtrlSetState($g_hPicLabGray, $GUI_SHOW)
+			;============================================
 			Return False
 		EndIf
 	EndIf
@@ -53,6 +62,11 @@ Func Laboratory()
 		SetLog("Checking Troop Upgrade in Laboratory ...", $COLOR_INFO)
 	Else
 		SetLog("Laboratory Upgrade in progress, waiting for completion", $COLOR_INFO)
+		;==========Hide Red  Show Green Hide Gray===
+		GUICtrlSetState($g_hPicLabGray, $GUI_HIDE)
+		GUICtrlSetState($g_hPicLabRed, $GUI_HIDE)
+		GUICtrlSetState($g_hPicLabGreen, $GUI_SHOW)
+		;===========================================
 		Return False
 	EndIf
 

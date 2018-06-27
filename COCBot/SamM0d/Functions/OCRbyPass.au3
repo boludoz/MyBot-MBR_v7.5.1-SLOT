@@ -1,6 +1,6 @@
 ; #FUNCTION# ====================================================================================================================
 ; Name ..........: OCR bypass
-; Description ...: ByPass camps. capacity and update
+; Description ...: ByPass camps. capacity auto update
 ; Author ........: Boludoz (25/6/2018)
 ; Modified ......: 
 ; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2015-2018

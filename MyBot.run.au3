@@ -73,7 +73,7 @@ MainLoop(CheckPrerequisites())
 
 Func UpdateBotTitle()
 	Local $sConsoleTitle ; Console title has also Android Emulator Name
-	Local $sTitle = "My Bot " & $g_sBotVersion & " @Samkie M0d v1.4.4 + v17.b"
+	Local $sTitle = "My Bot " & $g_sBotVersion & " @Samkie M0d v1.4.4 RC6 + v18.a"
 	If $g_sBotTitle = "" Then
 		$g_sBotTitle = $sTitle
 		$sConsoleTitle = $sTitle
@@ -830,15 +830,6 @@ Func runBot() ;Bot that runs everything in order
 			If $g_bRestart = True Then ContinueLoop
 			If _Sleep($DELAYRUNBOT3) Then Return
 			VillageReport()
-			click(30, 584)
-			if _sleep(1000) then return 
-			click(407, 132)
-			if _sleep(1000) then return 
-		Local $NewCampOCR = GetOCRCurrent(48, 160)
-		setlog($NewCampOCR[0] & "Current Army " & $NewCampOCR[1] & "Total Army Capacity " & $NewCampOCR[2] & "Remain Space for the current Army")
-		Local $NewCampOCR = getArmyCapacityOnTrainTroops(48, 160)
-		setlog($NewCampOCR)
-
 			CheckStopForWar()
 			If $g_bOutOfGold = True And (Number($g_aiCurrentLoot[$eLootGold]) >= Number($g_iTxtRestartGold)) Then ; check if enough gold to begin searching again
 				$g_bOutOfGold = False ; reset out of gold flag
@@ -873,7 +864,7 @@ Func runBot() ;Bot that runs everything in order
 			If $g_bRestart = True Then ContinueLoop
 			If IsSearchAttackEnabled() Then ; if attack is disabled skip reporting, requesting, donating, training, and boosting
 				; samm0d - ignore request cc, since later when train army will be apply request cc.
-				Local $aRndFuncList = ['LabCheck', 'ReplayShare', 'NotifyReport', 'DonateCC,Train', 'Boost', 'CollectFreeMagicItems']
+				Local $aRndFuncList = ['ReplayShare', 'NotifyReport', 'DonateCC,Train', 'Boost', 'CollectFreeMagicItems']
 				;Local $aRndFuncList = ['ReplayShare', 'NotifyReport', 'DonateCC,Train', 'BoostBarracks', 'BoostSpellFactory', 'BoostKing', 'BoostQueen', 'BoostWarden', 'RequestCC', 'CollectFreeMagicItems']
 				While 1
 					If $g_bRunState = False Then Return
@@ -1373,7 +1364,7 @@ Func _RunFunction($action)
 					getArmyTroopCapacity(True, False)
 					getArmySpellCapacity(False, True)
 				EndIf
-					If SkipDonateNearFullTroops(True) = False And BalanceDonRec(True) Then DonateCC()
+				If SkipDonateNearFullTroops(True) = False And BalanceDonRec(True) Then DonateCC()
 			EndIf
 
 			If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)
@@ -1387,14 +1378,6 @@ Func _RunFunction($action)
 					EndIf
 				EndIf
 			Else
-				If $g_iActiveDonate And $g_bChkDonate Then
-					If $g_bFirstStart Then
-						getArmyTroopCapacity(True, False)
-						getArmySpellCapacity(False, True)
-					EndIf
-					If SkipDonateNearFullTroops(True) = False And BalanceDonRec(True) Then DonateCC()
-				EndIf
-				If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)
 				If $g_bTrainEnabled Then ; check for training enabled in halt mode
 					If $g_iActualTrainSkip < $g_iMaxTrainSkip Then
 						;Train()
@@ -1421,9 +1404,6 @@ Func _RunFunction($action)
 			BoostKing()
 			BoostQueen()
 			BoostWarden()
-		Case "LabCheck"
-			LabGuiDisplay()
-			_Sleep($DELAYRUNBOT3)
 		Case "RequestCC"
 			RequestCC()
 			If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)

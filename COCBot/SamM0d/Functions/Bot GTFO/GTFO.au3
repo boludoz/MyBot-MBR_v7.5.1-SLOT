@@ -398,20 +398,20 @@ Func DonateIT($Slot)
 		;         than check if the slot 1 is empty return to train troops
 		
 		; dadad5 Out of troops on Slot 0
-		If not _ColorCheck(_GetPixelColor(385 + ($Slot * 68), $g_iDonationWindowY + 70 + $YComp, True), Hex(0xDADAD5, 6), 5) Then
+		;If not _ColorCheck(_GetPixelColor(385 + ($Slot * 68), $g_iDonationWindowY + 70 + $YComp, True), Hex(0xDADAD5, 6), 5) Then
 
 		Click(385 + ($Slot * 68), $g_iDonationWindowY + 70 + $YComp, $NumberClick, $DELAYDONATECC3, "#0175")
-		SetLog(" - Donated Troops on Slot " & $Slot + 1, $COLOR_INFO)
-		EndIf
+		;SetLog(" - Donated Troops on Slot " & $Slot + 1, $COLOR_INFO)
+		:EndIf
 		
 		$Slot += 1
 		$iTroopIndex = $Slot
 		
-		If not _ColorCheck(_GetPixelColor(385 + ($Slot * 68), $g_iDonationWindowY + 70 + $YComp, True), Hex(0xDADAD5, 6), 5) Then
+		;If not _ColorCheck(_GetPixelColor(385 + ($Slot * 68), $g_iDonationWindowY + 70 + $YComp, True), Hex(0xDADAD5, 6), 5) Then
 
 		Click(385 + ($Slot * 68), $g_iDonationWindowY + 70 + $YComp, $NumberClick, $DELAYDONATECC3, "#0175")
-		SetLog(" - Donated Troops on Slot " & $Slot + 1, $COLOR_INFO)
-	EndIf
+		;SetLog(" - Donated Troops on Slot " & $Slot + 1, $COLOR_INFO)
+		;EndIf
 	
 	; dadad5 Out of troops on Slot 0
 		If _ColorCheck(_GetPixelColor(350, $g_iDonationWindowY + 105 + $YComp, True), Hex(0xDADAD5, 6), 5) Then

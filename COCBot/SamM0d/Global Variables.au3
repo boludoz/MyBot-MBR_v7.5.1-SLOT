@@ -219,14 +219,14 @@ Global $grpHLFClick, $lblHLFClickDelay, $lblDesc1, $chkEnableHLFClick, $lblHLFCl
 
 
 ; advanced update for wall by Samkie
-;Global $ichkSmartUpdateWall = 1
-;Global $itxtClickWallDelay = 500
-;Global $aBaseNode[2] = [-1,-1] ;first found with core
-;Global $aLastWall[2] = [-1,-1]
-;Global $iFaceDirection = -1
+Global $ichkSmartUpdateWall = 1
+Global $itxtClickWallDelay = 500
+Global $aBaseNode[2] = [-1,-1] ;first found with core
+Global $aLastWall[2] = [-1,-1]
+Global $iFaceDirection = -1
 
-Global $grpStatsMisc, $chkSmartUpdateWall,$txtClickWallDelay, $chkEnableCustomOCR4CCRequest, $chkCheck4CC, $txtCheck4CCWaitTime, $chkIncreaseGlobalDelay, $txtIncreaseGlobalDelay, _
-$chkAutoDock
+;~ Global $chkSmartUpdateWall,$txtClickWallDelay
+Global $grpStatsMisc, $chkEnableCustomOCR4CCRequest, $chkCheck4CC, $txtCheck4CCWaitTime, $chkIncreaseGlobalDelay, $txtIncreaseGlobalDelay, $chkAutoDock
 
 ; CSV Deployment Speed Mod
 Global $isldSelectedCSVSpeed[$g_iModeCount], $iCSVSpeeds[19]
