@@ -277,13 +277,12 @@ EndFunc   ;==>getBarracksNewTroopQuantity
 ; -------------------------------------------------------------------------------------------------
 Func getArmyCapacityOnTrainTroops($x_start, $y_start)
 Local $g_campSpaceAuto = 1
-if $g_campSpaceAuto = 1 Then
-Local $NewCampOCR = _getArmyCapacityOnTrainTroops($x_start, $y_start)
-Return $NewCampOCR
-Return _getArmyCapacityOnTrainTroops($x_start, $y_start)
-Else
-Return getOcrAndCapture("coc-NewCapacity", $x_start, $y_start, 67, 14, True)
-Endif
+	if $g_campSpaceAuto = 1 Then
+		Local $NewCampOCR = _getArmyCapacityOnTrainTroops($x_start, $y_start)
+			Return $NewCampOCR
+	Else
+			Return getOcrAndCapture("coc-NewCapacity", $x_start, $y_start, 67, 14, True)
+	Endif
 EndFunc   ;==>getArmyCapacityOnTrainTroops
 ; =================================================================================================
 

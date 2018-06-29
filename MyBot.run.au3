@@ -829,7 +829,7 @@ Func runBot() ;Bot that runs everything in order
 			checkMainScreen(False)
 			If $g_bRestart = True Then ContinueLoop
 			If _Sleep($DELAYRUNBOT3) Then Return
-			VillageReport()
+            VillageReport()
 			CheckStopForWar()
 			If $g_bOutOfGold = True And (Number($g_aiCurrentLoot[$eLootGold]) >= Number($g_iTxtRestartGold)) Then ; check if enough gold to begin searching again
 				$g_bOutOfGold = False ; reset out of gold flag
@@ -1351,6 +1351,7 @@ Func _RunFunction($action)
 			EndIf
 		Case "DonateCC,Train"
 			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
+			CheckAutoCamp()
 			; samm0d
 			If $ichkModTrain = 1 Then
 				If $g_bTrainEnabled Then
@@ -1404,12 +1405,28 @@ Func _RunFunction($action)
 			BoostKing()
 			BoostQueen()
 			BoostWarden()
+		Case "LabCheck"
+		;	LabGuiDisplay()
+		;	_Sleep($DELAYRUNBOT3)
 		Case "RequestCC"
 			RequestCC()
 			If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)
 		Case "Laboratory"
 			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
 			Laboratory()
+			;If Laboratory() True Then
+			;	;==========Hide Red  Show Green Hide Gray===
+			;	GUICtrlSetState($g_hPicLabGray, $GUI_HIDE)
+			;	GUICtrlSetState($g_hPicLabRed, $GUI_HIDE)
+			;	GUICtrlSetState($g_hPicLabGreen, $GUI_SHOW)
+			;	;===========================================
+			;	Else
+			;	;========Show Red  Hide Green  Hide Gray=====
+			;	GUICtrlSetState($g_hPicLabGray, $GUI_HIDE)
+			;	GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)
+			;	GUICtrlSetState($g_hPicLabRed, $GUI_SHOW)
+			;	;============================================
+			;Endif
 			If _Sleep($DELAYRUNBOT3) = False Then checkMainScreen(False)
 			Setlog("Checking Lab Status", $COLOR_INFO)
 		Case "UpgradeHeroes"
